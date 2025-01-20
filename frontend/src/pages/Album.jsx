@@ -71,7 +71,7 @@ function Album() {
   useEffect(() => {
     socket.on("update-album", (data) => {
       // alert("yes")
-      console.log(data);
+      // console.log(data);
       handleAddToAlbum(data);
     });
   }, [albums]);
