@@ -3,7 +3,7 @@ import React from "react";
 function Navbar() {
   return (
     <nav>
-      <h2>Generative Album</h2>
+      <h2>Indroyd Labs</h2>
     </nav>
   );
 }
