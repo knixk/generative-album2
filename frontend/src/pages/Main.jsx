@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
+const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
+
 // send the data on port - sender --------
 import io from "socket.io-client";
 const socket = io("http://localhost:3000");
@@ -64,7 +66,7 @@ function Main() {
         {
           headers: {
             "X-Rapidapi-Key":
-              "cef7de3f42msh47f9ebffe210c03p10be64jsn0c9f66beeaaf",
+              "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
             "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
             "Content-Type": "application/json",
           },
@@ -72,8 +74,10 @@ function Main() {
       );
 
       console.log("======== im data =========>");
-      console.log(data.data.url);
+      // console.log(data.data.url);
       const genImg = data.data.url;
+      // const genImg = sampleImg;
+
       setImg(genImg);
       console.log("======== im data =========>");
 

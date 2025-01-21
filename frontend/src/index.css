@@ -16,6 +16,9 @@ body {
   border-radius: 10px 10px 10px 10px;
   /* border-radius: 2px; */
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  animation: animation1;
+  animation-duration: 5s;
+  /* animation-delay: 2s; */
 }
 
 .generated__img {
@@ -117,4 +120,17 @@ input:hover,
 .form__container textarea {
   /* padding: 1rem; */
   resize: none;
+}
+
+@keyframes animation1 {
+  0% {
+    opacity: 0;
+    scale: 1.1;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+
+  }
 }

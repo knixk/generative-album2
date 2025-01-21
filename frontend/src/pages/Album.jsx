@@ -5,6 +5,7 @@ import io from "socket.io-client";
 const socket = io("http://localhost:3000");
 
 import img from "../assets/img.webp";
+import toast, { Toaster } from "react-hot-toast";
 
 // --- replace this with real data ----
 const data = [
@@ -65,6 +66,7 @@ function Album() {
     // console.log(newItem, "ni");
     const newData = [...albums, newItem];
     // console.log(newData, "im nd");
+    console.log("updated");
     setAlbums(newData);
   };
 
@@ -74,9 +76,10 @@ function Album() {
       // console.log(data);
       handleAddToAlbum(data);
     });
-  }, [albums]);
+  }, []);
   return (
     <div className="album__container">
+      <Toaster />
       {/* <p>Your lovely creations..</p> */}
       <div className="album__grid">
         {albums.map((i, idx) => {
