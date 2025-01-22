@@ -98,7 +98,7 @@ function Album() {
       //   setShowModal(false);
       // }, 7500);
     });
-  }, []);
+  }, [albums]);
   return (
     <div className="album__container">
       <Toaster />
