@@ -10,7 +10,6 @@ import Modal from "../components/Modal";
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
-
 // --- replace this with real data ----
 const data = [
   {
@@ -78,17 +77,27 @@ function Album() {
   };
 
   useEffect(() => {
+    const images = localStorage.getItem("images");
+    // console.log(images)
+
+    // if (images) {
+    //   const json_images = JSON.parse(images);
+    //   setAlbums(json_images);
+    // } else {
+    //   localStorage.setItem("images", JSON.stringify(albums));
+    // }
+
     socket.on("update-album", (data) => {
       // alert("yes")
       // console.log(data);
       handleAddToAlbum(data);
-      console.log("image was added")
-      setShowModal(true)
-    });
+      console.log("image was added");
+      // setShowModal(true);
 
-    setTimeout(() => {
-      setShowModal(false);
-    }, 7500);
+      // setTimeout(() => {
+      //   setShowModal(false);
+      // }, 7500);
+    });
   }, []);
   return (
     <div className="album__container">

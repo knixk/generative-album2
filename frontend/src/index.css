@@ -108,10 +108,15 @@ button,
 }
 
 .home__container {
-  /* display: flex; */
-  /* justify-content: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+
   /* background-color: red; */
-  /* height: 90vh; */
+  /* height: 60vh; */
+  margin-top: 5rem;
   /* align-self: center; */
   /* margin: 1rem 0; */
 }
@@ -157,5 +162,10 @@ input:hover,
 .modal__img {
   width: 70vw;
   border-radius: 0 0 10px 10px;
+  box-shadow: var(--my-box-shadow);
 
+}
+
+.home__img {
+  border-radius: 10px;
 }

@@ -58,25 +58,25 @@ function Main() {
 
   const myAsyncFn = async () => {
     try {
-      const data = await axios.post(
-        "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
-        {
-          inputs: prompt,
-        },
-        {
-          headers: {
-            "X-Rapidapi-Key":
-              "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
-            "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // const data = await axios.post(
+      //   "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
+      //   {
+      //     inputs: prompt,
+      //   },
+      //   {
+      //     headers: {
+      //       "X-Rapidapi-Key":
+      //         "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
+      //       "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
 
       console.log("======== im data =========>");
       // console.log(data.data.url);
-      const genImg = data.data.url;
-      // const genImg = sampleImg;
+      // const genImg = data.data.url;
+      const genImg = sampleImg;
 
       setImg(genImg);
       console.log("======== im data =========>");
