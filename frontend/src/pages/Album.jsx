@@ -122,7 +122,7 @@
         <Toaster />
         {/* <p>Your lovely creations..</p> */}
         {showModal ? (
-          <Modal props={{ sampleImg }} />
+          <Modal props={{ img }} />
         ) : (
           <div className="album__grid">
             {albums.map((i, idx) => {

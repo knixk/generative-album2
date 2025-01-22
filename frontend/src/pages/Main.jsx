@@ -25,6 +25,7 @@ function Main() {
   const [prompt, setPrompt] = useState();
   // ---- send this img to backend socket
   const [img, setImg] = useState();
+  const [disabled, setDisabled] = useState(false);
 
   // const {
   //   formData,
@@ -58,28 +59,28 @@ function Main() {
 
   const myAsyncFn = async () => {
     try {
-      // const data = await axios.post(
-      //   "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
-      //   {
-      //     inputs: prompt,
-      //   },
-      //   {
-      //     headers: {
-      //       "X-Rapidapi-Key":
-      //         "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
-      //       "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
+      const data = await axios.post(
+        "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
+        {
+          inputs: prompt,
+        },
+        {
+          headers: {
+            "X-Rapidapi-Key":
+              "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
+            "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      console.log("======== im data =========>");
+      // console.log("======== im data =========>");
       // console.log(data.data.url);
-      // const genImg = data.data.url;
-      const genImg = sampleImg;
+      const genImg = data.data.url;
+      // const genImg = sampleImg;
 
       setImg(genImg);
-      console.log("======== im data =========>");
+      // console.log("======== im data =========>");
 
       // now we got the image we can send it to the backend
       const myPayload = {
@@ -91,7 +92,8 @@ function Main() {
       genImg && submitData(myPayload);
       toast.success("Your image is successfully generated!");
 
-      console.log(myPayload);
+      // console.log(myPayload);
+      setDisabled(false);
     } catch (err) {
       console.error(err);
     }
@@ -99,8 +101,9 @@ function Main() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted");
-    console.log(prompt);
+    setDisabled(true);
+    // console.log("submitted");
+    // console.log(prompt);
     // fetchImage();
     await myAsyncFn();
 
@@ -130,6 +133,7 @@ function Main() {
         />
 
         <button
+          disabled={disabled}
           onClick={() => {
             toast("Please wait while we ready your creation...");
           }}

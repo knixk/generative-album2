@@ -4,8 +4,8 @@ import React from "react";
 
 function Modal(props) {
 //   console.log(props, "im props");
-  const { sampleImg } = props.props;
-  const img = sampleImg;
+  const { img } = props.props;
+  // const img = sampleImg;
 //   console.log(img)
 
   return (
