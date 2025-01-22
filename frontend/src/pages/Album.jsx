@@ -47,16 +47,16 @@ const data = [
     img: "https://as2.ftcdn.net/jpg/05/36/62/97/1000_F_536629702_9FkGvzElExv4TpJwr5S03yJHdS3hADR6.jpg",
     name: "Arun Gehlot",
   },
-  {
-    id: "12312312",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69EWR5a90jYQWOYu8vdbbzLasqQNWHhyVnA&s",
-    name: "Priyanka Sharma",
-  },
-  {
-    id: "123sda212312",
-    img: "https://imgv3.fotor.com/images/gallery/a-3d-girl-cartoon-character-generated-by-cartoon-character-maker-in-Fotor.jpg",
-    name: "Om Sharma",
-  },
+  // {
+  //   id: "12312312",
+  //   img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69EWR5a90jYQWOYu8vdbbzLasqQNWHhyVnA&s",
+  //   name: "Priyanka Sharma",
+  // },
+  // {
+  //   id: "123sda212312",
+  //   img: "https://imgv3.fotor.com/images/gallery/a-3d-girl-cartoon-character-generated-by-cartoon-character-maker-in-Fotor.jpg",
+  //   name: "Om Sharma",
+  // },
 ];
 
 function Album() {
@@ -71,15 +71,28 @@ function Album() {
     const newItem = { name, img, id: new Date() };
     // console.log(newItem, "ni");
     const newData = [...albums, newItem];
+
+    const stringifyImgs = JSON.stringify(newData);
+    // console.log(stringifyImgs);
+    localStorage.setItem("images", stringifyImgs);
+
     // console.log(newData, "im nd");
-    console.log("updated");
+    // console.log("updated");
     setAlbums(newData);
   };
 
   useEffect(() => {
     const images = localStorage.getItem("images");
-    // console.log(images)
 
+    if (images) {
+      const parsedImgs = JSON.parse(images);
+      setAlbums(parsedImgs);
+      // console.log(parsedImgs);
+    } else {
+    }
+  }, []);
+
+  useEffect(() => {
     // if (images) {
     //   const json_images = JSON.parse(images);
     //   setAlbums(json_images);
@@ -92,11 +105,12 @@ function Album() {
       // console.log(data);
       handleAddToAlbum(data);
       console.log("image was added");
+      setShowModal(true)
       // setShowModal(true);
 
-      // setTimeout(() => {
-      //   setShowModal(false);
-      // }, 7500);
+      setTimeout(() => {
+        setShowModal(false);
+      }, 7500);
     });
   }, [albums]);
   return (
