@@ -1,3 +1,7 @@
+:root {
+  --my-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -38,7 +42,8 @@ body {
   padding: 2rem 2rem;
   border-radius: 10px;
   gap: 1rem;
-  width: 800px;
+  width: 80vw;
+  max-width: 2080px;
   justify-content: center;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   /* max-width: 900px; */
@@ -131,6 +136,26 @@ input:hover,
   100% {
     opacity: 1;
     scale: 1;
-
   }
+}
+
+.modal__container {
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+  gap: 1rem;
+  box-shadow: var(--my-box-shadow);
+  background-color: white;
+  padding: 1rem 0 0 0;
+  border-radius: 10px;
+  align-items: center;
+  animation: animation1;
+  animation-duration: 5s;
+
+}
+
+.modal__img {
+  width: 70vw;
+  border-radius: 0 0 10px 10px;
+
 }

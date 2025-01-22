@@ -6,6 +6,9 @@ const socket = io("http://localhost:3000");
 
 import img from "../assets/img.webp";
 import toast, { Toaster } from "react-hot-toast";
+import Modal from "../components/Modal";
+
+const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
 // --- replace this with real data ----
 const data = [
@@ -58,10 +61,13 @@ const data = [
 
 function Album() {
   const [albums, setAlbums] = useState(data);
+  const [showModal, setShowModal] = useState(true);
+  const [img, setImg] = useState();
 
   const handleAddToAlbum = (data) => {
     const { name, image } = data;
     let img = image;
+    setImg(image);
     const newItem = { name, img, id: new Date() };
     // console.log(newItem, "ni");
     const newData = [...albums, newItem];
@@ -76,21 +82,29 @@ function Album() {
       // console.log(data);
       handleAddToAlbum(data);
     });
+
+    setTimeout(() => {
+      setShowModal(false);
+    }, 7500);
   }, []);
   return (
     <div className="album__container">
       <Toaster />
       {/* <p>Your lovely creations..</p> */}
-      <div className="album__grid">
-        {albums.map((i, idx) => {
-          return (
-            <div key={idx} className="card__container">
-              <img className="generated__img" src={i.img} alt={i.name} />
-              <p className="name">{i.name}</p>
-            </div>
-          );
-        })}
-      </div>
+      {showModal ? (
+        <Modal props={{ sampleImg }} />
+      ) : (
+        <div className="album__grid">
+          {albums.map((i, idx) => {
+            return (
+              <div key={idx} className="card__container">
+                <img className="generated__img" src={i.img} alt={i.name} />
+                <p className="name">{i.name}</p>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
