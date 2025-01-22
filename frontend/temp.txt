@@ -1,0 +1,5 @@
+image:
+{
+    "name": "Kanishk Shrivastava",
+    "image": "https://storage.googleapis.com/face-10b17.appspot.com/1737543794800_realistic.jpg?GoogleAccessId=face-10b17%40appspot.gserviceaccount.com&Expires=1737547394&Signature=OUTCTj%2F9Mjcihuu7Ylq%2FvMdjQJWj7OX1yH%2BRt1Om7HaF4YozYNHhBgfV1chsP29JfCM%2BEEga3T54HPgu6tmTPv2MiDcTh4BAoGaTF1anN8LwCHX6XXsrvg10dHSG%2F%2FxhFH%2F1h5qISOSp%2BT7IGYtuptXApLg1JyOcPEky4lJu%2Blx%2BupQrSSfU1r2bX9E1Qdd%2BR%2FD05CUZwoEtWXI3b1MhrwsHjBDBo035Eu6WV74%2FKUyh%2B7xLiFeKzJ29y6b%2B0eM9JjmALLiIPpZpAB3Rz%2B36cOU062cyGKIzdgYVE9vM4ls2bsnf5Sxr3YqdBLG2OIBJPVf%2FdlS6AGw3XWA6ug2LYw%3D%3D"
+}
