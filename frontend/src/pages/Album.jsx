@@ -10,6 +10,7 @@ import Modal from "../components/Modal";
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
+
 // --- replace this with real data ----
 const data = [
   {
@@ -61,7 +62,7 @@ const data = [
 
 function Album() {
   const [albums, setAlbums] = useState(data);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState();
 
   const handleAddToAlbum = (data) => {
@@ -81,6 +82,8 @@ function Album() {
       // alert("yes")
       // console.log(data);
       handleAddToAlbum(data);
+      console.log("image was added")
+      setShowModal(true)
     });
 
     setTimeout(() => {
