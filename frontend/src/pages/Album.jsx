@@ -64,6 +64,10 @@
     const [showModal, setShowModal] = useState(false);
     const [img, setImg] = useState();
 
+    const handleDelete = (i) => {
+      return;
+    }
+
     const handleAddToAlbum = (data) => {
       const { name, image } = data;
       let img = image;
@@ -124,8 +128,11 @@
             {albums.map((i, idx) => {
               return (
                 <div key={idx} className="card__container">
+                  
                   <img className="generated__img" src={i.img} alt={i.name} />
                   <p className="name">{i.name}</p>
+                  <button className="delete__btn">x</button>
+
                 </div>
               );
             })}

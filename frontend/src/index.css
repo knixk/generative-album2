@@ -171,3 +171,11 @@ input:hover,
 .home__img {
   border-radius: 10px;
 }
+
+.delete__btn {
+  /* position: absolute; */
+  display: none;
+  /* left: 0; */
+  /* bottom: 0; */
+
+}
