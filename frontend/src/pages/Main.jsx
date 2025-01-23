@@ -26,7 +26,6 @@ const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOa
 
 // IndexedDB setup ----- x -----
 
-
 // send the data on port - sender --------
 import io from "socket.io-client";
 const socket = io("http://localhost:3000");
@@ -120,6 +119,9 @@ function Main() {
 
       // console.log(myPayload);
       setDisabled(false);
+
+      setPrompt("");
+      setName("");
     } catch (err) {
       console.error(err);
     }
