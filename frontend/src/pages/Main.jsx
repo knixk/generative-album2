@@ -7,6 +7,25 @@ import axios from "axios";
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
+// IndexedDB setup ----------
+
+// const request = indexedDB.open("MyDatabase", 1);
+
+// request.onupgradeneeded = (event) => {
+//   const db = event.target.result;
+//   db.createObjectStore("MyStore", { keyPath: "id" });
+// };
+
+// request.onsuccess = (event) => {
+//   console.log("Database opened successfully!");
+// };
+
+// request.onerror = (event) => {
+//   console.error("Database error:", event.target.error);
+// };
+
+// IndexedDB setup ----- x -----
+
 // send the data on port - sender --------
 import io from "socket.io-client";
 const socket = io("http://localhost:3000");
@@ -58,6 +77,12 @@ function Main() {
   // };
 
   const myAsyncFn = async () => {
+    if (prompt == "" || name == "") {
+      return;
+    }
+
+    toast("Please wait while we ready your creation...");
+
     try {
       const data = await axios.post(
         "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
@@ -94,6 +119,9 @@ function Main() {
 
       // console.log(myPayload);
       setDisabled(false);
+
+      setPrompt("");
+      setName("");
     } catch (err) {
       console.error(err);
     }
@@ -124,20 +152,18 @@ function Main() {
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter your name.."
           type="text"
+          required
+          autoFocus
         />
         <textarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="Enter your prompt.."
           type="text"
+          required
         />
 
-        <button
-          disabled={disabled}
-          onClick={() => {
-            toast("Please wait while we ready your creation...");
-          }}
-        >
+        <button disabled={disabled} onClick={() => {}}>
           Submit
         </button>
       </form>
