@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Grid from "../components/Grid";
-// import { myContext } from "../App";
+import { myContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
@@ -34,7 +34,6 @@ const addToDB = async (dbName, storeName, data) => {
   return transaction.complete;
 };
 
-
 // IndexedDB setup ----- x -----
 
 // send the data on port - sender --------
@@ -46,9 +45,9 @@ function submitData(payload) {
 }
 
 function Main() {
-  // const myState = useContext(myContext);
+  const myState = useContext(myContext);
   // console.log("==========================>");
-  // console.log(myState.formData);
+  console.log(myState);
   // console.log("==========================>");
   // ---- send this prompt to the api
   const [name, setName] = useState();
@@ -159,8 +158,6 @@ function Main() {
   const addAllImages = () => {
     exampleImageLinks.forEach((link) => handleAddImage(link));
   };
-
-
 
   return (
     <div className="main__container">

@@ -15,7 +15,7 @@ function App() {
 
   return (
     <Router>
-      {/* <myContext.Provider
+      <myContext.Provider
         value={
           (formData,
           setFormData,
@@ -24,14 +24,14 @@ function App() {
           submitDisabled,
           setSubmitDisabled)
         }
-      > */}
+      >
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/album" element={<Album />}></Route>
           <Route path="/main" element={<Main />}></Route>
         </Routes>
-      {/* </myContext.Provider> */}
+      </myContext.Provider>
     </Router>
   );
 }
