@@ -129,11 +129,14 @@ function Main() {
 
     toast("Please wait while we ready your creation...");
 
+    const finalStr = `${valentineDay} ${prompt}`;
+    console.log(finalStr)
+
     try {
       const data = await axios.post(
         "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
         {
-          inputs: `${valentineDay} ${prompt} `,
+          inputs: finalStr,
         },
         {
           headers: {
@@ -207,7 +210,7 @@ function Main() {
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
 
         <div className="choose__container">
-        <label>I want to celebrate valentine's day in</label>
+        <p>I want to celebrate valentine's day in</p>
         {/* <select onChange={(e) => console.log(e.target.value)}>
           <option value="Paris">Paris</option>
           <option value="New York">New York</option>
@@ -233,10 +236,18 @@ function Main() {
         />
         
 
-        <button disabled={disabled} onClick={() => {}}>
+        <button id="submit__btn" disabled={disabled} onClick={() => {}}>
           Submit
         </button>
       </form>
+
+
+          <button onClick={() => {
+
+            localStorage.clear('images');
+            toast.success('All images cleared...')
+
+          }} id="cache__btn">Clear Cache</button>
 
       {/* <Grid /> */}
     </div>
