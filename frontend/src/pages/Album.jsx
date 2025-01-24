@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import * as nsfwjs from "nsfwjs";
-const model = await nsfwjs.load();
+// import * as nsfwjs from "nsfwjs";
+// const model = await nsfwjs.load();
 
 // recieve the image on port ------- receiver
 import io from "socket.io-client";
@@ -145,15 +145,15 @@ function Album() {
   }, [albums]);
 
   // Load images from IndexedDB on component mount
-  useEffect(() => {
-    const loadImages = async () => {
-      const storedImages = await getAllFromDB(dbName, storeName);
-      setImages(storedImages);
-      console.log(storedImages, "im stored images");
-    };
+  // useEffect(() => {
+  //   const loadImages = async () => {
+  //     const storedImages = await getAllFromDB(dbName, storeName);
+  //     setImages(storedImages);
+  //     console.log(storedImages, "im stored images");
+  //   };
 
-    loadImages();
-  }, []);
+  //   loadImages();
+  // }, []);
   return (
     <div className="album__container">
       <Toaster />
@@ -163,10 +163,10 @@ function Album() {
       ) : (
         <div className="album__grid">
           {albums.map((i, idx) => {
-            let imgElem = new Image();
-            imgElem.crossOrigin = "anonymous"; // Avoid CORS issues
-            imgElem.src = genImg;
-            classifyImage(imgElem);
+            // let imgElem = new Image();
+            // imgElem.crossOrigin = "anonymous"; // Avoid CORS issues
+            // imgElem.src = genImg;
+            // classifyImage(imgElem);
             return (
               // <div key={idx} className="card__container">
               //   <img className="generated__img" src={i.img} alt={i.name} />
