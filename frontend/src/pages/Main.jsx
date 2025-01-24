@@ -4,6 +4,7 @@ import { myContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import * as nsfwjs from "nsfwjs";
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
@@ -57,6 +58,7 @@ function Main() {
   const [prompt, setPrompt] = useState();
   // ---- send this img to backend socket
   const [disabled, setDisabled] = useState(false);
+  const [model, setModel] = useState(null);
 
   // const {
   //   formData,
@@ -82,6 +84,38 @@ function Main() {
       setImages((prev) => [...prev, { id, blob }]);
     } catch (error) {
       console.error("Error downloading image:", error);
+    }
+  };
+
+  // Load the NSFW.js model on component mount
+  useEffect(() => {
+    const loadModel = async () => {
+      const loadedModel = await nsfwjs.load(); // Load the NSFW model
+      setModel(loadedModel);
+    };
+    loadModel();
+  }, []);
+
+  // Check if an image is NSFW
+  const analyzeImage = async (imageUrl) => {
+    try {
+      let img = new Image();
+      img.crossOrigin = "anonymous"; // Avoid CORS issues
+      img.src = imageUrl;
+
+      // Wait for the image to load
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+
+      if (model) {
+        const predictions = await model.classify(img); // Classify the image
+        console.log(predictions);
+        // setImageResults((prev) => [...prev, { url: imageUrl, predictions }]);
+      }
+    } catch (error) {
+      console.error("Error analyzing image:", error);
     }
   };
 
@@ -115,6 +149,9 @@ function Main() {
 
       setImg(genImg);
       // console.log("======== im data =========>");
+      // const imgElem = new Image();
+      // imgElem.crossOrigin = "anonymous"; // Avoid CORS issues
+      // imgElem.src = genImg;
 
       // now we got the image we can send it to the backend
       const myPayload = {
