@@ -12,26 +12,29 @@ function App() {
   const [formData, setFormData] = useState();
   const [lastGeneratedImg, setLastGeneratedImg] = useState();
   const [submitDisabled, setSubmitDisabled] = useState(false);
+    const [img, setImg] = useState();
+  
 
   return (
     <Router>
-      {/* <myContext.Provider
-        value={
-          (formData,
+      <myContext.Provider
+        value={{
+          formData,
           setFormData,
           lastGeneratedImg,
           setLastGeneratedImg,
           submitDisabled,
-          setSubmitDisabled)
-        }
-      > */}
+          setSubmitDisabled,
+          img, setImg
+        }}
+      >
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/album" element={<Album />}></Route>
           <Route path="/main" element={<Main />}></Route>
         </Routes>
-      {/* </myContext.Provider> */}
+      </myContext.Provider>
     </Router>
   );
 }
