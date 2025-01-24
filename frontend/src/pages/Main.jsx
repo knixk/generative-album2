@@ -9,20 +9,40 @@ const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOa
 
 // IndexedDB setup ----------
 
-// const request = indexedDB.open("MyDatabase", 1);
+// IndexedDB helper functions
+const openDB = (dbName, storeName) => {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(dbName, 1);
 
-// request.onupgradeneeded = (event) => {
-//   const db = event.target.result;
-//   db.createObjectStore("MyStore", { keyPath: "id" });
-// };
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains(storeName)) {
+        db.createObjectStore(storeName, { keyPath: "id" });
+      }
+    };
 
-// request.onsuccess = (event) => {
-//   console.log("Database opened successfully!");
-// };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+};
 
-// request.onerror = (event) => {
-//   console.error("Database error:", event.target.error);
-// };
+const addToDB = async (dbName, storeName, data) => {
+  const db = await openDB(dbName, storeName);
+  const transaction = db.transaction(storeName, "readwrite");
+  const store = transaction.objectStore(storeName);
+  store.add(data);
+  return transaction.complete;
+};
+
+const getAllFromDB = async (dbName, storeName) => {
+  const db = await openDB(dbName, storeName);
+  const transaction = db.transaction(storeName, "readonly");
+  const store = transaction.objectStore(storeName);
+  return new Promise((resolve) => {
+    const request = store.getAll();
+    request.onsuccess = () => resolve(request.result);
+  });
+};
 
 // IndexedDB setup ----- x -----
 
@@ -55,26 +75,24 @@ function Main() {
   //   setSubmitDisabled,
   // } = myState;
 
-  // const fetchImage = async () => {
-  //   const url =
-  //     "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic";
-  //   const headers = {
-  //     "X-Rapidapi-Key": "cef7de3f42msh47f9ebffe210c03p10be64jsn0c9f66beeaaf",
-  //     "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
-  //     "Content-Type": "application/json",
-  //   };
-  //   const data = {
-  //     inputs:
-  //       "Find serenity in the tranquil elegance of a solitary sailboat drifting on a glassy lake at sunset",
-  //   };
+  
+  // Add image to IndexedDB
+  const handleAddImage = async (imageUrl) => {
+    try {
+      const response = await fetch(imageUrl);
+      if (!response.ok) throw new Error("Failed to fetch image.");
+      const blob = await response.blob();
 
-  //   try {
-  //     const response = await axios.post(url, data, { headers });
-  //     console.log(response.data); // Handle the response as needed
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
+      // Save to IndexedDB
+      const id = Date.now(); // Unique ID
+      await addToDB(dbName, storeName, { id, blob });
+
+      // Update UI
+      setImages((prev) => [...prev, { id, blob }]);
+    } catch (error) {
+      console.error("Error downloading image:", error);
+    }
+  };
 
   const myAsyncFn = async () => {
     if (prompt == "" || name == "") {
@@ -141,7 +159,17 @@ function Main() {
     // submitData("link")
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
+
+  // Load images from IndexedDB on component mount
+  useEffect(() => {
+    const loadImages = async () => {
+      const storedImages = await getAllFromDB(dbName, storeName);
+      setImages(storedImages);
+    };
+
+    loadImages();
+  }, []);
 
   return (
     <div className="main__container">
