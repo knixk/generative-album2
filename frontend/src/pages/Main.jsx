@@ -47,7 +47,7 @@ function submitData(payload) {
 
 function Main() {
 
-  const valentineDay = `I`
+  const valentineDay = `Valentine's day celebration in`;
 
   const myState = useContext(myContext);
   // console.log("==========================>");
@@ -133,7 +133,7 @@ function Main() {
       const data = await axios.post(
         "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
         {
-          inputs: prompt,
+          inputs: `${valentineDay} ${prompt} `,
         },
         {
           headers: {
@@ -207,8 +207,21 @@ function Main() {
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
 
         <div className="choose__container">
-          
+        <label>I want to celebrate valentine's day in</label>
+        {/* <select onChange={(e) => console.log(e.target.value)}>
+          <option value="Paris">Paris</option>
+          <option value="New York">New York</option>
+          <option value="London">London</option>
+        </select> */}
+        <input
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Enter place.."
+          type="text"
+          required
+        />  
         </div>
+        
 
         <input
           value={name}
@@ -218,13 +231,7 @@ function Main() {
           required
           autoFocus
         />
-        <textarea
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Enter your prompt.."
-          type="text"
-          required
-        />
+        
 
         <button disabled={disabled} onClick={() => {}}>
           Submit
