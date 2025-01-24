@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // import * as nsfwjs from "nsfwjs";
 // const model = await nsfwjs.load();
 
-// recieve the image on port ------- receiver
+// recieve the image on port -------  receiver
 import io from "socket.io-client";
 const socket = io("http://localhost:3000");
 

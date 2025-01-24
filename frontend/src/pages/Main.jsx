@@ -4,7 +4,7 @@ import { myContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-import * as nsfwjs from "nsfwjs";
+// import * as nsfwjs from "nsfwjs";
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
@@ -47,7 +47,7 @@ function submitData(payload) {
 
 function Main() {
 
-  const valentineDay = `Valentine's day celebration in`;
+  const valentineDay = `A breathtaking and romantic setting capturing the essence of a Valentine's Day celebration in`;
 
   const myState = useContext(myContext);
   // console.log("==========================>");
@@ -91,13 +91,13 @@ function Main() {
   };
 
   // Load the NSFW.js model on component mount
-  useEffect(() => {
-    const loadModel = async () => {
-      const loadedModel = await nsfwjs.load(); // Load the NSFW model
-      setModel(loadedModel);
-    };
-    loadModel();
-  }, []);
+  // useEffect(() => {
+  //   const loadModel = async () => {
+  //     const loadedModel = await nsfwjs.load(); // Load the NSFW model
+  //     setModel(loadedModel);
+  //   };
+  //   loadModel();
+  // }, []);
 
   // Check if an image is NSFW
   const analyzeImage = async (imageUrl) => {

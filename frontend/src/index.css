@@ -184,3 +184,7 @@ input:hover,
   display: flex;
   flex-direction: row;
 }
+
+#cache__btn {
+  margin-top: 5rem;
+}
