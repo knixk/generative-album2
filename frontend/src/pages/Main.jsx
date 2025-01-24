@@ -34,15 +34,6 @@ const addToDB = async (dbName, storeName, data) => {
   return transaction.complete;
 };
 
-const getAllFromDB = async (dbName, storeName) => {
-  const db = await openDB(dbName, storeName);
-  const transaction = db.transaction(storeName, "readonly");
-  const store = transaction.objectStore(storeName);
-  return new Promise((resolve) => {
-    const request = store.getAll();
-    request.onsuccess = () => resolve(request.result);
-  });
-};
 
 // IndexedDB setup ----- x -----
 
@@ -75,7 +66,6 @@ function Main() {
   //   setSubmitDisabled,
   // } = myState;
 
-  
   // Add image to IndexedDB
   const handleAddImage = async (imageUrl) => {
     try {
@@ -161,15 +151,16 @@ function Main() {
 
   // useEffect(() => {}, []);
 
-  // Load images from IndexedDB on component mount
-  useEffect(() => {
-    const loadImages = async () => {
-      const storedImages = await getAllFromDB(dbName, storeName);
-      setImages(storedImages);
-    };
+  // Convert blob to URL for rendering
+  const getBlobUrl = (blob) => URL.createObjectURL(blob);
 
-    loadImages();
-  }, []);
+  // Add all images (background processing)
+  // add a single image
+  const addAllImages = () => {
+    exampleImageLinks.forEach((link) => handleAddImage(link));
+  };
+
+
 
   return (
     <div className="main__container">
