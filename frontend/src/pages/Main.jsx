@@ -48,12 +48,14 @@ function Main() {
   const myState = useContext(myContext);
   // console.log("==========================>");
   console.log(myState);
+
+  const { img, setImg } = myState;
+
   // console.log("==========================>");
   // ---- send this prompt to the api
   const [name, setName] = useState();
   const [prompt, setPrompt] = useState();
   // ---- send this img to backend socket
-  const [img, setImg] = useState();
   const [disabled, setDisabled] = useState(false);
 
   // const {
