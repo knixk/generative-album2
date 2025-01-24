@@ -51,7 +51,7 @@ function Main() {
 
   const myState = useContext(myContext);
   // console.log("==========================>");
-  console.log(myState);
+  // console.log(myState);
 
   const { img, setImg } = myState;
 
@@ -114,7 +114,7 @@ function Main() {
 
       if (model) {
         const predictions = await model.classify(img); // Classify the image
-        console.log(predictions);
+        // console.log(predictions);
         // setImageResults((prev) => [...prev, { url: imageUrl, predictions }]);
       }
     } catch (error) {
@@ -130,7 +130,7 @@ function Main() {
     toast("Please wait while we ready your creation...");
 
     const finalStr = `${valentineDay} ${prompt}`;
-    console.log(finalStr)
+    // console.log(finalStr)
 
     try {
       const data = await axios.post(
