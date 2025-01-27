@@ -57,15 +57,9 @@ function Main() {
   // ---- send this img to backend socket
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
-  const [ipAddress, setIPAddress] = useState();
+  const [ipAddress, setIPAddress] = useState('http://192.168.0.105:3000/');
 
-  const socket = ipAddress && io(ipAddress);
-
-  console.log(socket)
-
-  function submitData(payload) {
-    socket.emit("new-image", payload); // Send image to server
-  }
+  // console.log(socket);
 
   // const {
   //   formData,
@@ -127,8 +121,14 @@ function Main() {
   };
 
   const myAsyncFn = async () => {
-    if (prompt == "" || name == "") {
+    if (prompt == "" || name == "" || ipAddress == "") {
       return;
+    }
+
+    const socket = io(ipAddress);
+
+    function submitData(payload) {
+      socket.emit("new-image", payload); // Send image to server
     }
 
     toast("Please wait while we ready your creation...");
@@ -137,27 +137,27 @@ function Main() {
     // console.log(finalStr)
 
     try {
-      console.log(ipAddress)
+      console.log(ipAddress);
       // ----- uncomment this line to generate the image -----
-      // const data = await axios.post(
-      //   "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
-      //   {
-      //     inputs: finalStr,
-      //   },
-      //   {
-      //     headers: {
-      //       "X-Rapidapi-Key":
-      //         "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
-      //       "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
+      const data = await axios.post(
+        "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
+        {
+          inputs: finalStr,
+        },
+        {
+          headers: {
+            "X-Rapidapi-Key":
+              "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
+            "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // console.log("======== im data =========>");
       // console.log(data.data.url);
       // ---x-- uncomment this line to generate the image ---x--
-      
+
       const genImg = data.data.url;
 
       // const genImg = sampleImg;
@@ -176,6 +176,8 @@ function Main() {
 
       // only and only if the image is present then we make this call..
       genImg && submitData(myPayload);
+      // submitData(myPayload);
+
       toast.success("Your image is successfully generated!");
 
       // console.log(myPayload);
