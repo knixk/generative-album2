@@ -11,7 +11,7 @@
 
 body {
   /* background-color: #e2e2e2; */
-  background-image: url('https://c0.wallpaperflare.com/preview/153/282/530/abstract-background-blur-bokeh.jpg');
+  background-image: url('https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Arial', 'sans-serif';
@@ -511,3 +511,13 @@ body{
 }
 
 /* ------- animation ----x  */
+
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 2rem;
+}

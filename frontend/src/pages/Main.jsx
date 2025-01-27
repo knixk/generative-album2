@@ -272,7 +272,7 @@ function Main() {
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
-          <input
+          {/* <input
             value={ipAddress}
             onChange={(e) => {
               setIPAddress(e.target.value);
@@ -280,7 +280,7 @@ function Main() {
             }}
             type="text"
             placeholder="Enter device ip address"
-          />
+          /> */}
           <p className="prompt__label">
             I want to celebrate valentine's day at:
           </p>
