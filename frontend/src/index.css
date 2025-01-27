@@ -15,6 +15,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Arial', 'sans-serif';
+  height: 100vh;
 }
 
 .card__container {
@@ -40,10 +41,10 @@ body {
   display: grid;
   /* flex-wrap: wrap; */
   /* justify-content: center; */
-  background-color: rgb(233, 233, 233);
+  background-color: rgba(255, 255, 255, 0.103);
   margin: 0 1rem;
   margin-right: 3rem;
-  padding: 2rem 2rem;
+  padding: 4rem 2rem;
   border-radius: 10px;
   gap: 1rem;
   width: 80vw;
@@ -197,4 +198,15 @@ input:hover,
 
 #cache__btn {
   margin-top: 5rem;
+}
+
+.prompt__label {  
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.075);
+  padding: 1.5rem 1rem;
+  /* width: 70%; */
+  font-size: 20px;
+  border-radius: 5px;
+  color: white;
+  /* text-align: center; */
 }

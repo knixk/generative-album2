@@ -229,7 +229,7 @@ function Main() {
             type="text"
             placeholder="Enter device ip address"
           />
-          <p>I want to celebrate valentine's day in</p>
+          <p className="prompt__label">I want to celebrate valentine's day at:</p>
           {/* <select onChange={(e) => console.log(e.target.value)}>
           <option value="Paris">Paris</option>
           <option value="New York">New York</option>
