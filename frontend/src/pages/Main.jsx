@@ -55,7 +55,7 @@ request.onupgradeneeded = (event) => {
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
 const fixedIP = `http://192.168.0.105:3000/`
-const ngrokAdd = ` https://926d-206-84-237-190.ngrok-free.app`
+const ngrokAdd = `https://926d-206-84-237-190.ngrok-free.app`
 
 // IndexedDB setup ----------
 const socket = io(ngrokAdd);
