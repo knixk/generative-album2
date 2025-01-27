@@ -37,7 +37,7 @@ io.on("connection", (socket) => {
     console.log(image);
   });
 });
-app.listen(port, ip, mainFn);
+app.listen(port, mainFn);
 
 app.get("/", async (req, res) => {
   res.status(200).json({
