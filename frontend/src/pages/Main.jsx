@@ -59,7 +59,7 @@ const ngrokAdd = `https://2c8c-206-84-237-190.ngrok-free.app`;
 import io from "socket.io-client";
 
 // IndexedDB setup ----------
-const socket = io();
+const socket = io("http://localhost:3000");
 
 function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
