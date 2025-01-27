@@ -11,6 +11,9 @@ const socket = io("http://localhost:3000");
 import img from "../assets/img.webp";
 import toast, { Toaster } from "react-hot-toast";
 import Modal from "../components/Modal";
+import Loader from "../components/Loader";
+import { myContext } from "../App";
+import { useContext } from "react";
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
@@ -84,6 +87,8 @@ function Album() {
   const [albums, setAlbums] = useState(data);
   const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState();
+  const myState = useContext(myContext);
+  const { isLoading, setIsLoading } = myState;
 
   const handleDelete = (i) => {
     return;
@@ -155,6 +160,11 @@ function Album() {
 
   //   loadImages();
   // }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="album__container">
       <Toaster />
