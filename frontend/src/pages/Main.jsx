@@ -8,7 +8,15 @@ import axios from "axios";
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
+const fixedIP = `http://192.168.0.105:3000/`
+
 // IndexedDB setup ----------
+const socket = io(fixedIP);
+
+function submitData(payload) {
+  socket.emit("new-image", payload); // Send image to server
+}
+
 
 // IndexedDB helper functions
 const openDB = (dbName, storeName) => {
@@ -125,11 +133,6 @@ function Main() {
       return;
     }
 
-    const socket = io(ipAddress);
-
-    function submitData(payload) {
-      socket.emit("new-image", payload); // Send image to server
-    }
 
     toast("Please wait while we ready your creation...");
 
