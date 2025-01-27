@@ -59,7 +59,8 @@ const ngrokAdd = `https://2c8c-206-84-237-190.ngrok-free.app`;
 import io from "socket.io-client";
 
 // IndexedDB setup ----------
-const socket = io("http://localhost:3000");
+// so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
+const socket = io("http://localhost:3002");
 
 function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
