@@ -10,7 +10,10 @@
 }
 
 body {
-  background-color: #e2e2e2;
+  /* background-color: #e2e2e2; */
+  background-image: url('https://c0.wallpaperflare.com/preview/153/282/530/abstract-background-blur-bokeh.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: 'Arial', 'sans-serif';
 }
 
@@ -46,7 +49,9 @@ body {
   width: 80vw;
   max-width: 2080px;
   justify-content: center;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(99, 99, 99, 0.192) 0px 2px 8px 0px;
+  /* display: none; */
+  /* opacity: 0.6; */
   /* max-width: 900px; */
   /* grid-template-columns: repeat(); */
   /* background-color:antiquewhite; */
