@@ -39,12 +39,8 @@ const addToDB = async (dbName, storeName, data) => {
 
 // send the data on port - sender --------
 import io from "socket.io-client";
-const socket = io("http://localhost:3000");
 
-function submitData(payload) {
-  socket.emit("new-image", payload); // Send image to server
-}
-
+// ----------- Main app function ----------------
 function Main() {
   const valentineDay = `A breathtaking and romantic setting capturing the essence of a Valentine's Day celebration in`;
 
@@ -62,6 +58,14 @@ function Main() {
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
   const [ipAddress, setIPAddress] = useState();
+
+  const socket = ipAddress && io(ipAddress);
+
+  console.log(socket)
+
+  function submitData(payload) {
+    socket.emit("new-image", payload); // Send image to server
+  }
 
   // const {
   //   formData,
@@ -133,24 +137,29 @@ function Main() {
     // console.log(finalStr)
 
     try {
-      const data = await axios.post(
-        "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
-        {
-          inputs: finalStr,
-        },
-        {
-          headers: {
-            "X-Rapidapi-Key":
-              "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
-            "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      console.log(ipAddress)
+      // ----- uncomment this line to generate the image -----
+      // const data = await axios.post(
+      //   "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
+      //   {
+      //     inputs: finalStr,
+      //   },
+      //   {
+      //     headers: {
+      //       "X-Rapidapi-Key":
+      //         "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
+      //       "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
 
       // console.log("======== im data =========>");
       // console.log(data.data.url);
+      // ---x-- uncomment this line to generate the image ---x--
+      
       const genImg = data.data.url;
+
       // const genImg = sampleImg;
 
       setImg(genImg);
@@ -209,10 +218,15 @@ function Main() {
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
-          <input value={ipAddress} onChange={(e) => {
-            setIPAddress(e.target.value)
-            // console.log(ipAddress)
-          }} type="text" placeholder="Enter device ip address" />
+          <input
+            value={ipAddress}
+            onChange={(e) => {
+              setIPAddress(e.target.value);
+              // console.log(ipAddress)
+            }}
+            type="text"
+            placeholder="Enter device ip address"
+          />
           <p>I want to celebrate valentine's day in</p>
           {/* <select onChange={(e) => console.log(e.target.value)}>
           <option value="Paris">Paris</option>
