@@ -182,7 +182,12 @@ input:hover,
 
 .choose__container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.choose__container p {
+  margin: 1rem 0;
 }
 
 #cache__btn {

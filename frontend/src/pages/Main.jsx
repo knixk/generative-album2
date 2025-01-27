@@ -46,7 +46,6 @@ function submitData(payload) {
 }
 
 function Main() {
-
   const valentineDay = `A breathtaking and romantic setting capturing the essence of a Valentine's Day celebration in`;
 
   const myState = useContext(myContext);
@@ -62,6 +61,7 @@ function Main() {
   // ---- send this img to backend socket
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
+  const [ipAddress, setIPAddress] = useState();
 
   // const {
   //   formData,
@@ -208,23 +208,25 @@ function Main() {
     <div className="main__container">
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
-
         <div className="choose__container">
-        <p>I want to celebrate valentine's day in</p>
-        {/* <select onChange={(e) => console.log(e.target.value)}>
+          <input value={ipAddress} onChange={(e) => {
+            setIPAddress(e.target.value)
+            // console.log(ipAddress)
+          }} type="text" placeholder="Enter device ip address" />
+          <p>I want to celebrate valentine's day in</p>
+          {/* <select onChange={(e) => console.log(e.target.value)}>
           <option value="Paris">Paris</option>
           <option value="New York">New York</option>
           <option value="London">London</option>
         </select> */}
-        <input
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Enter place.."
-          type="text"
-          required
-        />  
+          <input
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Enter place.."
+            type="text"
+            required
+          />
         </div>
-        
 
         <input
           value={name}
@@ -234,20 +236,21 @@ function Main() {
           required
           autoFocus
         />
-        
 
         <button id="submit__btn" disabled={disabled} onClick={() => {}}>
           Submit
         </button>
       </form>
 
-
-          <button onClick={() => {
-
-            localStorage.clear('images');
-            toast.success('All images cleared...')
-
-          }} id="cache__btn">Clear Cache</button>
+      <button
+        onClick={() => {
+          localStorage.clear("images");
+          toast.success("All images cleared...");
+        }}
+        id="cache__btn"
+      >
+        Clear Cache
+      </button>
 
       {/* <Grid /> */}
     </div>
