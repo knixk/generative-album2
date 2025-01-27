@@ -60,7 +60,7 @@ import io from "socket.io-client";
 
 // IndexedDB setup ----------
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
-const socket = io("http://localhost:3002");
+const socket = io();
 
 function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
