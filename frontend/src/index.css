@@ -113,6 +113,8 @@ button,
   border-radius: 5px;
   outline: none;
   border: none;
+  font-size:18px;
+  letter-spacing: 1.2px;
 }
 
 .home__container {
