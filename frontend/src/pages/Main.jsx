@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 // import * as nsfwjs from "nsfwjs";
+import Loader from "../components/Loader";
 
 // This is what our customer data looks like.
 const customerData = [
   { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
   { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" },
 ];
-
 
 const dbName = "the_name";
 
@@ -49,21 +49,21 @@ request.onupgradeneeded = (event) => {
   };
 };
 
-
-
-
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
-const fixedIP = `http://192.168.0.105:3000/`
-const ngrokAdd = `https://926d-206-84-237-190.ngrok-free.app`
+const localIP = `http://localhost:3000/`;
+const fixedIP = `http://192.168.0.105:3000/`;
+const ngrokAdd = `https://2c8c-206-84-237-190.ngrok-free.app`;
+
+// send the data on port - sender --------
+import io from "socket.io-client";
 
 // IndexedDB setup ----------
-const socket = io(ngrokAdd);
+const socket = io();
 
 function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
 }
-
 
 // IndexedDB helper functions
 const openDB = (dbName, storeName) => {
@@ -92,9 +92,6 @@ const addToDB = async (dbName, storeName, data) => {
 
 // IndexedDB setup ----- x -----
 
-// send the data on port - sender --------
-import io from "socket.io-client";
-
 // ----------- Main app function ----------------
 function Main() {
   const valentineDay = `A breathtaking and romantic setting capturing the essence of a Valentine's Day celebration in`;
@@ -103,7 +100,7 @@ function Main() {
   // console.log("==========================>");
   // console.log(myState);
 
-  const { img, setImg } = myState;
+  const { img, setImg, isLoading, setIsLoading } = myState;
 
   // console.log("==========================>");
   // ---- send this prompt to the api
@@ -112,7 +109,7 @@ function Main() {
   // ---- send this img to backend socket
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
-  const [ipAddress, setIPAddress] = useState('http://192.168.0.105:3000/');
+  const [ipAddress, setIPAddress] = useState("http://192.168.0.105:3000/");
 
   // console.log(socket);
 
@@ -180,7 +177,6 @@ function Main() {
       return;
     }
 
-
     toast("Please wait while we ready your creation...");
 
     const finalStr = `${valentineDay} ${prompt}`;
@@ -189,20 +185,20 @@ function Main() {
     try {
       console.log(ipAddress);
       // ----- uncomment this line to generate the image -----
-      const data = await axios.post(
-        "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
-        {
-          inputs: finalStr,
-        },
-        {
-          headers: {
-            "X-Rapidapi-Key":
-              "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
-            "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // const data = await axios.post(
+      //   "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
+      //   {
+      //     inputs: finalStr,
+      //   },
+      //   {
+      //     headers: {
+      //       "X-Rapidapi-Key":
+      //         "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
+      //       "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
 
       // console.log("======== im data =========>");
       // console.log(data.data.url);
@@ -265,6 +261,10 @@ function Main() {
     exampleImageLinks.forEach((link) => handleAddImage(link));
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="main__container">
       <Toaster />
@@ -279,7 +279,9 @@ function Main() {
             type="text"
             placeholder="Enter device ip address"
           />
-          <p className="prompt__label">I want to celebrate valentine's day at:</p>
+          <p className="prompt__label">
+            I want to celebrate valentine's day at:
+          </p>
           {/* <select onChange={(e) => console.log(e.target.value)}>
           <option value="Paris">Paris</option>
           <option value="New York">New York</option>

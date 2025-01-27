@@ -1,10 +1,12 @@
-import React from 'react'
+import React from "react";
 
 function Loader() {
   return (
-    <div>Loader</div>
-  )
+    <div>
+      <h1 class="title">Loading</h1>
+      <div class="rainbow-marker-loader"></div>
+    </div>
+  );
 }
 
-export default Loader
-
+export default Loader;
