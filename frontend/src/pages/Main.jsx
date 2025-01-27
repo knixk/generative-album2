@@ -6,6 +6,25 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 // import * as nsfwjs from "nsfwjs";
 
+// Let us open our database
+const request = window.indexedDB.open("MyTestDatabase", 3);
+
+
+request.onerror = (event) => {
+  // Do something with request.error!
+  // console.error("db didn't open succesfully")
+  console.error(`Database error: ${event.target.error?.message}`);
+
+};
+request.onsuccess = (event) => {
+  // Do something with request.result!
+  db = event.target.result;
+  console.log(db)
+  console.log("db opened succesfully")
+};
+
+
+
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
 const fixedIP = `http://192.168.0.105:3000/`
