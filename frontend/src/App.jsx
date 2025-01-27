@@ -13,7 +13,7 @@ function App() {
   const [lastGeneratedImg, setLastGeneratedImg] = useState();
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [img, setImg] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Router>

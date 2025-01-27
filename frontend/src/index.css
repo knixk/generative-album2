@@ -84,6 +84,7 @@ nav {
   color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   letter-spacing: 3px;
+  width: 100vw;
 }
 
 .main__container {
@@ -489,18 +490,20 @@ input:hover,
 
 /* for demo */
 body{
-  display:flex;
+  /* display:flex; */
   flex-direction:column;
   align-items:center;
   justify-content:center;
   min-height:100vh;
-  padding:1rem 1rem 2rem 1rem;
+  /* padding:1rem 1rem 2rem 1rem; */
   box-sizing:border-box;
   overflow:hidden;
 }
 
 .title{
-  color:var(--color-crayon);
+  /* color:var(--color-crayon); */
+  color: white;
+  text-align: center;
   font-size:1.5rem;
   font-family: 'M PLUS Rounded 1c', sans-serif; 
   text-transform:uppercase;

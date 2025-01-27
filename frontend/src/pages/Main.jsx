@@ -185,20 +185,20 @@ function Main() {
     try {
       console.log(ipAddress);
       // ----- uncomment this line to generate the image -----
-      // const data = await axios.post(
-      //   "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
-      //   {
-      //     inputs: finalStr,
-      //   },
-      //   {
-      //     headers: {
-      //       "X-Rapidapi-Key":
-      //         "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
-      //       "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
-      //       "Content-Type": "application/json",
-      //     },
-      //   }
-      // );
+      const data = await axios.post(
+        "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
+        {
+          inputs: finalStr,
+        },
+        {
+          headers: {
+            "X-Rapidapi-Key":
+              "12bd4f84e7msha12d050fcf41207p19242cjsncb3d832cee2e",
+            "X-Rapidapi-Host": "ai-text-to-image-generator-api.p.rapidapi.com",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // console.log("======== im data =========>");
       // console.log(data.data.url);
@@ -225,6 +225,7 @@ function Main() {
       // submitData(myPayload);
 
       toast.success("Your image is successfully generated!");
+      setIsLoading(false);
 
       // console.log(myPayload);
       setDisabled(false);
@@ -242,6 +243,7 @@ function Main() {
     // console.log("submitted");
     // console.log(prompt);
     // fetchImage();
+    setIsLoading(true);
     await myAsyncFn();
 
     // img && submitData(img);
