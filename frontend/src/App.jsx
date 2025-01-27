@@ -12,8 +12,8 @@ function App() {
   const [formData, setFormData] = useState();
   const [lastGeneratedImg, setLastGeneratedImg] = useState();
   const [submitDisabled, setSubmitDisabled] = useState(false);
-    const [img, setImg] = useState();
-  
+  const [img, setImg] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Router>
@@ -25,7 +25,10 @@ function App() {
           setLastGeneratedImg,
           submitDisabled,
           setSubmitDisabled,
-          img, setImg
+          img,
+          setImg,
+          isLoading,
+          setIsLoading,
         }}
       >
         <Navbar />

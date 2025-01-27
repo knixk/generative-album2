@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 // recieve the image on port -------  receiver
 import io from "socket.io-client";
 const socket = io("http://localhost:3000");
+// const socket = io("http://192.168.0.105:3000/");
 
 import img from "../assets/img.webp";
 import toast, { Toaster } from "react-hot-toast";

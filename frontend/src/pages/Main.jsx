@@ -5,10 +5,65 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 // import * as nsfwjs from "nsfwjs";
+import Loader from "../components/Loader";
+
+// This is what our customer data looks like.
+const customerData = [
+  { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+  { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" },
+];
+
+const dbName = "the_name";
+
+const request = indexedDB.open(dbName, 2);
+
+request.onerror = (event) => {
+  // Handle errors.
+};
+request.onupgradeneeded = (event) => {
+  const db = event.target.result;
+
+  // Create an objectStore to hold information about our customers. We're
+  // going to use "ssn" as our key path because it's guaranteed to be
+  // unique - or at least that's what I was told during the kickoff meeting.
+  const objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+
+  // Create an index to search customers by name. We may have duplicates
+  // so we can't use a unique index.
+  objectStore.createIndex("name", "name", { unique: false });
+
+  // Create an index to search customers by email. We want to ensure that
+  // no two customers have the same email, so use a unique index.
+  objectStore.createIndex("email", "email", { unique: true });
+
+  // Use transaction oncomplete to make sure the objectStore creation is
+  // finished before adding data into it.
+  objectStore.transaction.oncomplete = (event) => {
+    // Store values in the newly created objectStore.
+    const customerObjectStore = db
+      .transaction("customers", "readwrite")
+      .objectStore("customers");
+    customerData.forEach((customer) => {
+      customerObjectStore.add(customer);
+    });
+  };
+};
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
+const localIP = `http://localhost:3000/`;
+const fixedIP = `http://192.168.0.105:3000/`;
+const ngrokAdd = `https://2c8c-206-84-237-190.ngrok-free.app`;
+
+// send the data on port - sender --------
+import io from "socket.io-client";
+
 // IndexedDB setup ----------
+const socket = io("http://localhost:3000");
+
+function submitData(payload) {
+  socket.emit("new-image", payload); // Send image to server
+}
 
 // IndexedDB helper functions
 const openDB = (dbName, storeName) => {
@@ -37,23 +92,15 @@ const addToDB = async (dbName, storeName, data) => {
 
 // IndexedDB setup ----- x -----
 
-// send the data on port - sender --------
-import io from "socket.io-client";
-const socket = io("http://localhost:3000");
-
-function submitData(payload) {
-  socket.emit("new-image", payload); // Send image to server
-}
-
+// ----------- Main app function ----------------
 function Main() {
-
   const valentineDay = `A breathtaking and romantic setting capturing the essence of a Valentine's Day celebration in`;
 
   const myState = useContext(myContext);
   // console.log("==========================>");
   // console.log(myState);
 
-  const { img, setImg } = myState;
+  const { img, setImg, isLoading, setIsLoading } = myState;
 
   // console.log("==========================>");
   // ---- send this prompt to the api
@@ -62,6 +109,9 @@ function Main() {
   // ---- send this img to backend socket
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
+  const [ipAddress, setIPAddress] = useState("http://192.168.0.105:3000/");
+
+  // console.log(socket);
 
   // const {
   //   formData,
@@ -123,7 +173,7 @@ function Main() {
   };
 
   const myAsyncFn = async () => {
-    if (prompt == "" || name == "") {
+    if (prompt == "" || name == "" || ipAddress == "") {
       return;
     }
 
@@ -133,6 +183,8 @@ function Main() {
     // console.log(finalStr)
 
     try {
+      console.log(ipAddress);
+      // ----- uncomment this line to generate the image -----
       const data = await axios.post(
         "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
         {
@@ -150,7 +202,10 @@ function Main() {
 
       // console.log("======== im data =========>");
       // console.log(data.data.url);
+      // ---x-- uncomment this line to generate the image ---x--
+
       const genImg = data.data.url;
+
       // const genImg = sampleImg;
 
       setImg(genImg);
@@ -167,7 +222,10 @@ function Main() {
 
       // only and only if the image is present then we make this call..
       genImg && submitData(myPayload);
+      // submitData(myPayload);
+
       toast.success("Your image is successfully generated!");
+      setIsLoading(false);
 
       // console.log(myPayload);
       setDisabled(false);
@@ -185,6 +243,7 @@ function Main() {
     // console.log("submitted");
     // console.log(prompt);
     // fetchImage();
+    setIsLoading(true);
     await myAsyncFn();
 
     // img && submitData(img);
@@ -204,27 +263,40 @@ function Main() {
     exampleImageLinks.forEach((link) => handleAddImage(link));
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="main__container">
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
-
         <div className="choose__container">
-        <p>I want to celebrate valentine's day in</p>
-        {/* <select onChange={(e) => console.log(e.target.value)}>
+          {/* <input
+            value={ipAddress}
+            onChange={(e) => {
+              setIPAddress(e.target.value);
+              // console.log(ipAddress)
+            }}
+            type="text"
+            placeholder="Enter device ip address"
+          /> */}
+          <p className="prompt__label">
+            I want to celebrate valentine's day at:
+          </p>
+          {/* <select onChange={(e) => console.log(e.target.value)}>
           <option value="Paris">Paris</option>
           <option value="New York">New York</option>
           <option value="London">London</option>
         </select> */}
-        <input
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Enter place.."
-          type="text"
-          required
-        />  
+          <input
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Enter place.."
+            type="text"
+            required
+          />
         </div>
-        
 
         <input
           value={name}
@@ -234,20 +306,21 @@ function Main() {
           required
           autoFocus
         />
-        
 
         <button id="submit__btn" disabled={disabled} onClick={() => {}}>
           Submit
         </button>
       </form>
 
-
-          <button onClick={() => {
-
-            localStorage.clear('images');
-            toast.success('All images cleared...')
-
-          }} id="cache__btn">Clear Cache</button>
+      <button
+        onClick={() => {
+          localStorage.clear("images");
+          toast.success("All images cleared...");
+        }}
+        id="cache__btn"
+      >
+        Clear Cache
+      </button>
 
       {/* <Grid /> */}
     </div>
