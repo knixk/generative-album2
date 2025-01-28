@@ -7,4 +7,8 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
+  server: {
+    host: "0.0.0.0", // Listen on all network interfaces
+    // port: 30, // Optional: set your desired port
+  },
 });

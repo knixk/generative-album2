@@ -51,16 +51,16 @@ request.onupgradeneeded = (event) => {
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
-const localIP = `http://localhost:3000/`;
-const fixedIP = `http://192.168.0.105:3000/`;
-const ngrokAdd = `https://2c8c-206-84-237-190.ngrok-free.app`;
+// const localIP = `http://localhost:3000/`;
+// const fixedIP = `http://192.168.0.105:3000/`;
+// const ngrokAdd = `https://2c8c-206-84-237-190.ngrok-free.app`;
 
 // send the data on port - sender --------
 import io from "socket.io-client";
 
 // IndexedDB setup ----------
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
-const socket = io("http://192.168.0.105:3000");
+const socket = io('ws://192.168.0.105:3000');
 
 function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
