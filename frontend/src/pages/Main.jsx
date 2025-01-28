@@ -61,7 +61,7 @@ import io from "socket.io-client";
 // IndexedDB setup ----------
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
 // const socket = io('ws://192.168.0.105:3000');
-const socket = io();
+const socket = io('ws://192.168.0.105:3000');
 
 // const socket = io('ws://192.168.0.2:3000');
 

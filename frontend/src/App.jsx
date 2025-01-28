@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Album from "./pages/Album";
 import Navbar from "./components/Navbar";
 import Main from "./pages/Main";
+import Config from "./pages/Config";
 
 export const myContext = createContext();
 
@@ -14,6 +15,7 @@ function App() {
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [img, setImg] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [configData, setConfigData] = useState({})
 
   return (
     <Router>
@@ -36,6 +38,8 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/album" element={<Album />}></Route>
           <Route path="/main" element={<Main />}></Route>
+          <Route path="/config" element={<Config />}></Route>
+
         </Routes>
       </myContext.Provider>
     </Router>
