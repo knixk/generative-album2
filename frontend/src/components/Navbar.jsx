@@ -10,7 +10,7 @@ function Navbar() {
   const MyState = useContext(myContext);
   const { isLoading, setIsLoading } = MyState;
 
-  console.log(MyState)
+  // console.log(MyState)
 
   if (isLoading) {
     return ""
