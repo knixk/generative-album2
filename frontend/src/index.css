@@ -222,6 +222,11 @@ input:hover,
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background-color: #2e2e2e23;
+  padding: 2rem 2rem;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
 }
 
 .choose__container p {
@@ -234,13 +239,15 @@ input:hover,
 
 .prompt__label {  
   font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.075);
+  background-color: rgba(77, 77, 77, 0.144);
   padding: 1.5rem 1rem;
   /* width: 70%; */
   font-size: 20px;
   border-radius: 5px;
   color: white;
   /* text-align: center; */
+  /* box-shadow: rgba(207, 207, 207, 0.2) 0px 2px 8px 0px; */
+
 }
 
 
@@ -634,3 +641,4 @@ body{
   padding: 2rem 1rem;
   /* width: 50%; */
 }
+

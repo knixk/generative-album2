@@ -61,8 +61,7 @@ import io from "socket.io-client";
 // IndexedDB setup ----------
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
 // const socket = io('ws://192.168.0.105:3000');
-const socket = io('ws://192.168.0.106:3000');
-
+const socket = io("ws://192.168.0.106:3000");
 
 function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
@@ -299,20 +298,20 @@ function Main() {
             type="text"
             required
           />
+
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name.."
+            type="text"
+            required
+            autoFocus
+          />
+
+          <button id="submit__btn" disabled={disabled} onClick={() => {}}>
+            Submit
+          </button>
         </div>
-
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Enter your name.."
-          type="text"
-          required
-          autoFocus
-        />
-
-        <button id="submit__btn" disabled={disabled} onClick={() => {}}>
-          Submit
-        </button>
       </form>
 
       <button
