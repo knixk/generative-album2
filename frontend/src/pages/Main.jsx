@@ -97,7 +97,7 @@ const addToDB = async (dbName, storeName, data) => {
 
 // ----------- Main app function ----------------
 function Main() {
-  const valentineDay = `A breathtaking and romantic setting capturing the essence of a Valentine's Day celebration in`;
+  const valentineDay = `A breathtaking and romantic setting capturing the essence of a Valentine's Day celebration at`;
 
   const myState = useContext(myContext);
   // console.log("==========================>");
