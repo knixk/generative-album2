@@ -62,7 +62,7 @@ import io from "socket.io-client";
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
 // const socket = io('ws://192.168.0.105:3000');
 // const bigMonitor = 'http://192.168.0.118:3000'
-const socket = io("ws://192.168.0.118:3000");
+const socket = io("ws://192.168.0.106:3000");
 
 function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
@@ -97,7 +97,7 @@ const addToDB = async (dbName, storeName, data) => {
 
 // ----------- Main app function ----------------
 function Main() {
-  const valentineDay = `A breathtaking and romantic setting capturing the essence of a Valentine's Day celebration at`;
+  const valentineDay = `Valentine's day celebration at`;
 
   const myState = useContext(myContext);
   // console.log("==========================>");
