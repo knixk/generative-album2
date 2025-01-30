@@ -4,50 +4,11 @@ import { myContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-// import * as nsfwjs from "nsfwjs";
 import Loader from "../components/Loader";
-
-// This is what our customer data looks like.
-const customerData = [
-  { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
-  { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" },
-];
 
 const dbName = "the_name";
 
 const request = indexedDB.open(dbName, 2);
-
-request.onerror = (event) => {
-  // Handle errors.
-};
-request.onupgradeneeded = (event) => {
-  const db = event.target.result;
-
-  // Create an objectStore to hold information about our customers. We're
-  // going to use "ssn" as our key path because it's guaranteed to be
-  // unique - or at least that's what I was told during the kickoff meeting.
-  const objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
-
-  // Create an index to search customers by name. We may have duplicates
-  // so we can't use a unique index.
-  objectStore.createIndex("name", "name", { unique: false });
-
-  // Create an index to search customers by email. We want to ensure that
-  // no two customers have the same email, so use a unique index.
-  objectStore.createIndex("email", "email", { unique: true });
-
-  // Use transaction oncomplete to make sure the objectStore creation is
-  // finished before adding data into it.
-  objectStore.transaction.oncomplete = (event) => {
-    // Store values in the newly created objectStore.
-    const customerObjectStore = db
-      .transaction("customers", "readwrite")
-      .objectStore("customers");
-    customerData.forEach((customer) => {
-      customerObjectStore.add(customer);
-    });
-  };
-};
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
@@ -68,62 +29,15 @@ function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
 }
 
-// IndexedDB helper functions
-const openDB = (dbName, storeName) => {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(dbName, 1);
-
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      if (!db.objectStoreNames.contains(storeName)) {
-        db.createObjectStore(storeName, { keyPath: "id" });
-      }
-    };
-
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
-  });
-};
-
-const addToDB = async (dbName, storeName, data) => {
-  const db = await openDB(dbName, storeName);
-  const transaction = db.transaction(storeName, "readwrite");
-  const store = transaction.objectStore(storeName);
-  store.add(data);
-  return transaction.complete;
-};
-
-// IndexedDB setup ----- x -----
-
 // ----------- Main app function ----------------
 function Main() {
   const valentineDay = `Valentine's day celebration at`;
 
   const myState = useContext(myContext);
-  // console.log("==========================>");
-  // console.log(myState);
 
-  const { img, setImg, isLoading, setIsLoading } = myState;
+  const { img, setImg, isLoading, setIsLoading, prompt, setPrompt, disabled, setDisabled, introText, setIntroText } = myState;
 
-  // console.log("==========================>");
-  // ---- send this prompt to the api
-  const [name, setName] = useState();
-  const [prompt, setPrompt] = useState();
-  // ---- send this img to backend socket
-  const [disabled, setDisabled] = useState(false);
-  const [model, setModel] = useState(null);
-  const [ipAddress, setIPAddress] = useState("http://192.168.0.105:3000/");
 
-  // console.log(socket);
-
-  // const {
-  //   formData,
-  //   setFormData,
-  //   lastGeneratedImg,
-  //   setLastGeneratedImg,
-  //   submitDisabled,
-  //   setSubmitDisabled,
-  // } = myState;
 
   // Add image to IndexedDB
   const handleAddImage = async (imageUrl) => {
@@ -143,40 +57,9 @@ function Main() {
     }
   };
 
-  // Load the NSFW.js model on component mount
-  // useEffect(() => {
-  //   const loadModel = async () => {
-  //     const loadedModel = await nsfwjs.load(); // Load the NSFW model
-  //     setModel(loadedModel);
-  //   };
-  //   loadModel();
-  // }, []);
-
-  // Check if an image is NSFW
-  const analyzeImage = async (imageUrl) => {
-    try {
-      let img = new Image();
-      img.crossOrigin = "anonymous"; // Avoid CORS issues
-      img.src = imageUrl;
-
-      // Wait for the image to load
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-      });
-
-      if (model) {
-        const predictions = await model.classify(img); // Classify the image
-        // console.log(predictions);
-        // setImageResults((prev) => [...prev, { url: imageUrl, predictions }]);
-      }
-    } catch (error) {
-      console.error("Error analyzing image:", error);
-    }
-  };
 
   const uploadImage = async (imageUrl) => {
-    console.log(imageUrl, "im i u")
+    console.log(imageUrl, "im i u");
     try {
       const response = await axios.post("http://localhost:5051/upload-image", {
         imageUrl,
@@ -219,7 +102,7 @@ function Main() {
 
       const genImg = data.data.url;
 
-      genImg && await uploadImage(genImg);
+      genImg && (await uploadImage(genImg));
 
       setImg(genImg);
 
@@ -248,19 +131,11 @@ function Main() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setDisabled(true);
-    // console.log("submitted");
-    // console.log(prompt);
-    // fetchImage();
     setIsLoading(true);
     await myAsyncFn();
 
-    // img && submitData(img);
 
-    //  ------ submit the iamge here.
-    // submitData("link")
   };
-
-  // useEffect(() => {}, []);
 
   // Convert blob to URL for rendering
   const getBlobUrl = (blob) => URL.createObjectURL(blob);
@@ -280,23 +155,10 @@ function Main() {
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
-          {/* <input
-            value={ipAddress}
-            onChange={(e) => {
-              setIPAddress(e.target.value);
-              // console.log(ipAddress)
-            }}
-            type="text"
-            placeholder="Enter device ip address"
-          /> */}
+
           <p className="prompt__label">
-            I want to celebrate valentine's day at:
+            {}:
           </p>
-          {/* <select onChange={(e) => console.log(e.target.value)}>
-          <option value="Paris">Paris</option>
-          <option value="New York">New York</option>
-          <option value="London">London</option>
-        </select> */}
           <input
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
@@ -321,8 +183,6 @@ function Main() {
       </form>
 
       {/* <img src={'http://localhost:5000/images/image_1738213756278.jpg'} alt="" /> */}
-      {/* <div>hello</div> */}
-
 
       <button
         onClick={() => {
@@ -334,7 +194,6 @@ function Main() {
         Clear Cache
       </button>
 
-      {/* <Grid /> */}
     </div>
   );
 }

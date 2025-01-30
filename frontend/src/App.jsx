@@ -17,12 +17,32 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [configData, setConfigData] = useState({});
 
+  const [name, setName] = useState();
+  const [prompt, setPrompt] = useState();
+  // ---- send this img to backend socket
+  const [disabled, setDisabled] = useState(false);
+  const [model, setModel] = useState(null);
+  const [ipAddress, setIPAddress] = useState("http://192.168.0.105:3000/");
+  const [introText, setIntroText] = useState();
+
   return (
     <Router>
       <myContext.Provider
         value={{
+          introText,
+          setIntroText,
           formData,
+          name,
+          setName,
           setFormData,
+          prompt,
+          setPrompt,
+          disabled,
+          setDisabled,
+          model,
+          setModel,
+          ipAddress,
+          setIPAddress,
           lastGeneratedImg,
           setLastGeneratedImg,
           submitDisabled,

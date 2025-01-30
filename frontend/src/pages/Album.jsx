@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-// import * as nsfwjs from "nsfwjs";
-// const model = await nsfwjs.load();
+
 
 // recieve the image on port -------  receiver
 import io from "socket.io-client";
@@ -118,15 +117,13 @@ function Album() {
     let img = image;
     setImg(image);
     const newItem = { name, img, id: new Date() };
-    // console.log(newItem, "ni");
     const newData = [...albums, newItem];
 
     const stringifyImgs = JSON.stringify(newData);
-    // console.log(stringifyImgs);
+
     localStorage.setItem("images", stringifyImgs);
 
-    // console.log(newData, "im nd");
-    // console.log("updated");
+
     setAlbums(newData);
   };
 
@@ -152,7 +149,6 @@ function Album() {
     if (images) {
       const parsedImgs = JSON.parse(images);
       setAlbums(parsedImgs);
-      // console.log(parsedImgs);
     } else {
     }
   }, []);
@@ -161,13 +157,9 @@ function Album() {
 
 
     socket.on("update-album", (data) => {
-      // alert("yes")
-      // console.log(data);
       handleAddToAlbum(data);
       console.log("image was added");
       setShowModal(true);
-      // setShowModal(true);
-
       setTimeout(() => {
         setShowModal(false);
       }, 7500);
