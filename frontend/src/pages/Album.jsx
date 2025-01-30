@@ -115,6 +115,8 @@ function Album() {
     const { name, image } = data;
     let img = image;
     setImg(image);
+
+    // -------- changes require here, it wants a url but we're giving back an object
     const newItem = { name, img, id: new Date() };
     const newData = [...albums, newItem];
 
