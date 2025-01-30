@@ -141,7 +141,7 @@ function Album() {
     setAlbums(images)
     };
 
-    // myAsyncFn()
+    myAsyncFn()
 
 
     const images = localStorage.getItem("images");
@@ -181,9 +181,11 @@ function Album() {
         <div className="album__grid">
           {albums.map((i, idx) => {
             // console.log(i)
+            const finalUrl = `http://localhost:5051/images/${i}`;
+            console.log(finalUrl)
             return (
               <div key={idx} className="card__container">
-                <img className="generated__img" src={i.img} alt={""} />
+                <img className="generated__img" src={finalUrl} alt={""} />
                 <p className="name">{i.name}</p>
                 <button className="delete__btn">x</button>
               </div>

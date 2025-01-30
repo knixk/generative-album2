@@ -35,7 +35,7 @@ function Main() {
 
   const myState = useContext(myContext);
 
-  const { img, setImg, isLoading, setIsLoading, prompt, setPrompt, disabled, setDisabled, introText, setIntroText } = myState;
+  const { img, setImg, isLoading, setIsLoading, prompt, setPrompt, disabled, setDisabled, introText, setIntroText, name, setName } = myState;
 
 
 
@@ -62,7 +62,7 @@ function Main() {
     console.log(imageUrl, "im i u");
     try {
       const response = await axios.post("http://localhost:5051/upload-image", {
-        imageUrl,
+        imageUrl, name
       });
       console.log("Image saved:", response.data.imagePath);
       return response.data.imagePath;
