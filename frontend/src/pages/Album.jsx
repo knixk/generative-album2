@@ -93,7 +93,7 @@ function Album() {
   const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState();
   const myState = useContext(myContext);
-  const { isLoading, setIsLoading } = myState;
+  const { isLoading, setIsLoading, refresh, setRefresh } = myState;
 
   const handleDelete = (i) => {
     return;
@@ -151,7 +151,7 @@ function Album() {
     //   setAlbums(parsedImgs);
     // } else {
     // }
-  }, [showModal]);
+  }, [showModal, refresh]);
 
   useEffect(() => {
     socket.on("update-album", (body) => {

@@ -16,6 +16,7 @@ function App() {
   const [img, setImg] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [configData, setConfigData] = useState({});
+  const [refresh, setRefresh] = useState(false);
 
   const [name, setName] = useState();
   const [prompt, setPrompt] = useState();
@@ -53,6 +54,8 @@ function App() {
           setIsLoading,
           configData,
           setConfigData,
+          refresh,
+          setRefresh,
         }}
       >
         <Navbar />

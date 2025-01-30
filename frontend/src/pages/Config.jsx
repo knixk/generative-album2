@@ -12,6 +12,8 @@ function Config() {
     setPrompt,
     introText,
     setIntroText,
+    refresh, setRefresh
+    
   } = myState;
 
   const bodyRef = useRef(null);
@@ -101,6 +103,8 @@ function Config() {
           localStorage.clear("images");
           // toast.success("All images cleared...");
           await deleteOldImages()
+          // setRefresh((prev) => !prev)
+          // console.log(setRefresh)
         }}
         id="cache__btn"
       >
