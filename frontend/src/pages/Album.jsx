@@ -144,17 +144,17 @@ function Album() {
     setAlbums(images)
     };
 
-    myAsyncFn()
+    // myAsyncFn()
 
 
-    // const images = localStorage.getItem("images");
+    const images = localStorage.getItem("images");
 
-    // if (images) {
-    //   const parsedImgs = JSON.parse(images);
-    //   setAlbums(parsedImgs);
-    //   // console.log(parsedImgs);
-    // } else {
-    // }
+    if (images) {
+      const parsedImgs = JSON.parse(images);
+      setAlbums(parsedImgs);
+      // console.log(parsedImgs);
+    } else {
+    }
   }, []);
 
   useEffect(() => {
@@ -188,10 +188,10 @@ function Album() {
       ) : (
         <div className="album__grid">
           {albums.map((i, idx) => {
-            console.log(i)
+            // console.log(i)
             return (
               <div key={idx} className="card__container">
-                <img className="generated__img" src={`../../../backend/uploads/image_1738213756278.jpg`} alt={""} />
+                <img className="generated__img" src={i.img} alt={""} />
                 <p className="name">{i.name}</p>
                 <button className="delete__btn">x</button>
               </div>

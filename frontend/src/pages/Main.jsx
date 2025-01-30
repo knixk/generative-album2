@@ -320,6 +320,10 @@ function Main() {
         </div>
       </form>
 
+      {/* <img src={'http://localhost:5000/images/image_1738213756278.jpg'} alt="" /> */}
+      {/* <div>hello</div> */}
+
+
       <button
         onClick={() => {
           localStorage.clear("images");
