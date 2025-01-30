@@ -35,9 +35,26 @@ function Main() {
 
   const myState = useContext(myContext);
 
-  const { img, setImg, isLoading, setIsLoading, prompt, setPrompt, disabled, setDisabled, introText, setIntroText, name, setName, ipAddress, setIPAddress } = myState;
-
-
+  const {
+    img,
+    setImg,
+    isLoading,
+    setIsLoading,
+    prompt,
+    setPrompt,
+    disabled,
+    setDisabled,
+    introText,
+    setIntroText,
+    name,
+    setName,
+    ipAddress,
+    setIPAddress,
+    refresh,
+    setRefresh,
+    configData,
+    setConfigData,
+  } = myState;
 
   // Add image to IndexedDB
   const handleAddImage = async (imageUrl) => {
@@ -57,12 +74,12 @@ function Main() {
     }
   };
 
-
   const uploadImage = async (imageUrl) => {
     // console.log(imageUrl, "im i u");
     try {
       const response = await axios.post("http://localhost:5051/upload-image", {
-        imageUrl, name
+        imageUrl,
+        name,
       });
       // console.log("Image saved:", response.data.imagePath);
       return response.data.imagePath;
@@ -103,7 +120,6 @@ function Main() {
       const genImg = data.data.url;
       // const genImg = `http://localhost:5051/images/image_1738213756278.jpg`;
 
-
       genImg && (await uploadImage(genImg));
 
       setImg(genImg);
@@ -135,8 +151,6 @@ function Main() {
     setDisabled(true);
     setIsLoading(true);
     await myAsyncFn();
-
-
   };
 
   // Convert blob to URL for rendering
@@ -154,16 +168,20 @@ function Main() {
 
   useEffect(() => {
     // console.log(introText)
-  }, [])
+    console.log("component was mounted..");
+    console.log(configData)
+  }, [refresh]);
 
   return (
     <div className="main__container">
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
-
           <p className="prompt__label">
             I'd like to celebrate Valentine's day at:
+            {configData.main__prompt}, 
+            {configData.main__form__text}
+
           </p>
           <input
             value={prompt}
@@ -189,8 +207,6 @@ function Main() {
       </form>
 
       {/* <img src={'http://localhost:5000/images/image_1738213756278.jpg'} alt="" /> */}
-
-
     </div>
   );
 }

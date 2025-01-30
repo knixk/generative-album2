@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { myContext } from "../App";
-import axios from "axios"
-// import createa
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+
+// import
 
 function Config() {
   const myState = useContext(myContext);
@@ -12,8 +14,8 @@ function Config() {
     setPrompt,
     introText,
     setIntroText,
-    refresh, setRefresh
-    
+    refresh,
+    setRefresh,
   } = myState;
 
   const bodyRef = useRef(null);
@@ -31,9 +33,8 @@ function Config() {
     console.log(configData);
 
     setPrompt(configData.main__prompt);
-    setIntroText(configData.main__form__text)
-    console.log(configData.main__form__text)
-
+    setIntroText(configData.main__form__text);
+    console.log(configData.main__form__text);
 
     const myDoc = document.querySelector("body");
     myDoc.style.backgroundImage = `url(${configData.bg__url})`;
@@ -43,11 +44,15 @@ function Config() {
 
     // ------ clear the form
     // setConfigData({})
+    toast.success("Form was submitted..");
+    setRefresh((prev) => !prev)
   };
 
   const deleteOldImages = async () => {
     try {
-      const response = await axios.delete("http://localhost:5051/delete-old-images");
+      const response = await axios.delete(
+        "http://localhost:5051/delete-old-images"
+      );
       console.log("Deleted images:", response.data.deleted);
     } catch (error) {
       console.error("Error deleting images:", error);
@@ -55,12 +60,13 @@ function Config() {
   };
 
   useEffect(() => {
-    console.log(introText)
+    console.log(introText);
+    
   }, []);
-
 
   return (
     <div className="config__container">
+      <Toaster />
       <form onSubmit={handleSubmit} className="config__form">
         <input
           value={configData.max__number}
@@ -97,19 +103,18 @@ function Config() {
 
         <button className="submit">Submit</button>
 
-
-      <button
-        onClick={async () => {
-          localStorage.clear("images");
-          // toast.success("All images cleared...");
-          await deleteOldImages()
-          // setRefresh((prev) => !prev)
-          // console.log(setRefresh)
-        }}
-        id="cache__btn"
-      >
-        Clear Cache
-      </button>
+        <button
+          onClick={async () => {
+            localStorage.clear("images");
+            // toast.success("All images cleared...");
+            await deleteOldImages();
+            setRefresh((prev) => !prev);
+            console.log(setRefresh);
+          }}
+          id="cache__btn"
+        >
+          Clear Cache
+        </button>
       </form>
     </div>
   );
