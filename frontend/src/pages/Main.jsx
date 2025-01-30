@@ -35,7 +35,7 @@ function Main() {
 
   const myState = useContext(myContext);
 
-  const { img, setImg, isLoading, setIsLoading, prompt, setPrompt, disabled, setDisabled, introText, setIntroText, name, setName } = myState;
+  const { img, setImg, isLoading, setIsLoading, prompt, setPrompt, disabled, setDisabled, introText, setIntroText, name, setName, ipAddress, setIPAddress } = myState;
 
 
 

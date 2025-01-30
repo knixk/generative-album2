@@ -91,7 +91,7 @@ const data = [
 ];
 
 function Album() {
-  const [albums, setAlbums] = useState(data);
+  const [albums, setAlbums] = useState();
   const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState();
   const myState = useContext(myContext);
@@ -144,13 +144,13 @@ function Album() {
     myAsyncFn()
 
 
-    const images = localStorage.getItem("images");
+    // const images = localStorage.getItem("images");
 
-    if (images) {
-      const parsedImgs = JSON.parse(images);
-      setAlbums(parsedImgs);
-    } else {
-    }
+    // if (images) {
+    //   const parsedImgs = JSON.parse(images);
+    //   setAlbums(parsedImgs);
+    // } else {
+    // }
   }, []);
 
   useEffect(() => {
@@ -179,14 +179,15 @@ function Album() {
         <Modal props={{ img }} />
       ) : (
         <div className="album__grid">
-          {albums.map((i, idx) => {
+          {albums && albums.map((i, idx) => {
             // console.log(i)
             const finalUrl = `http://localhost:5051/images/${i}`;
+            console.log(i, "IM the I --------------")
             console.log(finalUrl)
             return (
               <div key={idx} className="card__container">
                 <img className="generated__img" src={finalUrl} alt={""} />
-                <p className="name">{i.name}</p>
+                <p className="name">{`${i}`}</p>
                 <button className="delete__btn">x</button>
               </div>
             );

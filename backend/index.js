@@ -69,6 +69,8 @@ app.post("/upload-image", async (req, res) => {
     console.log("im req.body", req.body);
     const { imageUrl, name } = req.body;
 
+    console.log(name, "im the name -------------")
+
     if (!imageUrl) {
       console.log("url not found");
       return res.status(400).json({ error: "Image URL is required" });
@@ -82,12 +84,13 @@ app.post("/upload-image", async (req, res) => {
     console.log(response);
 
     const imageBuffer = Buffer.from(response.data, "binary");
-    const name = `image_${Date.now()}.jpg`;
-    const imagePath = path.join(UPLOAD_DIR, name);
+    const imageName = `image_${Date.now()}.jpg`;
+    
+    const imagePath = path.join(UPLOAD_DIR, imageName);
 
     fs.writeFileSync(imagePath, imageBuffer);
 
-    res.json({ success: true, imagePath: `/images/${name}` });
+    res.json({ success: true, imagePath: `/images/${imageName}` });
 
     console.log(
       "==========x========= inside upload image =========x=========="
