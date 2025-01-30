@@ -59,12 +59,12 @@ function Main() {
 
 
   const uploadImage = async (imageUrl) => {
-    console.log(imageUrl, "im i u");
+    // console.log(imageUrl, "im i u");
     try {
       const response = await axios.post("http://localhost:5051/upload-image", {
         imageUrl, name
       });
-      console.log("Image saved:", response.data.imagePath);
+      // console.log("Image saved:", response.data.imagePath);
       return response.data.imagePath;
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -83,7 +83,7 @@ function Main() {
     // console.log(finalStr)
 
     try {
-      console.log(ipAddress);
+      // console.log(ipAddress);
       // ----- uncomment this line to generate the image -----
       const data = await axios.post(
         "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
@@ -101,6 +101,8 @@ function Main() {
       );
 
       const genImg = data.data.url;
+      // const genImg = `http://localhost:5051/images/image_1738213756278.jpg`;
+
 
       genImg && (await uploadImage(genImg));
 

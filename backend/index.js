@@ -44,15 +44,6 @@ const io = require("socket.io")(socketPort, {
   cors: { origin: "*" }, // Allow all origins
 });
 
-io.on("connection", (socket) => {
-  console.log("A user connected");
-
-  socket.on("new-image", (image) => {
-    io.emit("update-album", image); // Broadcast to all clients
-    console.log("Received image and sending to frontend");
-    console.log(image);
-  });
-});
 
 app.get("/", async (req, res) => {
   res.status(200).json({
@@ -64,6 +55,18 @@ app.get("/", async (req, res) => {
 
 // Route to download and store image
 app.post("/upload-image", async (req, res) => {
+
+  io.on("connection", (socket) => {
+    console.log("A user connected");
+  
+    socket.on("new-image", (image) => {
+      io.emit("update-album", image); // Broadcast to all clients
+      console.log("Received image and sending to frontend");
+      console.log(image);
+    });
+  });
+  
+
   try {
     console.log("=================== inside upload image ===================");
     console.log("im req.body", req.body);

@@ -103,7 +103,7 @@ function Album() {
     try {
       const req = axios.get("http://localhost:5051/get-images");
       const res = await req;
-      console.log(res.data.images);
+      // console.log(res.data.images);
       return res.data.images;
     } catch (err) {
       console.error(err);
@@ -111,7 +111,7 @@ function Album() {
   };
 
   const handleAddToAlbum = (data) => {
-    console.log(data, "inside handle add to");
+    // console.log(data, "inside handle add to -----------=================");
     const { name, image } = data;
     let img = image;
     setImg(image);
@@ -121,12 +121,12 @@ function Album() {
     // const newItem
     // const finalUrl = ${image}`;
 
-    const newData = [...albums, ""];
+    // const newData = [...albums, ];
 
-    const stringifyImgs = JSON.stringify(newData);
+    // const stringifyImgs = JSON.stringify(newData);
 
-    localStorage.setItem("images", stringifyImgs);
-    setAlbums(newData);
+    // localStorage.setItem("images", stringifyImgs);
+    // setAlbums(newData);
   };
 
   const classifyImage = async (img) => {
@@ -138,7 +138,7 @@ function Album() {
   useEffect(() => {
     const myAsyncFn = async () => {
       const images = await getAllImages();
-      console.log(images);
+      // console.log(images);
       setAlbums(images);
     };
 
@@ -151,19 +151,22 @@ function Album() {
     //   setAlbums(parsedImgs);
     // } else {
     // }
-  }, []);
+  }, [showModal]);
 
   useEffect(() => {
     socket.on("update-album", (body) => {
       handleAddToAlbum(body);
-      console.log(body, "im the body of socket");
+      // console.log(body, "im the body of socket");
       console.log("image was added");
       setShowModal(true);
       setTimeout(() => {
         setShowModal(false);
+        // forcePageUpdate();
       }, 7500);
     });
-  }, [albums]);
+
+    // socket.off("")
+  }, []);
 
   if (isLoading) {
     return <Loader />;
@@ -183,7 +186,7 @@ function Album() {
               // console.log(i)
               const finalUrl = `http://localhost:5051/images/${i}`;
               // console.log(i, "IM the I --------------");
-              const name2 = i.split("_")[0]
+              const name2 = i.split("_")[0];
               // console.log(name2)
               // console.log(finalUrl);
               return (
