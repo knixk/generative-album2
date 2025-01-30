@@ -107,6 +107,7 @@ function Album() {
       const req = axios.get("http://localhost:5051/get-images");
       const res = await req;
       console.log(res.data.images);
+      return res.data.images
     } catch (err) {
       console.error(err);
     }
@@ -137,23 +138,27 @@ function Album() {
 
   useEffect(() => {
     const myAsyncFn = async () => {
-      await getAllImages();
+
+    const images = await getAllImages();
+    console.log(images)
+    setAlbums(images)
     };
 
-    myAsyncFn();
+    myAsyncFn()
 
-    const images = localStorage.getItem("images");
 
-    if (images) {
-      const parsedImgs = JSON.parse(images);
-      setAlbums(parsedImgs);
-      // console.log(parsedImgs);
-    } else {
-    }
+    // const images = localStorage.getItem("images");
+
+    // if (images) {
+    //   const parsedImgs = JSON.parse(images);
+    //   setAlbums(parsedImgs);
+    //   // console.log(parsedImgs);
+    // } else {
+    // }
   }, []);
 
   useEffect(() => {
-    
+
 
     socket.on("update-album", (data) => {
       // alert("yes")
@@ -176,15 +181,17 @@ function Album() {
   return (
     <div className="album__container">
       <Toaster />
+      {/* <img src="../../../backend/uploads/image_1738213756278.jpg" alt="" /> */}
       {/* <p>Your lovely creations..</p> */}
       {showModal ? (
         <Modal props={{ img }} />
       ) : (
         <div className="album__grid">
           {albums.map((i, idx) => {
+            console.log(i)
             return (
               <div key={idx} className="card__container">
-                <img className="generated__img" src={i.img} alt={i.name} />
+                <img className="generated__img" src={`../../../backend/uploads/image_1738213756278.jpg`} alt={""} />
                 <p className="name">{i.name}</p>
                 <button className="delete__btn">x</button>
               </div>

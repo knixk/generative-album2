@@ -101,7 +101,7 @@ app.post("/upload-image", async (req, res) => {
 app.get("/get-images", (req, res) => {
   fs.readdir(UPLOAD_DIR, (err, files) => {
     if (err) return res.status(500).json({ error: "Failed to read directory" });
-    res.json({ images: files.map((file) => `/images/${file}`) });
+    res.json({ images: files.map((file) => `${file}`) });
   });
 });
 
