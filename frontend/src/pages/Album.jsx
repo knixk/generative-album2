@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 
 // recieve the image on port -------  receiver
 import io from "socket.io-client";
+import axios from "axios";
 // const socket = io('ws://192.168.0.105:3000');
 // const socket = io();
 // const socket = io('ws://192.168.0.105:3000');
@@ -12,10 +13,8 @@ import io from "socket.io-client";
 // big monitor
 const socket = io("ws://192.168.0.106:3000");
 
-
 // const socket = io("http://192.168.0.105:3000/");
 // const bigMonitor = 'http://192.168.0.118:3000'
-
 
 import img from "../assets/img.webp";
 import toast, { Toaster } from "react-hot-toast";
@@ -103,6 +102,16 @@ function Album() {
     return;
   };
 
+  const getAllImages = async () => {
+    try {
+      const req = axios.get("http://localhost:5051/get-images");
+      const res = await req;
+      console.log(res.data.images);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleAddToAlbum = (data) => {
     const { name, image } = data;
     let img = image;
@@ -127,6 +136,12 @@ function Album() {
   };
 
   useEffect(() => {
+    const myAsyncFn = async () => {
+      await getAllImages();
+    };
+
+    myAsyncFn();
+
     const images = localStorage.getItem("images");
 
     if (images) {
@@ -138,12 +153,7 @@ function Album() {
   }, []);
 
   useEffect(() => {
-    // if (images) {
-    //   const json_images = JSON.parse(images);
-    //   setAlbums(json_images);
-    // } else {
-    //   localStorage.setItem("images", JSON.stringify(albums));
-    // }
+    
 
     socket.on("update-album", (data) => {
       // alert("yes")
@@ -159,17 +169,6 @@ function Album() {
     });
   }, [albums]);
 
-  // Load images from IndexedDB on component mount
-  // useEffect(() => {
-  //   const loadImages = async () => {
-  //     const storedImages = await getAllFromDB(dbName, storeName);
-  //     setImages(storedImages);
-  //     console.log(storedImages, "im stored images");
-  //   };
-
-  //   loadImages();
-  // }, []);
-
   if (isLoading) {
     return <Loader />;
   }
@@ -183,17 +182,7 @@ function Album() {
       ) : (
         <div className="album__grid">
           {albums.map((i, idx) => {
-            // let imgElem = new Image();
-            // imgElem.crossOrigin = "anonymous"; // Avoid CORS issues
-            // imgElem.src = genImg;
-            // classifyImage(imgElem);
             return (
-              // <div key={idx} className="card__container">
-              //   <img className="generated__img" src={i.img} alt={i.name} />
-              //   <p className="name">{i.name}</p>
-              //   <button className="delete__btn">x</button>
-              // </div>
-
               <div key={idx} className="card__container">
                 <img className="generated__img" src={i.img} alt={i.name} />
                 <p className="name">{i.name}</p>

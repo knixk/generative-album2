@@ -175,6 +175,20 @@ function Main() {
     }
   };
 
+  const uploadImage = async (imageUrl) => {
+    console.log(imageUrl, "im i u")
+    try {
+      const response = await axios.post("http://localhost:5051/upload-image", {
+        imageUrl,
+      });
+      console.log("Image saved:", response.data.imagePath);
+      return response.data.imagePath;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
+  };
+
   const myAsyncFn = async () => {
     if (prompt == "" || name == "" || ipAddress == "") {
       return;
@@ -203,19 +217,11 @@ function Main() {
         }
       );
 
-      // console.log("======== im data =========>");
-      // console.log(data.data.url);
-      // ---x-- uncomment this line to generate the image ---x--
-
       const genImg = data.data.url;
 
-      // const genImg = sampleImg;
+      genImg && await uploadImage(genImg);
 
       setImg(genImg);
-      // console.log("======== im data =========>");
-      // const imgElem = new Image();
-      // imgElem.crossOrigin = "anonymous"; // Avoid CORS issues
-      // imgElem.src = genImg;
 
       // now we got the image we can send it to the backend
       const myPayload = {
@@ -225,7 +231,6 @@ function Main() {
 
       // only and only if the image is present then we make this call..
       genImg && submitData(myPayload);
-      // submitData(myPayload);
 
       toast.success("Your image is successfully generated!");
       setIsLoading(false);
