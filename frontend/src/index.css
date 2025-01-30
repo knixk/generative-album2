@@ -41,7 +41,10 @@ body {
   display: grid;
   /* flex-wrap: wrap; */
   /* justify-content: center; */
-  background-color: rgba(255, 255, 255, 0.103);
+
+  /* background-color: rgba(255, 255, 255, 0.103); */
+  /* box-shadow: rgba(99, 99, 99, 0.192) 0px 2px 8px 0px; */
+
   margin: 0 1rem;
   margin-right: 3rem;
   padding: 4rem 2rem;
@@ -50,7 +53,6 @@ body {
   width: 80vw;
   max-width: 2080px;
   justify-content: center;
-  box-shadow: rgba(99, 99, 99, 0.192) 0px 2px 8px 0px;
   /* display: none; */
   /* opacity: 0.6; */
   /* max-width: 900px; */
@@ -642,3 +644,7 @@ body{
   /* width: 50%; */
 }
 
+
+.generated__img {
+  /* width: 100px; */
+}
