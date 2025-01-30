@@ -150,6 +150,10 @@ function Main() {
     return <Loader />;
   }
 
+  useEffect(() => {
+    console.log(introText)
+  }, [introText])
+
   return (
     <div className="main__container">
       <Toaster />
@@ -157,7 +161,7 @@ function Main() {
         <div className="choose__container">
 
           <p className="prompt__label">
-            {}:
+            I'd like to celebrate Valentine's day at:
           </p>
           <input
             value={prompt}
@@ -184,15 +188,6 @@ function Main() {
 
       {/* <img src={'http://localhost:5000/images/image_1738213756278.jpg'} alt="" /> */}
 
-      <button
-        onClick={() => {
-          localStorage.clear("images");
-          toast.success("All images cleared...");
-        }}
-        id="cache__btn"
-      >
-        Clear Cache
-      </button>
 
     </div>
   );

@@ -29,18 +29,23 @@ function Config() {
 
     setPrompt(configData.main__prompt);
     setIntroText(configData.main__form__text)
+    console.log(configData.main__form__text)
+
 
     const myDoc = document.querySelector("body");
     myDoc.style.backgroundImage = `url(${configData.bg__url})`;
 
     // store this image somehow
-    console.log(myDoc);
+    // console.log(myDoc);
 
     // ------ clear the form
     // setConfigData({})
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(introText)
+  }, []);
+
 
   return (
     <div className="config__container">
@@ -79,6 +84,17 @@ function Config() {
         />
 
         <button className="submit">Submit</button>
+
+
+      <button
+        onClick={() => {
+          localStorage.clear("images");
+          toast.success("All images cleared...");
+        }}
+        id="cache__btn"
+      >
+        Clear Cache
+      </button>
       </form>
     </div>
   );
