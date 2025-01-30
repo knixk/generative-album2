@@ -45,6 +45,18 @@ const io = require("socket.io")(socketPort, {
 });
 
 
+
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  socket.on("new-image", (image) => {
+    io.emit("update-album", image); // Broadcast to all clients
+    console.log("Received image and sending to frontend");
+    console.log(image);
+  });
+});
+
+
 app.get("/", async (req, res) => {
   res.status(200).json({
     msg: "api is functional...",
@@ -56,23 +68,13 @@ app.get("/", async (req, res) => {
 // Route to download and store image
 app.post("/upload-image", async (req, res) => {
 
-  io.on("connection", (socket) => {
-    console.log("A user connected");
-  
-    socket.on("new-image", (image) => {
-      io.emit("update-album", image); // Broadcast to all clients
-      console.log("Received image and sending to frontend");
-      console.log(image);
-    });
-  });
-  
 
   try {
     console.log("=================== inside upload image ===================");
     console.log("im req.body", req.body);
     const { imageUrl, name } = req.body;
 
-    console.log(name, "im the name -------------")
+    // console.log(name, "im the name -------------")
 
     if (!imageUrl) {
       console.log("url not found");
@@ -84,7 +86,7 @@ app.post("/upload-image", async (req, res) => {
       responseType: "arraybuffer",
     });
 
-    console.log(response);
+    // console.log(response);
 
     const imageBuffer = Buffer.from(response.data, "binary");
     const imageName = `${name}_${Date.now()}.jpg`;
