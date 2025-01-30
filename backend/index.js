@@ -103,6 +103,7 @@ app.post("/upload-image", async (req, res) => {
   }
 });
 
+
 // Route to get all stored images
 app.get("/get-images", (req, res) => {
   fs.readdir(UPLOAD_DIR, (err, files) => {
@@ -110,5 +111,31 @@ app.get("/get-images", (req, res) => {
     res.json({ images: files.map((file) => `${file}`) });
   });
 });
+
+
+app.delete("/delete-old-images", (req, res) => {
+  fs.readdir(UPLOAD_DIR, (err, files) => {
+    if (err) return res.status(500).json({ error: "Failed to read directory" });
+
+    if (files.length === 0) return res.json({ message: "No images to delete" });
+
+    // Sort files by creation time (oldest first)
+    const filePaths = files
+      .map((file) => ({
+        name: file,
+        time: fs.statSync(path.join(UPLOAD_DIR, file)).ctimeMs,
+      }))
+      .sort((a, b) => a.time - b.time) // Sort by creation time
+      .slice(0, 5) // Get first 5 oldest images
+      .map((file) => path.join(UPLOAD_DIR, file.name));
+
+    // Delete selected files
+    filePaths.forEach((filePath) => fs.unlinkSync(filePath));
+
+    res.json({ success: true, deleted: filePaths.map((file) => path.basename(file)) });
+  });
+});
+
+
 
 app.listen(port, mainFn);

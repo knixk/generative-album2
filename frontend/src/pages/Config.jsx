@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { myContext } from "../App";
+import axios from "axios"
 // import createa
 
 function Config() {
@@ -40,6 +41,15 @@ function Config() {
 
     // ------ clear the form
     // setConfigData({})
+  };
+
+  const deleteOldImages = async () => {
+    try {
+      const response = await axios.delete("http://localhost:5051/delete-old-images");
+      console.log("Deleted images:", response.data.deleted);
+    } catch (error) {
+      console.error("Error deleting images:", error);
+    }
   };
 
   useEffect(() => {
@@ -87,9 +97,10 @@ function Config() {
 
 
       <button
-        onClick={() => {
+        onClick={async () => {
           localStorage.clear("images");
-          toast.success("All images cleared...");
+          // toast.success("All images cleared...");
+          await deleteOldImages()
         }}
         id="cache__btn"
       >
