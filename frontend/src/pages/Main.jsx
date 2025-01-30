@@ -151,8 +151,8 @@ function Main() {
   }
 
   useEffect(() => {
-    console.log(introText)
-  }, [introText])
+    // console.log(introText)
+  }, [])
 
   return (
     <div className="main__container">

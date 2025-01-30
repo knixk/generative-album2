@@ -33,7 +33,7 @@ body {
 .generated__img {
   width: 100%;
   border-radius: 10px 10px 0 0;
-  height: 150px;
+  /* height: 150px; */
   /* background-image:; */
 }
 
@@ -45,11 +45,11 @@ body {
   /* background-color: rgba(255, 255, 255, 0.103); */
   /* box-shadow: rgba(99, 99, 99, 0.192) 0px 2px 8px 0px; */
 
-  margin: 0 1rem;
-  margin-right: 3rem;
-  padding: 4rem 2rem;
+  margin: 0 3rem;
+  /* margin-right: 3rem; */
+  padding: 4rem 3rem;
   border-radius: 10px;
-  gap: 1rem;
+  gap: 2rem;
   width: 80vw;
   max-width: 2080px;
   justify-content: center;

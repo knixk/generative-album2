@@ -3,7 +3,7 @@ import React from "react";
 import { myContext } from "../App";
 import { useContext } from "react";
 
-console.log(window.location.pathname)
+// console.log(window.location.pathname)
 
 function Navbar() {
 
