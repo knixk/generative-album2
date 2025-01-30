@@ -117,8 +117,11 @@ function Album() {
     setImg(image);
 
     // -------- changes require here, it wants a url but we're giving back an object
-    const newItem = { name, img, id: new Date() };
-    const newData = [...albums, newItem];
+    // const newItem = { name, img, id: new Date() };
+    // const newItem
+    // const finalUrl = ${image}`;
+
+    const newData = [...albums, ""];
 
     const stringifyImgs = JSON.stringify(newData);
 
@@ -128,7 +131,7 @@ function Album() {
 
   const classifyImage = async (img) => {
     const predictions = await model.classify(img);
-    console.log(predictions);
+    // console.log(predictions);
     return predictions;
   };
 
@@ -179,12 +182,14 @@ function Album() {
             albums.map((i, idx) => {
               // console.log(i)
               const finalUrl = `http://localhost:5051/images/${i}`;
-              console.log(i, "IM the I --------------");
-              console.log(finalUrl);
+              // console.log(i, "IM the I --------------");
+              const name2 = i.split("_")[0]
+              // console.log(name2)
+              // console.log(finalUrl);
               return (
                 <div key={idx} className="card__container">
                   <img className="generated__img" src={finalUrl} alt={""} />
-                  <p className="name">{`${i}`}</p>
+                  <p className="name">{`${name2}`}</p>
                   <button className="delete__btn">x</button>
                 </div>
               );

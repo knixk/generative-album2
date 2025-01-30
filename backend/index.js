@@ -84,7 +84,7 @@ app.post("/upload-image", async (req, res) => {
     console.log(response);
 
     const imageBuffer = Buffer.from(response.data, "binary");
-    const imageName = `image_${Date.now()}.jpg`;
+    const imageName = `${name}_${Date.now()}.jpg`;
     
     const imagePath = path.join(UPLOAD_DIR, imageName);
 
