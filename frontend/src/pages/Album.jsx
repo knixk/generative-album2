@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
-
 // recieve the image on port -------  receiver
 import io from "socket.io-client";
 import axios from "axios";
@@ -91,7 +89,7 @@ const data = [
 ];
 
 function Album() {
-  const [albums, setAlbums] = useState();
+  const [albums, setAlbums] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState();
   const myState = useContext(myContext);
@@ -106,13 +104,14 @@ function Album() {
       const req = axios.get("http://localhost:5051/get-images");
       const res = await req;
       console.log(res.data.images);
-      return res.data.images
+      return res.data.images;
     } catch (err) {
       console.error(err);
     }
   };
 
   const handleAddToAlbum = (data) => {
+    console.log(data, "inside handle add to");
     const { name, image } = data;
     let img = image;
     setImg(image);
@@ -122,8 +121,6 @@ function Album() {
     const stringifyImgs = JSON.stringify(newData);
 
     localStorage.setItem("images", stringifyImgs);
-
-
     setAlbums(newData);
   };
 
@@ -135,14 +132,12 @@ function Album() {
 
   useEffect(() => {
     const myAsyncFn = async () => {
-
-    const images = await getAllImages();
-    console.log(images)
-    setAlbums(images)
+      const images = await getAllImages();
+      console.log(images);
+      setAlbums(images);
     };
 
-    myAsyncFn()
-
+    myAsyncFn();
 
     // const images = localStorage.getItem("images");
 
@@ -154,10 +149,9 @@ function Album() {
   }, []);
 
   useEffect(() => {
-
-
-    socket.on("update-album", (data) => {
-      handleAddToAlbum(data);
+    socket.on("update-album", (body) => {
+      handleAddToAlbum(body);
+      console.log(body, "im the body of socket");
       console.log("image was added");
       setShowModal(true);
       setTimeout(() => {
@@ -179,19 +173,20 @@ function Album() {
         <Modal props={{ img }} />
       ) : (
         <div className="album__grid">
-          {albums && albums.map((i, idx) => {
-            // console.log(i)
-            const finalUrl = `http://localhost:5051/images/${i}`;
-            console.log(i, "IM the I --------------")
-            console.log(finalUrl)
-            return (
-              <div key={idx} className="card__container">
-                <img className="generated__img" src={finalUrl} alt={""} />
-                <p className="name">{`${i}`}</p>
-                <button className="delete__btn">x</button>
-              </div>
-            );
-          })}
+          {albums &&
+            albums.map((i, idx) => {
+              // console.log(i)
+              const finalUrl = `http://localhost:5051/images/${i}`;
+              console.log(i, "IM the I --------------");
+              console.log(finalUrl);
+              return (
+                <div key={idx} className="card__container">
+                  <img className="generated__img" src={finalUrl} alt={""} />
+                  <p className="name">{`${i}`}</p>
+                  <button className="delete__btn">x</button>
+                </div>
+              );
+            })}
         </div>
       )}
     </div>
