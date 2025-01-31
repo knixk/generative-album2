@@ -187,7 +187,7 @@ function Album() {
       }
 
 
-    }, [refresh]);
+    }, []);
 
   return (
     <div className="album__container">

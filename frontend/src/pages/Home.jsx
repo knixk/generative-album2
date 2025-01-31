@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import  {useEffect} from "react";
+import { useNavigate,  } from "react-router-dom";
 import istanbul from "../assets/istanbul.jpg"
 
 // const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
@@ -7,6 +7,21 @@ const sampleImg2 = `https://img.freepik.com/premium-photo/picture-forest-with-tr
 const sampleImg3 = `https://i.pinimg.com/736x/39/4d/68/394d68ba91ee4f49d400034d8d487997.jpg`
 function Home() {
   const navigate = useNavigate();
+
+    useEffect(() => {
+      // backgroundImg && setBackground(backgroundImg);
+      // console.log("img was updated")
+      const bg__img = localStorage.getItem("bg__img");
+      console.log(bg__img)
+      if (bg__img) {
+        // setBackground(bg__img)
+        const myDoc = document.querySelector("body");
+        myDoc.style.backgroundImage = `url(${bg__img})`;
+        console.log(myDoc);
+        console.log("image set");
+      }
+    }, []);
+
 
   return (
     <div className="home__container">

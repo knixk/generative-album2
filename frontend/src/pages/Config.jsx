@@ -42,6 +42,12 @@ function Config() {
     setBackgroundImage(configData.bg__url);
     localStorage.setItem("bg__img", configData.bg__url);
 
+    const localState = {
+      bg__img: configData.bg__url,
+      main__form__text: configData.main__form__text,
+      main__prompt: configData.main__prompt,
+    }
+
     // store this image somehow
     // console.log(myDoc);
 
@@ -82,25 +88,54 @@ function Config() {
         }
   
   
-      }, [refresh]);
+      }, []);
 
   return (
     <div className="config__container">
       <Toaster />
       <form onSubmit={handleSubmit} className="config__form">
-        <input
+        {/* <input
           value={configData.max__number}
           name="max__number"
           onChange={handleChange}
           placeholder="Maximum number of images on canvas.."
           type="number"
           required
-        />
+        /> */}
         <input
           value={configData.bg__url}
           name="bg__url"
           onChange={handleChange}
           placeholder="Enter background image url.."
+          type="url"
+          required
+        />
+
+<input
+          value={configData.home__intro}
+          name="home__image"
+          onChange={handleChange}
+          placeholder="Home screen first image.."
+          type="url"
+          required
+        />
+
+<input
+          value={configData.home__intro}
+          name="home__intro"
+          onChange={handleChange}
+          placeholder="Home screen intro.."
+          type="url"
+          required
+        />
+
+        
+
+<input
+          value={configData.theme__color}
+          name="theme__color"
+          onChange={handleChange}
+          placeholder="theme color in hex (with the #).."
           type="url"
           required
         />
@@ -116,7 +151,7 @@ function Config() {
           value={configData.main__prompt}
           name="main__prompt"
           onChange={handleChange}
-          placeholder="Enter main form prompt.."
+          placeholder="Enter main form prompt for image description.."
           type="text"
           required
         />

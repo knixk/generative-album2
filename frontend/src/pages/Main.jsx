@@ -192,7 +192,7 @@ function Main() {
       console.log(myDoc);
       console.log("image set");
     }
-  }, [refresh]);
+  }, []);
 
   return (
     <div className="main__container">
