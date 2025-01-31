@@ -43,6 +43,11 @@ function Config() {
     setBackgroundImage(configData.bg__url);
     localStorage.setItem("bg__img", configData.bg__url);
 
+    const myData = JSON.stringify(configData);
+    console.log(myData)
+
+    localState.setItem("config__data", myData);
+
     const localState = {
       bg__img: configData.bg__url,
       main__form__text: configData.main__form__text,
