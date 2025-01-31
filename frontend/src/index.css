@@ -538,7 +538,7 @@ body{
   min-height:100vh;
   /* padding:1rem 1rem 2rem 1rem; */
   box-sizing:border-box;
-  overflow:hidden;
+  /* overflow:hidden; */
 }
 
 .title{
@@ -650,4 +650,18 @@ body{
 
 .generated__img {
   /* width: 100px; */
+}
+
+.color__label {
+  /* padding: 1rem; */
+  /* margin-right: 2rem; */
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 20px;
+}
+
+#theme__color {
+  margin-right: 1.5rem;
+  /* background-color: red; */
 }

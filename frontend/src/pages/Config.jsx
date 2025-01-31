@@ -22,7 +22,7 @@ function Config() {
 
   const bodyRef = useRef(null);
 
-  console.log(myState);
+  // console.log(myState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +36,7 @@ function Config() {
 
     setPrompt(configData.main__prompt);
     setIntroText(configData.main__form__text);
-    console.log(configData.main__form__text);
+    // console.log(configData.main__form__text);
 
     const myDoc = document.querySelector("body");
     myDoc.style.backgroundImage = `url(${configData.bg__url})`;
@@ -70,19 +70,19 @@ function Config() {
   };
 
   useEffect(() => {
-    console.log(introText);
+    // console.log(introText);
   }, []);
 
   useEffect(() => {
     // backgroundImg && setBackground(backgroundImg);
     // console.log("img was updated")
     const bg__img = localStorage.getItem("bg__img");
-    console.log(bg__img);
+    // console.log(bg__img);
     if (bg__img) {
       // setBackground(bg__img)
       const myDoc = document.querySelector("body");
       myDoc.style.backgroundImage = `url(${bg__img})`;
-      console.log(myDoc);
+      // console.log(myDoc);
       console.log("image set");
       setRefresh((prev) => !prev);
     }
@@ -123,18 +123,29 @@ function Config() {
           name="home__intro"
           onChange={handleChange}
           placeholder="Home screen intro.."
-          type="url"
+          type="text"
           required
         />
 
-        <input
+          <label className="color__label" htmlFor="theme__color">
+          <input
           value={configData.theme__color}
           name="theme__color"
+          id="theme__color"
           onChange={handleChange}
           placeholder="theme color in hex (with the #).."
-          type="url"
+          type="color"
           required
-        />
+        /> 
+            {/* Select the theme color: */}
+          <input type="text"
+          value={configData.theme__color}
+          placeholder="Select the theme color.."
+          // disabled
+          // onChange={(e) => {}
+          />
+          </label>
+
         <input
           value={configData.main__form__text}
           name="main__form__text"
@@ -157,10 +168,10 @@ function Config() {
         <button
           onClick={async () => {
             localStorage.clear("images");
-            // toast.success("All images cleared...");
+            // toast.success("All images cleared...");  
             await deleteOldImages();
             setRefresh((prev) => !prev);
-            console.log(setRefresh);
+            // console.log(setRefresh);
           }}
           id="cache__btn"
         >
