@@ -60,16 +60,10 @@ function Main() {
 
   // Add image to IndexedDB
 
-  const setBackground = (img) => {
-    // setBackgroundImg(img);
-    const myDoc = document.querySelector("body");
-    myDoc.style.backgroundImage = `url(${img})`;
-  };
+  // const setBackground = (img) => {
+  //   setBackgroundImg(img);
 
-  useEffect(() => {
-    backgroundImg && setBackground(backgroundImg);
-    console.log("img was updated")
-  }, [backgroundImage]);
+  // };
 
   const handleAddImage = async (imageUrl) => {
     try {
@@ -184,6 +178,20 @@ function Main() {
     // console.log(introText)
     console.log("component was mounted..");
     console.log(configData);
+  }, [refresh]);
+
+  useEffect(() => {
+    // backgroundImg && setBackground(backgroundImg);
+    // console.log("img was updated")
+    const bg__img = localStorage.getItem("bg__img");
+    console.log(bg__img)
+    if (bg__img) {
+      // setBackground(bg__img)
+      const myDoc = document.querySelector("body");
+      myDoc.style.backgroundImage = `url(${bg__img})`;
+      console.log(myDoc);
+      console.log("image set");
+    }
   }, [refresh]);
 
   return (

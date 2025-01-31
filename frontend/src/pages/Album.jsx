@@ -172,6 +172,23 @@ function Album() {
     return <Loader />;
   }
 
+    useEffect(() => {
+      // backgroundImg && setBackground(backgroundImg);
+      // console.log("img was updated")
+      const bg__img = localStorage.getItem("bg__img");
+      console.log(bg__img)
+      if (bg__img) {
+        // setBackground(bg__img)
+        const myDoc = document.querySelector("body");
+        myDoc.style.backgroundImage = `url(${bg__img})`;
+        console.log(myDoc);
+        console.log("image set");
+        setRefresh((prev) => !prev)
+      }
+
+
+    }, [refresh]);
+
   return (
     <div className="album__container">
       <Toaster />

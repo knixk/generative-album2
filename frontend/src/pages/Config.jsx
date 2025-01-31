@@ -40,6 +40,7 @@ function Config() {
     const myDoc = document.querySelector("body");
     myDoc.style.backgroundImage = `url(${configData.bg__url})`;
     setBackgroundImage(configData.bg__url);
+    localStorage.setItem("bg__img", configData.bg__url);
 
     // store this image somehow
     // console.log(myDoc);
@@ -65,6 +66,23 @@ function Config() {
     console.log(introText);
 
   }, []);
+
+      useEffect(() => {
+        // backgroundImg && setBackground(backgroundImg);
+        // console.log("img was updated")
+        const bg__img = localStorage.getItem("bg__img");
+        console.log(bg__img)
+        if (bg__img) {
+          // setBackground(bg__img)
+          const myDoc = document.querySelector("body");
+          myDoc.style.backgroundImage = `url(${bg__img})`;
+          console.log(myDoc);
+          console.log("image set");
+          setRefresh((prev) => !prev)
+        }
+  
+  
+      }, [refresh]);
 
   return (
     <div className="config__container">
