@@ -25,6 +25,7 @@ function App() {
   const [model, setModel] = useState(null);
   const [ipAddress, setIPAddress] = useState("http://192.168.0.105:3000/");
   const [introText, setIntroText] = useState();
+  const [backgroundImage, setBackgroundImage] = useState();
 
   return (
     <Router>
@@ -56,6 +57,7 @@ function App() {
           setConfigData,
           refresh,
           setRefresh,
+          backgroundImage, setBackgroundImage
         }}
       >
         <Navbar />

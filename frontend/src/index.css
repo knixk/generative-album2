@@ -42,7 +42,7 @@ body {
   display: grid;
   /* flex-wrap: wrap; */
   /* justify-content: center; */
-
+  /* margin-top: 25rem; */
   /* background-color: rgba(255, 255, 255, 0.103); */
   background-color: var(--background-color);
   box-shadow: rgba(99, 99, 99, 0.192) 0px 2px 8px 0px;
@@ -622,7 +622,7 @@ body{
   justify-content: center;
   align-items: center;
   /* height: 100vh; */
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .config__form {

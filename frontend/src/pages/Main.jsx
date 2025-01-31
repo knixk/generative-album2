@@ -54,9 +54,23 @@ function Main() {
     setRefresh,
     configData,
     setConfigData,
+    backgroundImg,
+    setBackgroundImg,
   } = myState;
 
   // Add image to IndexedDB
+
+  const setBackground = (img) => {
+    // setBackgroundImg(img);
+    const myDoc = document.querySelector("body");
+    myDoc.style.backgroundImage = `url(${img})`;
+  };
+
+  useEffect(() => {
+    backgroundImg && setBackground(backgroundImg);
+    console.log("img was updated")
+  }, [backgroundImage]);
+
   const handleAddImage = async (imageUrl) => {
     try {
       const response = await fetch(imageUrl);
@@ -169,7 +183,7 @@ function Main() {
   useEffect(() => {
     // console.log(introText)
     console.log("component was mounted..");
-    console.log(configData)
+    console.log(configData);
   }, [refresh]);
 
   return (
@@ -179,9 +193,8 @@ function Main() {
         <div className="choose__container">
           <p className="prompt__label">
             I'd like to celebrate Valentine's day at:
-            {configData.main__prompt}, 
-            {configData.main__form__text}
-
+            {/* {configData.main__prompt},  */}
+            {/* {configData.main__form__text} */}
           </p>
           <input
             value={prompt}

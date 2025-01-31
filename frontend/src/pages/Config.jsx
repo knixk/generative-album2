@@ -16,6 +16,7 @@ function Config() {
     setIntroText,
     refresh,
     setRefresh,
+    backgroundImage, setBackgroundImage
   } = myState;
 
   const bodyRef = useRef(null);
@@ -38,6 +39,7 @@ function Config() {
 
     const myDoc = document.querySelector("body");
     myDoc.style.backgroundImage = `url(${configData.bg__url})`;
+    setBackgroundImage(configData.bg__url);
 
     // store this image somehow
     // console.log(myDoc);
@@ -61,7 +63,7 @@ function Config() {
 
   useEffect(() => {
     console.log(introText);
-    
+
   }, []);
 
   return (
