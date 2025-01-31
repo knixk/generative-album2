@@ -16,7 +16,8 @@ function Config() {
     setIntroText,
     refresh,
     setRefresh,
-    backgroundImage, setBackgroundImage
+    backgroundImage,
+    setBackgroundImage,
   } = myState;
 
   const bodyRef = useRef(null);
@@ -46,7 +47,7 @@ function Config() {
       bg__img: configData.bg__url,
       main__form__text: configData.main__form__text,
       main__prompt: configData.main__prompt,
-    }
+    };
 
     // store this image somehow
     // console.log(myDoc);
@@ -54,7 +55,7 @@ function Config() {
     // ------ clear the form
     // setConfigData({})
     toast.success("Form was submitted..");
-    setRefresh((prev) => !prev)
+    setRefresh((prev) => !prev);
   };
 
   const deleteOldImages = async () => {
@@ -70,25 +71,22 @@ function Config() {
 
   useEffect(() => {
     console.log(introText);
-
   }, []);
 
-      useEffect(() => {
-        // backgroundImg && setBackground(backgroundImg);
-        // console.log("img was updated")
-        const bg__img = localStorage.getItem("bg__img");
-        console.log(bg__img)
-        if (bg__img) {
-          // setBackground(bg__img)
-          const myDoc = document.querySelector("body");
-          myDoc.style.backgroundImage = `url(${bg__img})`;
-          console.log(myDoc);
-          console.log("image set");
-          setRefresh((prev) => !prev)
-        }
-  
-  
-      }, []);
+  useEffect(() => {
+    // backgroundImg && setBackground(backgroundImg);
+    // console.log("img was updated")
+    const bg__img = localStorage.getItem("bg__img");
+    console.log(bg__img);
+    if (bg__img) {
+      // setBackground(bg__img)
+      const myDoc = document.querySelector("body");
+      myDoc.style.backgroundImage = `url(${bg__img})`;
+      console.log(myDoc);
+      console.log("image set");
+      setRefresh((prev) => !prev);
+    }
+  }, []);
 
   return (
     <div className="config__container">
@@ -111,8 +109,8 @@ function Config() {
           required
         />
 
-<input
-          value={configData.home__intro}
+        <input
+          value={configData.home__image}
           name="home__image"
           onChange={handleChange}
           placeholder="Home screen first image.."
@@ -120,7 +118,7 @@ function Config() {
           required
         />
 
-<input
+        <input
           value={configData.home__intro}
           name="home__intro"
           onChange={handleChange}
@@ -129,9 +127,7 @@ function Config() {
           required
         />
 
-        
-
-<input
+        <input
           value={configData.theme__color}
           name="theme__color"
           onChange={handleChange}
