@@ -1,5 +1,6 @@
 :root {
   --my-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  --background-color:  #2e2e2e23;
 }
 
 * {
@@ -43,7 +44,8 @@ body {
   /* justify-content: center; */
 
   /* background-color: rgba(255, 255, 255, 0.103); */
-  /* box-shadow: rgba(99, 99, 99, 0.192) 0px 2px 8px 0px; */
+  background-color: var(--background-color);
+  box-shadow: rgba(99, 99, 99, 0.192) 0px 2px 8px 0px;
 
   margin: 0 3rem;
   /* margin-right: 3rem; */
@@ -225,9 +227,10 @@ input:hover,
   flex-direction: column;
   gap: 10px;
   background-color: #2e2e2e23;
-  padding: 2rem 2rem;
+  padding: 3rem 2rem;
   border-radius: 5px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  /* width: 780px; */
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
 
 }
 
@@ -627,7 +630,7 @@ body{
   flex-direction: column;
   gap: 1rem;
   width: 550px;
-  background-color: #cecece7c;
+  background-color: var(--background-color);
   padding: 2rem;
   border-radius: 5px;
   max-width: 90%;
