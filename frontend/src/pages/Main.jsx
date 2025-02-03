@@ -21,9 +21,10 @@ import io from "socket.io-client";
 
 // IndexedDB setup ----------
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
-// const socket = io('ws://192.168.0.105:3000');
+// const `socket` = io('ws://192.168.0.105:3000');
 // const bigMonitor = 'http://192.168.0.118:3000'
-const socket = io("ws://192.168.0.106:3000");
+let socket;
+// let ipAddress;
 
 function submitData(payload) {
   socket.emit("new-image", payload); // Send image to server
@@ -48,8 +49,12 @@ function Main() {
     setName,
     ipAddress,
     refresh,
-    localState, setLocalState
+    localState,
+    setLocalState,
   } = myState;
+
+  socket = localState && io(localState.ip__address);
+  console.log(socket)
 
   const handleAddImage = async (imageUrl) => {
     try {
@@ -91,7 +96,7 @@ function Main() {
     toast("Please wait while we ready your creation...");
 
     const finalStr = `${localState.main__prompt} ${prompt}`;
-    console.log(finalStr)
+    console.log(finalStr);
 
     try {
       // console.log(ipAddress);
@@ -163,12 +168,7 @@ function Main() {
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
           <p className="prompt__label">
-            
-            {localState.main__form__text}:
-            {
-              " "
-            }
-            {/* {configData.main__prompt},  */}
+            {localState.main__form__text}: {/* {configData.main__prompt},  */}
             {/* {configData.main__form__text} */}
           </p>
           <input

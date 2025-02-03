@@ -31,7 +31,8 @@ function Config() {
       home__img: localState.home__img,
       theme__color: localState.theme__color,
       home__intro: localState.home__intro,
-      header__txt: localState.header__txt
+      header__txt: localState.header__txt,
+      ip__address: localState.ip__address
     };
 
     console.log(localState2)
@@ -61,6 +62,14 @@ function Config() {
     <div className="config__container">
       <Toaster />
       <form onSubmit={handleSubmit} className="config__form">
+      <input
+          value={localState.ip__address}
+          name="ip__address"
+          onChange={handleChange}
+          placeholder="Enter ip address.."
+          type="url"
+          required
+        />
         <input
           value={localState.bg__img}
           name="bg__img"

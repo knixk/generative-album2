@@ -31,6 +31,9 @@ function Navbar() {
         handleChange("theme__color", parsedState.theme__color);
         handleChange("home__intro", parsedState.home__intro);
         handleChange("header__txt", parsedState.header__txt);
+        handleChange("ip__address", parsedState.ip__address);
+
+
 
 
         // console.log(localState);
