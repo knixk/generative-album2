@@ -667,3 +667,9 @@ body{
   margin-right: 1.5rem;
   /* background-color: red; */
 }
+
+label {
+  color: white;
+  letter-spacing: 2px;
+  margin: 10px 0;
+}
