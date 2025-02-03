@@ -20,6 +20,7 @@ function App() {
   // ---- send this img to backend socket
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
+  const [img, setImg] = useState();
   const [localState, setLocalState] = useState({
     // home__img: "",
     // home__intro: "",
@@ -50,6 +51,8 @@ function App() {
           setIsLoading,
           localState,
           setLocalState,
+          img,
+          setImg,
         }}
       >
         <Navbar />
