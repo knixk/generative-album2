@@ -26,6 +26,13 @@ function App() {
   const [ipAddress, setIPAddress] = useState("http://192.168.0.105:3000/");
   const [introText, setIntroText] = useState();
   const [backgroundImage, setBackgroundImage] = useState();
+  const [localState, setLocalState] = useState({
+    home__img: "",
+    home__intro: "",
+    theme__color: "",
+    main__form__text: "",
+    main__prompt: "",
+  });
 
   return (
     <Router>
@@ -57,7 +64,10 @@ function App() {
           setConfigData,
           refresh,
           setRefresh,
-          backgroundImage, setBackgroundImage
+          backgroundImage,
+          setBackgroundImage,
+          localState,
+          setLocalState,
         }}
       >
         <Navbar />

@@ -56,6 +56,7 @@ function Main() {
     setConfigData,
     backgroundImg,
     setBackgroundImg,
+    localState, setLocalState
   } = myState;
 
   // Add image to IndexedDB
@@ -208,7 +209,11 @@ function Main() {
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
           <p className="prompt__label">
-            I'd like to celebrate Valentine's day at:
+            
+            {localState.main__form__text}:
+            {
+              " "
+            }
             {/* {configData.main__prompt},  */}
             {/* {configData.main__form__text} */}
           </p>

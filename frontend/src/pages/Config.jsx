@@ -54,11 +54,14 @@ function Config() {
       bg__img: configData.bg__url,
       main__form__text: configData.main__form__text,
       main__prompt: configData.main__prompt,
-      home__img: configData.home__img,
-      theme__color: configData.theme__color
+      home__img: configData.home__image,
+      theme__color: configData.theme__color,
+      home__intro: configData.home__intro
     };
 
-    console.log(localState)
+    localStorage.setItem('localState', JSON.stringify(localState));
+
+    console.log(localState, "im local State")
 
     // store this image somehow
     // console.log(myDoc);
@@ -186,7 +189,7 @@ function Config() {
           }}
           id="cache__btn"
         >
-          Clear Cache
+          Clear last 5 images
         </button>
       </form>
     </div>
