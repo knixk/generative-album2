@@ -1,6 +1,6 @@
 :root {
   --my-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  --background-color:  #2e2e2e23;
+  --background-color:  #77777723;
 }
 
 * {
@@ -212,6 +212,7 @@ input:hover,
   /* height: 350px; */
   /* background-color: ; */
   /* display: none; */
+  border: 3px solid rgba(255, 255, 255, 0.322);
 }
 
 .delete__btn {
@@ -226,7 +227,7 @@ input:hover,
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #2e2e2e23;
+  background-color: var(--background-color);
   padding: 3rem 2rem;
   border-radius: 5px;
   /* width: 780px; */
@@ -672,4 +673,37 @@ label {
   color: white;
   letter-spacing: 2px;
   margin: 10px 0;
+}
+
+.home__btn {
+  /* font-size: 5rem; */
+  /* font-weight: bold; */
+  font-size: 1.5rem !important;
+  /* background-color: red; */
+  color: white;
+  /* background-color: ; */
+  animation: pulse 3s infinite ease-in-out;
+  /* border: 5px solid white; */
+  margin-top: 10px;
+}
+
+.home__sub {
+  font-size: 2rem !important;
+}
+
+@keyframes pulse {
+  0% {
+    scale: 1;
+  }
+
+
+  50% {
+    scale: 1.05;
+  }
+
+
+  100% {
+    scale: 1;
+  }
+
 }

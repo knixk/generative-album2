@@ -24,8 +24,8 @@ function Home() {
     <div className="home__container">
       <Toaster/>
       <img className="home__img" src={localState.home__img} alt="" />
-      <h2>{localState.home__intro}</h2>
-      <button onClick={() => navigate("/main")}>Get started</button>
+      <h2 className="home__sub">{localState.home__intro}</h2>
+      <button className="home__btn" onClick={() => navigate("/main")}>Get started</button>
     </div>
   );
 }

@@ -37,9 +37,11 @@ function Navbar() {
         navEle.style.backgroundColor = parsedState.theme__color;
 
         const myDoc = document.querySelector("body");
+        const homeBtn = document.querySelector(".home__btn");
         // myDoc.style.backgroundImage = `url(${parsedState.bg__img})`;
         // darker background
         myDoc.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${parsedState.bg__img})`;
+        homeBtn.style.backgroundColor = parsedState.theme__color;
       }
     };
 
