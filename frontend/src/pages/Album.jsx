@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 
-// import * as nsfwjs from "nsfwjs";
-// const model = await nsfwjs.load();
-
 // recieve the image on port -------  receiver
 import io from "socket.io-client";
-const socket = io("http://localhost:3000");
+import axios from "axios";
+// const socket = io('ws://192.168.0.105:3000');
+// const socket = io();
+// const socket = io('ws://192.168.0.105:3000');
+// const socket = io('ws://192.168.0.106:3000');
+// big monitor
+const socket = io("ws://192.168.0.106:3000");
+
 // const socket = io("http://192.168.0.105:3000/");
+// const bigMonitor = 'http://192.168.0.118:3000'
 
 import img from "../assets/img.webp";
 import toast, { Toaster } from "react-hot-toast";
 import Modal from "../components/Modal";
+import Loader from "../components/Loader";
+import { myContext } from "../App";
+import { useContext } from "react";
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
@@ -81,107 +89,131 @@ const data = [
 ];
 
 function Album() {
-  const [albums, setAlbums] = useState(data);
+  const [albums, setAlbums] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState();
+  const myState = useContext(myContext);
+  const { isLoading, setIsLoading, refresh, setRefresh } = myState;
 
   const handleDelete = (i) => {
     return;
   };
 
+  const getAllImages = async () => {
+    try {
+      const req = axios.get("http://localhost:5051/get-images");
+      const res = await req;
+      // console.log(res.data.images);
+      return res.data.images;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleAddToAlbum = (data) => {
+    // console.log(data, "inside handle add to -----------=================");
     const { name, image } = data;
     let img = image;
     setImg(image);
-    const newItem = { name, img, id: new Date() };
-    // console.log(newItem, "ni");
-    const newData = [...albums, newItem];
 
-    const stringifyImgs = JSON.stringify(newData);
-    // console.log(stringifyImgs);
-    localStorage.setItem("images", stringifyImgs);
+    // -------- changes require here, it wants a url but we're giving back an object
+    // const newItem = { name, img, id: new Date() };
+    // const newItem
+    // const finalUrl = ${image}`;
 
-    // console.log(newData, "im nd");
-    // console.log("updated");
-    setAlbums(newData);
+    // const newData = [...albums, ];
+
+    // const stringifyImgs = JSON.stringify(newData);
+
+    // localStorage.setItem("images", stringifyImgs);
+    // setAlbums(newData);
   };
 
   const classifyImage = async (img) => {
     const predictions = await model.classify(img);
-    console.log(predictions);
+    // console.log(predictions);
     return predictions;
   };
 
   useEffect(() => {
-    const images = localStorage.getItem("images");
+    const myAsyncFn = async () => {
+      const images = await getAllImages();
+      // console.log(images);
+      setAlbums(images);
+    };
 
-    if (images) {
-      const parsedImgs = JSON.parse(images);
-      setAlbums(parsedImgs);
-      // console.log(parsedImgs);
-    } else {
-    }
-  }, []);
+    myAsyncFn();
+
+    // const images = localStorage.getItem("images");
+
+    // if (images) {
+    //   const parsedImgs = JSON.parse(images);
+    //   setAlbums(parsedImgs);
+    // } else {
+    // }
+  }, [showModal, refresh]);
 
   useEffect(() => {
-    // if (images) {
-    //   const json_images = JSON.parse(images);
-    //   setAlbums(json_images);
-    // } else {
-    //   localStorage.setItem("images", JSON.stringify(albums));
-    // }
-
-    socket.on("update-album", (data) => {
-      // alert("yes")
-      // console.log(data);
-      handleAddToAlbum(data);
+    socket.on("update-album", (body) => {
+      handleAddToAlbum(body);
+      // console.log(body, "im the body of socket");
       console.log("image was added");
       setShowModal(true);
-      // setShowModal(true);
-
       setTimeout(() => {
         setShowModal(false);
+        // forcePageUpdate();
       }, 7500);
     });
-  }, [albums]);
 
-  // Load images from IndexedDB on component mount
-  // useEffect(() => {
-  //   const loadImages = async () => {
-  //     const storedImages = await getAllFromDB(dbName, storeName);
-  //     setImages(storedImages);
-  //     console.log(storedImages, "im stored images");
-  //   };
+    // socket.off("")
+  }, []);
 
-  //   loadImages();
-  // }, []);
+  if (isLoading) {
+    return <Loader />;
+  }
+
+    useEffect(() => {
+      // backgroundImg && setBackground(backgroundImg);
+      // console.log("img was updated")
+      const bg__img = localStorage.getItem("bg__img");
+      console.log(bg__img)
+      if (bg__img) {
+        // setBackground(bg__img)
+        const myDoc = document.querySelector("body");
+        myDoc.style.backgroundImage = `url(${bg__img})`;
+        console.log(myDoc);
+        console.log("image set");
+        setRefresh((prev) => !prev)
+      }
+
+
+    }, []);
+
   return (
     <div className="album__container">
       <Toaster />
+      {/* <img src="../../../backend/uploads/image_1738213756278.jpg" alt="" /> */}
       {/* <p>Your lovely creations..</p> */}
       {showModal ? (
         <Modal props={{ img }} />
       ) : (
         <div className="album__grid">
-          {albums.map((i, idx) => {
-            // let imgElem = new Image();
-            // imgElem.crossOrigin = "anonymous"; // Avoid CORS issues
-            // imgElem.src = genImg;
-            // classifyImage(imgElem);
-            return (
-              // <div key={idx} className="card__container">
-              //   <img className="generated__img" src={i.img} alt={i.name} />
-              //   <p className="name">{i.name}</p>
-              //   <button className="delete__btn">x</button>
-              // </div>
-
-              <div key={idx} className="card__container">
-                <img className="generated__img" src={i.img} alt={i.name} />
-                <p className="name">{i.name}</p>
-                <button className="delete__btn">x</button>
-              </div>
-            );
-          })}
+          {albums &&
+            albums.map((i, idx) => {
+              // console.log(i)
+              const finalUrl = `http://localhost:5051/images/${i}`;
+              // console.log(i, "IM the I --------------");
+              const name2 = i.split("_")[0];
+              // console.log(name2)
+              // console.log(finalUrl);
+              return (
+                <div key={idx} className="card__container">
+                  <img className="generated__img" src={finalUrl} alt={""} />
+                  <p className="name">{`${name2}`}</p>
+                  <button className="delete__btn">x</button>
+                </div>
+              );
+            })}
         </div>
       )}
     </div>
