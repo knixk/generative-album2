@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useRef } from "react";
 import { myContext } from "../App";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import io from "socket.io-client";
+const socket = io("ws://192.168.0.106:3000");
+
 
 // import
 // import defineConfig from '../../vite.config';
@@ -50,7 +53,9 @@ function Config() {
     console.log(localState2)
 
     localStorage.setItem("localState", JSON.stringify(localState2));
-    window.dispatchEvent(new Event("localStorageUpdate"));
+    // window.dispatchEvent(new Event("localStorageUpdate"));
+    socket.emit("updateLocalStorage", localState2);
+
 
     // console.log(localState, "im local State")
 
