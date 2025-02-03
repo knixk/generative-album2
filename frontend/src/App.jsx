@@ -21,11 +21,11 @@ function App() {
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
   const [localState, setLocalState] = useState({
-    home__img: "",
-    home__intro: "",
-    theme__color: "",
-    main__form__text: "",
-    main__prompt: "",
+    // home__img: "",
+    // home__intro: "",
+    // theme__color: "",
+    // main__form__text: "",
+    // main__prompt: "",
   });
 
   return (
