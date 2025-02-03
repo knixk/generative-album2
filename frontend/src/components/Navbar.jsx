@@ -20,27 +20,39 @@ function Navbar() {
     setLocalState((prevLocalState) => ({ ...prevLocalState, [name]: value }));
   };
 
+  // const setLocalStorageState = () => {
+
+  // }
+
   useEffect(() => {
-    const localState = localStorage.getItem("localState");
-    if (localState) {
-      const parsedState = JSON.parse(localState);
+    const mainFn = () => {
+      const localState = localStorage.getItem("localState");
+      if (localState) {
+        const parsedState = JSON.parse(localState);
 
-      handleChange("bg__img", parsedState.bg__img);
-      handleChange("main__form__text", parsedState.main__form__text);
-      handleChange("main__prompt", parsedState.main__prompt);
-      handleChange("home__img", parsedState.home__img);
-      handleChange("theme__color", parsedState.theme__color);
-      handleChange("home__intro", parsedState.home__intro);
+        handleChange("bg__img", parsedState.bg__img);
+        handleChange("main__form__text", parsedState.main__form__text);
+        handleChange("main__prompt", parsedState.main__prompt);
+        handleChange("home__img", parsedState.home__img);
+        handleChange("theme__color", parsedState.theme__color);
+        handleChange("home__intro", parsedState.home__intro);
 
-      console.log(localState);
-      const prsedLocalState = JSON.parse(localState);
-      console.log(prsedLocalState);
+        // console.log(localState);
+        const prsedLocalState = JSON.parse(localState);
+        console.log(prsedLocalState);
 
-      const navEle = document.querySelector("nav");
-      // console.log(navEle);
-      navEle.style.backgroundColor = prsedLocalState.theme__color;
-      // console.log(localState)
-    }
+        const navEle = document.querySelector("nav");
+        // console.log(navEle);
+        navEle.style.backgroundColor = prsedLocalState.theme__color;
+        // console.log(localState)
+      }
+    };
+
+    mainFn();
+    window.addEventListener("localStorageUpdate", mainFn);
+    console.log("event listener added")
+    return () => window.removeEventListener("localStorageUpdate", mainFn);
+    console.log("listener removed")
   }, []);
 
   return (
