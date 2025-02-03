@@ -248,7 +248,7 @@ input:hover,
 .prompt__label {  
   font-weight: bold;
   background-color: rgba(77, 77, 77, 0.089);
-  padding: 1.5rem 1rem;
+  /* padding: 1.5rem 1rem; */
   /* width: 70%; */
   font-size: 20px;
   border-radius: 5px;

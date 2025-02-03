@@ -50,7 +50,6 @@ function Main() {
   socket = localState && io(localState.ip__address);
   // console.log(socket)
 
-
   const uploadImage = async (imageUrl) => {
     // console.log(imageUrl, "im i u");
     try {
@@ -145,18 +144,44 @@ function Main() {
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
-          <p className="prompt__label">
+          <label className="prompt__label">
             {localState.main__form__text}: {/* {configData.main__prompt},  */}
             {/* {configData.main__form__text} */}
-          </p>
+          </label>
           <input
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Enter place.."
+            placeholder="Enter location.."
             type="text"
             required
           />
 
+          <label className="prompt__label">
+            with
+          </label>
+
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter celebrity name.."
+            type="text"
+            required
+            autoFocus
+          />
+
+          <label className="prompt__label">at time</label>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter time (morning, evening).."
+            type="text"
+            required
+            autoFocus
+          />
+
+          <label className="prompt__label mt-2">
+            Enter your name
+          </label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
