@@ -48,7 +48,7 @@ function Main() {
   } = myState;
 
   socket = localState && io(localState.ip__address);
-  console.log(socket)
+  // console.log(socket)
 
 
   const uploadImage = async (imageUrl) => {
