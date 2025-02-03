@@ -2,33 +2,16 @@ import React, { useContext, useEffect, useRef } from "react";
 import { myContext } from "../App";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import io from "socket.io-client";
-const socket = io("ws://192.168.0.106:3000");
 
-
-// import
-// import defineConfig from '../../vite.config';
 
 function Config() {
   const myState = useContext(myContext);
   const {
-    configData,
-    setConfigData,
-    prompt,
-    setPrompt,
-    introText,
-    setIntroText,
-    refresh,
     setRefresh,
-    backgroundImage,
-    setBackgroundImage,
     localState,
     setLocalState,
   } = myState;
-  // console.log(localState);
-  const bodyRef = useRef(null);
 
-  // console.log(myState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,21 +31,16 @@ function Config() {
       home__img: localState.home__img,
       theme__color: localState.theme__color,
       home__intro: localState.home__intro,
+      header__txt: localState.header__txt
     };
 
     console.log(localState2)
 
     localStorage.setItem("localState", JSON.stringify(localState2));
     // window.dispatchEvent(new Event("localStorageUpdate"));
-    socket.emit("updateLocalStorage", localState2);
+    // socket.emit("updateLocalStorage", localState2);
 
 
-    // console.log(localState, "im local State")
-
-    // store this image somehow
-    // console.log(myDoc);
-
-    // ------ clear the form
 
     toast.success("Form was submitted..");
     setRefresh((prev) => !prev);
@@ -89,6 +67,15 @@ function Config() {
           onChange={handleChange}
           placeholder="Enter background image url.."
           type="url"
+          required
+        />
+
+          <input
+          value={localState.header__txt}
+          name="header__txt"
+          onChange={handleChange}
+          placeholder="Enter header text.."
+          type="text"
           required
         />
 

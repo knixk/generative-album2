@@ -3,13 +3,10 @@ import React from "react";
 import { myContext } from "../App";
 import { useContext, useEffect } from "react";
 
-// console.log(window.location.pathname)
 
 function Navbar() {
   const MyState = useContext(myContext);
   const { isLoading, setIsLoading, localState, setLocalState } = MyState;
-
-  // console.log(MyState)
 
   if (isLoading) {
     return "";
@@ -19,10 +16,6 @@ function Navbar() {
     //  setLocalState((prev) => {...prev, [name]: [value]};
     setLocalState((prevLocalState) => ({ ...prevLocalState, [name]: value }));
   };
-
-  // const setLocalStorageState = () => {
-
-  // }
 
   useEffect(() => {
     const mainFn = () => {
@@ -37,6 +30,8 @@ function Navbar() {
         handleChange("home__img", parsedState.home__img);
         handleChange("theme__color", parsedState.theme__color);
         handleChange("home__intro", parsedState.home__intro);
+        handleChange("header__txt", parsedState.header__txt);
+
 
         // console.log(localState);
         // const prsedLocalState = JSON.parse(localState);
@@ -63,7 +58,7 @@ function Navbar() {
 
   return (
     <nav>
-      <h2>Indroyd Labs Demo</h2>
+      <h2>{localState.header__txt}</h2>
     </nav>
   );
 }

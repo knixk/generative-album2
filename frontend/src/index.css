@@ -240,6 +240,8 @@ input:hover,
 
 #cache__btn {
   margin-top: 5rem;
+  background-color: rgb(139, 15, 15);
+  color: white;
 }
 
 .prompt__label {  

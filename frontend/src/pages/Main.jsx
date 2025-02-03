@@ -44,27 +44,12 @@ function Main() {
     setPrompt,
     disabled,
     setDisabled,
-    introText,
-    setIntroText,
     name,
     setName,
     ipAddress,
-    setIPAddress,
     refresh,
-    setRefresh,
-    configData,
-    setConfigData,
-    backgroundImg,
-    setBackgroundImg,
     localState, setLocalState
   } = myState;
-
-  // Add image to IndexedDB
-
-  // const setBackground = (img) => {
-  //   setBackgroundImg(img);
-
-  // };
 
   const handleAddImage = async (imageUrl) => {
     try {
@@ -105,8 +90,8 @@ function Main() {
 
     toast("Please wait while we ready your creation...");
 
-    const finalStr = `${valentineDay} ${prompt}`;
-    // console.log(finalStr)
+    const finalStr = `${localState.main__prompt} ${prompt}`;
+    console.log(finalStr)
 
     try {
       // console.log(ipAddress);
@@ -160,15 +145,6 @@ function Main() {
     setDisabled(true);
     setIsLoading(true);
     await myAsyncFn();
-  };
-
-  // Convert blob to URL for rendering
-  const getBlobUrl = (blob) => URL.createObjectURL(blob);
-
-  // Add all images (background processing)
-  // add a single image
-  const addAllImages = () => {
-    exampleImageLinks.forEach((link) => handleAddImage(link));
   };
 
   if (isLoading) {
