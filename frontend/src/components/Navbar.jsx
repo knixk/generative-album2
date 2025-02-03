@@ -33,22 +33,11 @@ function Navbar() {
         handleChange("header__txt", parsedState.header__txt);
         handleChange("ip__address", parsedState.ip__address);
 
-
-
-
-        // console.log(localState);
-        // const prsedLocalState = JSON.parse(localState);
-        // console.log(prsedLocalState);
-
         const navEle = document.querySelector("nav");
-        // console.log(navEle);
         navEle.style.backgroundColor = parsedState.theme__color;
 
         const myDoc = document.querySelector("body");
         myDoc.style.backgroundImage = `url(${parsedState.bg__img})`;
-
-        // console.log(localState)
-        // setBg(parsedState.bg__img);
       }
     };
 

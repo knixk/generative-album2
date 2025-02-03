@@ -16,7 +16,7 @@ function Config() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLocalState({ ...localState, [name]: value });
-    console.log(localState)
+    // console.log(localState)
 
   };
 
@@ -61,8 +61,10 @@ function Config() {
     <div className="config__container">
       <Toaster />
       <form onSubmit={handleSubmit} className="config__form">
+        <label htmlFor="ip__address">IP Address</label>
       <input
           value={localState.ip__address}
+          id="ip__address"
           name="ip__address"
           onChange={handleChange}
           placeholder="Enter ip address.."
