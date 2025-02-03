@@ -22,7 +22,7 @@ function Config() {
     localState,
     setLocalState,
   } = myState;
-  console.log(localState);
+  // console.log(localState);
   const bodyRef = useRef(null);
 
   // console.log(myState);
@@ -37,29 +37,12 @@ function Config() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted");
-    // console.log(configData);
-
-    setPrompt(configData.main__prompt);
-    setIntroText(configData.main__form__text);
-    // console.log(configData.main__form__text);
-
-    const myDoc = document.querySelector("body");
-    myDoc.style.backgroundImage = `url(${configData.bg__url})`;
-    setBackgroundImage(configData.bg__url);
-    localStorage.setItem("bg__img", configData.bg__url);
-
-    const myData = JSON.stringify(configData);
-    // console.log(myData)
-
-    localStorage.setItem("config__data", myData);
-    // console.log("localStorage was set")
 
     const localState2 = {
-      bg__img: localState.bg__url,
+      bg__img: localState.bg__img,
       main__form__text: localState.main__form__text,
       main__prompt: localState.main__prompt,
-      home__img: localState.home__image,
+      home__img: localState.home__img,
       theme__color: localState.theme__color,
       home__intro: localState.home__intro,
     };
@@ -67,7 +50,7 @@ function Config() {
     console.log(localState2)
 
     localStorage.setItem("localState", JSON.stringify(localState2));
-    window.dispatchEvent(new Event("localStorageUpdate"));
+    // window.dispatchEvent(new Event("localStorageUpdate"));
 
     // console.log(localState, "im local State")
 
@@ -75,7 +58,7 @@ function Config() {
     // console.log(myDoc);
 
     // ------ clear the form
-    // setConfigData({})
+
     toast.success("Form was submitted..");
     setRefresh((prev) => !prev);
   };
@@ -91,24 +74,10 @@ function Config() {
     }
   };
 
-  useEffect(() => {
-    // console.log(introText);
-  }, []);
-
-
-
   return (
     <div className="config__container">
       <Toaster />
       <form onSubmit={handleSubmit} className="config__form">
-        {/* <input
-          value={configData.max__number}
-          name="max__number"
-          onChange={handleChange}
-          placeholder="Maximum number of images on canvas.."
-          type="number"
-          required
-        /> */}
         <input
           value={localState.bg__img}
           name="bg__img"

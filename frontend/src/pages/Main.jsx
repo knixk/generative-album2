@@ -181,28 +181,6 @@ function Main() {
     // console.log(configData);
   }, [refresh]);
 
-  // useEffect(() => {
-  //   // backgroundImg && setBackground(backgroundImg);
-  //   // console.log("img was updated")
-
-  //   const tmpData = localStorage.getItem("config__data")
-  //   if (tmpData) {
-  //     const prsed = JSON.parse(tmpData);
-  //     // console.log(prsed)
-  //     setConfigData(prsed)
-  //   }
-
-  //   const bg__img = localStorage.getItem("bg__img");
-  //   // console.log(bg__img)
-  //   if (bg__img) {
-  //     // setBackground(bg__img)
-  //     const myDoc = document.querySelector("body");
-  //     myDoc.style.backgroundImage = `url(${bg__img})`;
-  //     // console.log(myDoc);
-  //     console.log("image set");
-  //   }
-  // }, []);
-
   return (
     <div className="main__container">
       <Toaster />
