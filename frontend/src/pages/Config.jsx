@@ -50,7 +50,7 @@ function Config() {
     console.log(localState2)
 
     localStorage.setItem("localState", JSON.stringify(localState2));
-    // window.dispatchEvent(new Event("localStorageUpdate"));
+    window.dispatchEvent(new Event("localStorageUpdate"));
 
     // console.log(localState, "im local State")
 

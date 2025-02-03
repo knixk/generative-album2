@@ -25,21 +25,8 @@ function Navbar() {
   // }
 
   useEffect(() => {
-    const setBg = (img) => {
-      // backgroundImg && setBackground(backgroundImg);
-      // console.log("img was updated")
-      // const bg__img = localStorage.getItem("bg__img");
-      // console.log(bg__img);
-      // if (bg__img) {
-      // setBackground(bg__img)
-
-      // console.log(myDoc);
-      console.log("image set");
-      // setRefresh((prev) => !prev);
-      // }
-    };
-
     const mainFn = () => {
+      console.log("main event fired")
       const localState = localStorage.getItem("localState");
       if (localState) {
         const parsedState = JSON.parse(localState);
@@ -70,11 +57,9 @@ function Navbar() {
     mainFn();
     window.addEventListener("localStorageUpdate", mainFn);
     console.log("event listener added");
-    return () => window.removeEventListener("localStorageUpdate", mainFn);
-    console.log("listener removed");
+    // return () => window.removeEventListener("localStorageUpdate", mainFn);
+    // console.log("listener removed");
   }, []);
-
-  useEffect(() => {}, []);
 
   return (
     <nav>
