@@ -3,7 +3,6 @@ import React from "react";
 import { myContext } from "../App";
 import { useContext, useEffect } from "react";
 
-
 function Navbar() {
   const MyState = useContext(myContext);
   const { isLoading, setIsLoading, localState, setLocalState } = MyState;
@@ -19,7 +18,7 @@ function Navbar() {
 
   useEffect(() => {
     const mainFn = () => {
-      console.log("main event fired")
+      console.log("main event fired");
       const localState = localStorage.getItem("localState");
       if (localState) {
         const parsedState = JSON.parse(localState);
@@ -41,7 +40,9 @@ function Navbar() {
         // myDoc.style.backgroundImage = `url(${parsedState.bg__img})`;
         // darker background
         myDoc.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${parsedState.bg__img})`;
-        homeBtn.style.backgroundColor = parsedState.theme__color;
+        if (homeBtn) {
+          homeBtn.style.backgroundColor = parsedState.theme__color;
+        }
       }
     };
 

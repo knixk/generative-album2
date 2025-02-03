@@ -7,6 +7,8 @@ function Config() {
   const myState = useContext(myContext);
   const { setRefresh, localState, setLocalState } = myState;
 
+  console.log(localState)
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLocalState({ ...localState, [name]: value });
@@ -25,6 +27,7 @@ function Config() {
       home__intro: localState.home__intro,
       header__txt: localState.header__txt,
       ip__address: localState.ip__address,
+      album__bg__img: localState.album__bg__img,
     };
 
     console.log(localState2);
@@ -34,7 +37,7 @@ function Config() {
     // socket.emit("updateLocalStorage", localState2);
 
     toast.success("Form was submitted..");
-    setRefresh((prev) => !prev);
+    // setRefresh((prev) => !prev);
   };
 
   const deleteOldImages = async () => {
@@ -68,6 +71,18 @@ function Config() {
           value={localState.bg__img}
           name="bg__img"
           id="bg__img"
+          onChange={handleChange}
+          placeholder="Enter background image url.."
+          type="url"
+          required
+        />
+
+        <label htmlFor="album__bg__img">Album Background Image: </label>
+
+        <input
+          value={localState.album__bg__img}
+          name="album__bg__img"
+          id="album__bg__img"
           onChange={handleChange}
           placeholder="Enter background image url.."
           type="url"
