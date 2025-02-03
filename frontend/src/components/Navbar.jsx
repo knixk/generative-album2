@@ -25,6 +25,20 @@ function Navbar() {
   // }
 
   useEffect(() => {
+    const setBg = (img) => {
+      // backgroundImg && setBackground(backgroundImg);
+      // console.log("img was updated")
+      // const bg__img = localStorage.getItem("bg__img");
+      // console.log(bg__img);
+      // if (bg__img) {
+      // setBackground(bg__img)
+
+      // console.log(myDoc);
+      console.log("image set");
+      // setRefresh((prev) => !prev);
+      // }
+    };
+
     const mainFn = () => {
       const localState = localStorage.getItem("localState");
       if (localState) {
@@ -38,22 +52,29 @@ function Navbar() {
         handleChange("home__intro", parsedState.home__intro);
 
         // console.log(localState);
-        const prsedLocalState = JSON.parse(localState);
-        console.log(prsedLocalState);
+        // const prsedLocalState = JSON.parse(localState);
+        // console.log(prsedLocalState);
 
         const navEle = document.querySelector("nav");
         // console.log(navEle);
-        navEle.style.backgroundColor = prsedLocalState.theme__color;
+        navEle.style.backgroundColor = parsedState.theme__color;
+
+        const myDoc = document.querySelector("body");
+        myDoc.style.backgroundImage = `url(${parsedState.bg__img})`;
+
         // console.log(localState)
+        // setBg(parsedState.bg__img);
       }
     };
 
     mainFn();
     window.addEventListener("localStorageUpdate", mainFn);
-    console.log("event listener added")
+    console.log("event listener added");
     return () => window.removeEventListener("localStorageUpdate", mainFn);
-    console.log("listener removed")
+    console.log("listener removed");
   }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <nav>
