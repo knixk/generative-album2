@@ -15,7 +15,6 @@ function Config() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // setConfigData({ ...configData, [name]: value });
     setLocalState({ ...localState, [name]: value });
     console.log(localState)
 

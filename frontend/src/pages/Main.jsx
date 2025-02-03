@@ -1,14 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import Grid from "../components/Grid";
 import { myContext } from "../App";
-import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import Loader from "../components/Loader";
-
-const dbName = "the_name";
-
-const request = indexedDB.open(dbName, 2);
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
@@ -32,7 +26,7 @@ function submitData(payload) {
 
 // ----------- Main app function ----------------
 function Main() {
-  const valentineDay = `Valentine's day celebration at`;
+  // const valentineDay = `Valentine's day celebration at`;
 
   const myState = useContext(myContext);
 
@@ -56,22 +50,6 @@ function Main() {
   socket = localState && io(localState.ip__address);
   console.log(socket)
 
-  const handleAddImage = async (imageUrl) => {
-    try {
-      const response = await fetch(imageUrl);
-      if (!response.ok) throw new Error("Failed to fetch image.");
-      const blob = await response.blob();
-
-      // Save to IndexedDB
-      const id = Date.now(); // Unique ID
-      await addToDB(dbName, storeName, { id, blob });
-
-      // Update UI
-      setImages((prev) => [...prev, { id, blob }]);
-    } catch (error) {
-      console.error("Error downloading image:", error);
-    }
-  };
 
   const uploadImage = async (imageUrl) => {
     // console.log(imageUrl, "im i u");
