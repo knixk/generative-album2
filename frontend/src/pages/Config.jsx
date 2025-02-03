@@ -4,6 +4,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 // import
+import defineConfig from '../../vite.config';
 
 function Config() {
   const myState = useContext(myContext);
@@ -46,13 +47,18 @@ function Config() {
     const myData = JSON.stringify(configData);
     console.log(myData)
 
-    localState.setItem("config__data", myData);
+    localStorage.setItem("config__data", myData);
+    // console.log("localStorage was set")
 
     const localState = {
       bg__img: configData.bg__url,
       main__form__text: configData.main__form__text,
       main__prompt: configData.main__prompt,
+      home__img: configData.home__img,
+      theme__color: configData.theme__color
     };
+
+    console.log(localState)
 
     // store this image somehow
     // console.log(myDoc);
