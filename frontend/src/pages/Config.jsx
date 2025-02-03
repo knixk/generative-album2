@@ -4,7 +4,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 // import
-import defineConfig from '../../vite.config';
+// import defineConfig from '../../vite.config';
 
 function Config() {
   const myState = useContext(myContext);

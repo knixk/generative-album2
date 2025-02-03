@@ -6,5 +6,5 @@ const myData = [
         "theme__color": "#5e1d1d",
         "main__form__text": "asdasd",
         "main__prompt": "asdasdasd"
-    }
+    }   
 ]
