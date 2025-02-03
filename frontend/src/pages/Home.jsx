@@ -12,10 +12,10 @@ function Home() {
   const myState = useContext(myContext);
   const { localState, setLocalState } = myState;
 
-  // if (localState.home__img) {
+  if (localState) {
     console.log(localState);
-  // } else {
-    // toast("go to /config page to set up the app..");
+  } else {
+    // toast.
   }
 
 
