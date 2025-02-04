@@ -150,46 +150,15 @@ function Config() {
 
         <label htmlFor="main__form__text1">Main label 1 text: </label>
 
-        <input
+        <textarea
           value={localState.main__form__text1}
           name="main__form__text1"
           onChange={handleChange}
           placeholder="Enter main label 1 text.."
+          className="main__form__text"
           type="text"
           required
-        />
-
-        <label htmlFor="main__form__text2">Main label 2 text: </label>
-
-        <input
-          value={localState.main__form__text2}
-          name="main__form__text2"
-          onChange={handleChange}
-          placeholder="Enter main label 2 text.."
-          type="text"
-          required
-        />
-
-        <label htmlFor="main__form__text3">Main label 3 text: </label>
-
-        <input
-          value={localState.main__form__text3}
-          name="main__form__text3"
-          onChange={handleChange}
-          placeholder="Enter main label 3 text.."
-          type="text"
-          required
-        />
-
-        <label htmlFor="bg__img">Actual prompt for AI : </label>
-
-        <input
-          value={localState.main__prompt}
-          name="main__prompt"
-          onChange={handleChange}
-          placeholder="Enter main form prompt for image description.."
-          type="text"
-          required
+          // height="200px"
         />
 
         <button className="submit">Submit</button>

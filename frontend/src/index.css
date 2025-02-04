@@ -715,3 +715,10 @@ label {
   letter-spacing: 2px;
   margin-top: 1rem;
 }
+
+.main__form__text {
+  height: 100px;
+  padding: 1rem;
+  border-radius: 5px;
+  resize: none;
+}
