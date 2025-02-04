@@ -93,7 +93,7 @@ function Album() {
   const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState();
   const myState = useContext(myContext);
-  const { isLoading, setIsLoading, refresh, setRefresh } = myState;
+  const { isLoading, setIsLoading, refresh, setRefresh, localState, setLocalState } = myState;
 
   const handleDelete = (i) => {
     return;
@@ -172,22 +172,36 @@ function Album() {
     return <Loader />;
   }
 
-    useEffect(() => {
-      // backgroundImg && setBackground(backgroundImg);
-      // console.log("img was updated")
-      const bg__img = localStorage.getItem("bg__img");
-      console.log(bg__img)
-      if (bg__img) {
-        // setBackground(bg__img)
-        const myDoc = document.querySelector("body");
-        myDoc.style.backgroundImage = `url(${bg__img})`;
-        console.log(myDoc);
-        console.log("image set");
-        setRefresh((prev) => !prev)
-      }
+  // useEffect(() => {
+  //   // backgroundImg && setBackground(backgroundImg);
+  //   // console.log("img was updated")
+  //   const bg__img = localStorage.getItem("bg__img");
+  //   console.log(bg__img)
+  //   if (bg__img) {
+  //     // setBackground(bg__img)
+  //     const myDoc = document.querySelector("body");
+  //     myDoc.style.backgroundImage = `url(${bg__img})`;
+  //     console.log(myDoc);
+  //     console.log("image set");
+  //     setRefresh((prev) => !prev)
+  //   }
 
+  // }, []);
 
-    }, []);
+  useEffect(() => {
+    const mainFn = () => {
+      // album__bg__img
+
+      // console.log(localState.album__bg__img)
+
+      const myDoc = document.querySelector("body");
+      // myDoc.style.backgroundImage = `url(${parsedState.bg__img})`;
+      // darker background
+      myDoc.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${localState.album__bg__img})`;
+    };
+
+    localState && mainFn();
+  }, [localState]);
 
   return (
     <div className="album__container">
