@@ -148,13 +148,13 @@ function Config() {
           />
         </label>
 
-        <label htmlFor="main__form__text1">Main label 1 text: </label>
+        <label htmlFor="main__form__text1">Final prompt form: (use variables to build it dynamically)</label>
 
         <textarea
           value={localState.main__form__text1}
           name="main__form__text1"
           onChange={handleChange}
-          placeholder="Enter main label 1 text.."
+          placeholder="I want celebrate {1} at {2} with {3} (can use many variables).."
           className="main__form__text"
           type="text"
           required

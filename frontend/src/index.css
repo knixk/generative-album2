@@ -673,6 +673,7 @@ label {
   color: white;
   letter-spacing: 2px;
   margin: 10px 0;
+  font-size: 20px;
 }
 
 .home__btn {
@@ -721,4 +722,7 @@ label {
   padding: 1rem;
   border-radius: 5px;
   resize: none;
+  border: none;
+  outline: none;
+  font-size: 20px;
 }
