@@ -137,7 +137,15 @@ function Main() {
     // console.log(introText)
     console.log("component was mounted..");
     // console.log(configData);
-  }, [refresh]);
+    const mainBtn = document.querySelector("#submit__btn");
+    // myDoc.style.backgroundImage = `url(${localState.bg__img})`;
+    // darker background
+    if (mainBtn) {
+      mainBtn.style.backgroundColor = localState.theme__color;
+    }
+    // console.log(localState)
+
+  }, []);
 
   return (
     <div className="main__container">

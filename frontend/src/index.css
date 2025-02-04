@@ -708,3 +708,9 @@ label {
   }
 
 }
+
+#submit__btn {
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+}

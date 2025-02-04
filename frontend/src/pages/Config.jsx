@@ -7,7 +7,7 @@ function Config() {
   const myState = useContext(myContext);
   const { setRefresh, localState, setLocalState } = myState;
 
-  console.log(localState)
+  console.log(localState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +28,9 @@ function Config() {
       header__txt: localState.header__txt,
       ip__address: localState.ip__address,
       album__bg__img: localState.album__bg__img,
+      main__form__text1: localState.main__form__text1,
+      main__form__text2: localState.main__form__text2,
+      main__form__text3: localState.main__form__text3,
     };
 
     console.log(localState2);
@@ -122,7 +125,7 @@ function Config() {
           required
         />
 
-        <label htmlFor="bg__img">Background Image: </label>
+        <label htmlFor="bg__img">Theme color: </label>
 
         <label className="color__label" htmlFor="theme__color">
           <input
@@ -145,18 +148,40 @@ function Config() {
           />
         </label>
 
-        <label htmlFor="bg__img">Background Image: </label>
+        <label htmlFor="main__form__text1">Main label 1 text: </label>
 
         <input
-          value={localState.main__form__text}
-          name="main__form__text"
+          value={localState.main__form__text1}
+          name="main__form__text1"
           onChange={handleChange}
-          placeholder="Enter main form text.."
+          placeholder="Enter main label 1 text.."
           type="text"
           required
         />
 
-        <label htmlFor="bg__img">Background Image: </label>
+        <label htmlFor="main__form__text2">Main label 2 text: </label>
+
+        <input
+          value={localState.main__form__text2}
+          name="main__form__text2"
+          onChange={handleChange}
+          placeholder="Enter main label 2 text.."
+          type="text"
+          required
+        />
+
+        <label htmlFor="main__form__text3">Main label 3 text: </label>
+
+        <input
+          value={localState.main__form__text3}
+          name="main__form__text3"
+          onChange={handleChange}
+          placeholder="Enter main label 3 text.."
+          type="text"
+          required
+        />
+
+        <label htmlFor="bg__img">Actual prompt for AI : </label>
 
         <input
           value={localState.main__prompt}
