@@ -29,6 +29,9 @@ function App() {
     // main__prompt: "",
   });
 
+  const [labelVals, setLabelVals] = useState({});
+  // const 
+
   return (
     <Router>
       <myContext.Provider
@@ -53,6 +56,7 @@ function App() {
           setLocalState,
           img,
           setImg,
+          labelVals, setLabelVals
         }}
       >
         <Navbar />

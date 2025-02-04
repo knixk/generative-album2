@@ -45,6 +45,8 @@ function Main() {
     refresh,
     localState,
     setLocalState,
+    labelVals,
+    setLabelVals,
   } = myState;
 
   socket = localState && io(localState.ip__address);
@@ -72,6 +74,10 @@ function Main() {
 
     toast("Please wait while we ready your creation...");
 
+    const finalStr2 = `${localState.main__form__text1} ${labelVals.val1} ${localState.main__form__text2} ${labelVals.val2} ${localState.main__form__text3} ${labelVals.val3}`;
+    console.log(finalStr2);
+
+    // return
     const finalStr = `${localState.main__prompt} ${prompt}`;
     console.log(finalStr);
 
@@ -81,7 +87,7 @@ function Main() {
       const data = await axios.post(
         "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
         {
-          inputs: finalStr,
+          inputs: finalStr2,
         },
         {
           headers: {
@@ -129,6 +135,15 @@ function Main() {
     await myAsyncFn();
   };
 
+  const handleLabelChange = (e) => {
+    console.log(e.target);
+    const { name, value } = e.target;
+    // console.log(name, value);
+    setLabelVals((prev) => ({ ...prev, [name]: value }));
+
+    console.log(labelVals)
+  };
+
   if (isLoading) {
     return <Loader />;
   }
@@ -142,9 +157,11 @@ function Main() {
     // darker background
     if (mainBtn) {
       mainBtn.style.backgroundColor = localState.theme__color;
+      // console.log(mainBtn)
+      console.log("color was set");
     }
-    // console.log(localState)
 
+    // console.log(localState)
   }, []);
 
   return (
@@ -153,43 +170,46 @@ function Main() {
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
           <label className="prompt__label">
-            {localState.main__form__text}: {/* {configData.main__prompt},  */}
+            {localState.main__form__text1}: {/* {configData.main__prompt},  */}
             {/* {configData.main__form__text} */}
           </label>
           <input
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Enter location.."
+            value={labelVals.val1}
+            name="val1"
+            onChange={(e) => handleLabelChange(e)}
+            placeholder="enter text.."
             type="text"
             required
           />
 
           <label className="prompt__label">
-            with
+            {localState.main__form__text2}
           </label>
 
           <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter celebrity name.."
+            value={labelVals.val2}
+            name="val2"
+            onChange={(e) => handleLabelChange(e)}
+            placeholder="enter text.."
             type="text"
             required
             autoFocus
           />
 
-          <label className="prompt__label">at time</label>
+          <label className="prompt__label">
+            {localState.main__form__text3}
+          </label>
           <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter time (morning, evening).."
+            value={labelVals.val3}
+            name="val3"
+            onChange={(e) => handleLabelChange(e)}
+            placeholder="enter text.."
             type="text"
             required
             autoFocus
           />
 
-          <label className="prompt__label mt-2">
-            Enter your name
-          </label>
+          <label className="prompt__label mt-2">Enter your name</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}

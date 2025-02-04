@@ -31,6 +31,15 @@ function Navbar() {
         handleChange("home__intro", parsedState.home__intro);
         handleChange("header__txt", parsedState.header__txt);
         handleChange("ip__address", parsedState.ip__address);
+        handleChange("main__form__text1", parsedState.main__form__text1);
+        handleChange("main__form__text2", parsedState.main__form__text2);
+        handleChange("main__form__text3", parsedState.main__form__text3);
+        handleChange("album__bg__img", parsedState.album__bg__img);
+
+        // album__bg__img
+
+
+
 
         const navEle = document.querySelector("nav");
         navEle.style.backgroundColor = parsedState.theme__color;
