@@ -45,13 +45,13 @@ function Navbar() {
         navEle.style.backgroundColor = parsedState.theme__color;
 
         const myDoc = document.querySelector("body");
-        const homeBtn = document.querySelector(".home__btn");
+        // const homeBtn = document.querySelector(".home__btn");
         // myDoc.style.backgroundImage = `url(${parsedState.bg__img})`;
         // darker background
         myDoc.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${parsedState.bg__img})`;
-        if (homeBtn) {
-          homeBtn.style.backgroundColor = parsedState.theme__color;
-        }
+        // if (homeBtn) {
+        //   homeBtn.style.backgroundColor = parsedState.theme__color;
+        // }
       }
     };
 
@@ -61,6 +61,13 @@ function Navbar() {
     // return () => window.removeEventListener("localStorageUpdate", mainFn);
     // console.log("listener removed");
   }, []);
+
+  useEffect(() => {
+    const homeBtn = document.querySelector(".home__btn");
+    if (homeBtn) {
+      homeBtn.style.backgroundColor = localState.theme__color;
+    }
+  }, [localState])
 
   return (
     <nav>

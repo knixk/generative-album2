@@ -162,7 +162,7 @@ function Main() {
     }
 
     // console.log(localState)
-  }, []);
+  }, [localState]);
 
   return (
     <div className="main__container">
