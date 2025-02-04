@@ -169,13 +169,10 @@ function Main() {
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
-
-          {/* ------ add a dynamic label here ------ */}
-
-          
+    
+          {/*           
           <label className="prompt__label">
-            {localState.main__form__text1}: {/* {configData.main__prompt},  */}
-            {/* {configData.main__form__text} */}
+            {localState.main__form__text1}: 
           </label>
           <input
             value={labelVals.val1}
@@ -184,11 +181,17 @@ function Main() {
             placeholder="enter text.."
             type="text"
             required
+          /> */}
+
+          <label className="prompt__label mt-2">Enter your name</label>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name.."
+            type="text"
+            required
+            autoFocus
           />
-
-
-          {/* ------ add a dynamic label here -- x -- x -- */}
-
 
           <button id="submit__btn" disabled={disabled} onClick={() => {}}>
             Submit

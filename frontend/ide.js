@@ -32,3 +32,7 @@ console.log(sorted)
 const idx = binarySearch(sorted, 23);
 
 console.log(idx);
+
+
+
+
