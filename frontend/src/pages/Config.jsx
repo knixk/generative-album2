@@ -17,7 +17,7 @@ function Config() {
   const myState = useContext(myContext);
   const { setRefresh, localState, setLocalState } = myState;
 
-  console.log(localState);
+  localState && console.log(localState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +42,8 @@ function Config() {
       main__form__text2: localState.main__form__text2,
       main__form__text3: localState.main__form__text3,
     };
+
+    console.log(localState.ip__address)
 
     console.log(localState2);
 
@@ -75,7 +77,7 @@ function Config() {
           name="ip__address"
           onChange={handleChange}
           placeholder="Enter ip address.."
-          type="url"
+          type="text"
           required
         />
         <label htmlFor="bg__img">Background Image: </label>
