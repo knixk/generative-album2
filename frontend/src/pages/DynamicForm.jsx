@@ -82,6 +82,7 @@ const DynamicForm = () => {
                     variant="outlined"
                     value={formValues[part] || ""}
                     onChange={(e) => handleChange(part, e.target.value)}
+                    placeholder="enter text.."
                   />
                 ) : (
                   <Typography key={index} variant="body1">
