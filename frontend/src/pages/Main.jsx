@@ -12,6 +12,7 @@ const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOa
 
 // send the data on port - sender --------
 import io from "socket.io-client";
+import DynamicForm from "./DynamicForm";
 
 // IndexedDB setup ----------
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
@@ -47,6 +48,7 @@ function Main() {
     setLocalState,
     labelVals,
     setLabelVals,
+    formValues, setFormValues
   } = myState;
 
   socket = localState && io(localState.ip__address);
@@ -72,12 +74,21 @@ function Main() {
       return;
     }
 
+
+    // console.log(localState.main__form__text1);
+
+    let template2 = localState.main__form__text1
+    template2.replace(/\{(\d+)\}/g, (_, n) => formValues[n] || `{${n}}`);
+    console.log(template2)
+
+
+    console.log(formValues)
     toast("Please wait while we ready your creation...");
 
     const finalStr2 = `${localState.main__form__text1} ${labelVals.val1} ${localState.main__form__text2} ${labelVals.val2} ${localState.main__form__text3} ${labelVals.val3}`;
     console.log(finalStr2);
 
-    // return
+    return
     const finalStr = `${localState.main__prompt} ${prompt}`;
     console.log(finalStr);
 
@@ -141,7 +152,7 @@ function Main() {
     // console.log(name, value);
     setLabelVals((prev) => ({ ...prev, [name]: value }));
 
-    console.log(labelVals)
+    console.log(labelVals);
   };
 
   if (isLoading) {
@@ -161,29 +172,25 @@ function Main() {
       console.log("color was set");
     }
 
-  console.log(localState.main__form__text1)
+    console.log(localState.main__form__text1);
 
-  const splitted = localState.main__form__text1 && localState.main__form__text1.split("}");
-  // const newStr = splitted && splitted.map((i) => {
+    const splitted =
+      localState.main__form__text1 && localState.main__form__text1.split("}");
+    // const newStr = splitted && splitted.map((i) => {
     // console.log(i)
     // const newI = i.split("{");
     // console.log(newI, "im new i")
-  // });
-  // console.log(splitted)
-
-
+    // });
+    // console.log(splitted)
 
     // console.log(localState)
   }, [localState]);
-
-
 
   return (
     <div className="main__container">
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
-    
           {/*           
           <label className="prompt__label">
             {localState.main__form__text1}: 
@@ -196,6 +203,8 @@ function Main() {
             type="text"
             required
           /> */}
+
+          <DynamicForm localState={localState && localState} />
 
           <label className="prompt__label mt-2">Enter your name</label>
           <input

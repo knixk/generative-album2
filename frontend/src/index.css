@@ -227,7 +227,7 @@ input:hover,
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: var(--background-color);
+  background-color: #eeeeee;
   padding: 3rem 2rem;
   border-radius: 5px;
   /* width: 780px; */

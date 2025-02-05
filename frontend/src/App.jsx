@@ -21,6 +21,8 @@ function App() {
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
   const [img, setImg] = useState();
+    const [formValues, setFormValues] = useState({});
+  
   const [localState, setLocalState] = useState({
     // home__img: "",
     // home__intro: "",
@@ -56,7 +58,8 @@ function App() {
           setLocalState,
           img,
           setImg,
-          labelVals, setLabelVals
+          labelVals, setLabelVals,
+          formValues, setFormValues
         }}
       >
         <Navbar />
