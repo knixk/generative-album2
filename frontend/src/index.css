@@ -1,6 +1,6 @@
 :root {
   --my-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  --background-color:  #2e2e2e23;
+  --background-color:  #77777723;
 }
 
 * {
@@ -106,7 +106,8 @@ nav {
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 90vw;
+  max-width: 550px;
   gap: 10px;
   /* background-color: red; */
 }
@@ -212,6 +213,7 @@ input:hover,
   /* height: 350px; */
   /* background-color: ; */
   /* display: none; */
+  border: 3px solid rgba(255, 255, 255, 0.322);
 }
 
 .delete__btn {
@@ -226,9 +228,10 @@ input:hover,
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #2e2e2e23;
+  background-color: #eeeeeeaf;
   padding: 3rem 2rem;
   border-radius: 5px;
+  /* box-shadow: none; */
   /* width: 780px; */
   /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
 
@@ -246,12 +249,15 @@ input:hover,
 
 .prompt__label {  
   font-weight: bold;
-  background-color: rgba(77, 77, 77, 0.089);
-  padding: 1.5rem 1rem;
+  /* background-color: rgba(77, 77, 77, 0.089); */
+  /* padding: 1.5rem 1rem; */
   /* width: 70%; */
   font-size: 20px;
   border-radius: 5px;
-  color: white;
+  color: black;
+  padding: 1rem 1rem;
+  text-align: center;
+  /* color: white; */
   /* text-align: center; */
   /* box-shadow: rgba(207, 207, 207, 0.2) 0px 2px 8px 0px; */
 
@@ -608,7 +614,7 @@ body{
   }
 
   .form__container {
-    width: 90%;
+    /* width: 90%; */
     /* background-color: red; */
     /* font-size: 12px; */
   }
@@ -666,4 +672,62 @@ body{
 #theme__color {
   margin-right: 1.5rem;
   /* background-color: red; */
+}
+
+label {
+  color: white;
+  letter-spacing: 2px;
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.home__btn {
+  /* font-size: 5rem; */
+  /* font-weight: bold; */
+  font-size: 1.5rem !important;
+  /* background-color: red; */
+  color: white;
+  /* background-color: ; */
+  animation: pulse 3s infinite ease-in-out;
+  /* border: 5px solid white; */
+  margin-top: 10px;
+}
+
+
+.home__sub {
+  font-size: 2rem !important;
+}
+
+@keyframes pulse {
+  0% {
+    scale: 1;
+  }
+
+
+  50% {
+    scale: 1.05;
+  }
+
+
+  100% {
+    scale: 1;
+  }
+
+}
+
+#submit__btn {
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-top: 1rem;
+}
+
+.main__form__text {
+  height: 100px;
+  padding: 1rem;
+  border-radius: 5px;
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 20px;
 }

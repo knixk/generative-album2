@@ -13,33 +13,31 @@ function App() {
   const [formData, setFormData] = useState();
   const [lastGeneratedImg, setLastGeneratedImg] = useState();
   const [submitDisabled, setSubmitDisabled] = useState(false);
-  const [img, setImg] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [configData, setConfigData] = useState({});
-  const [refresh, setRefresh] = useState(false);
 
   const [name, setName] = useState();
   const [prompt, setPrompt] = useState();
   // ---- send this img to backend socket
   const [disabled, setDisabled] = useState(false);
   const [model, setModel] = useState(null);
-  const [ipAddress, setIPAddress] = useState("http://192.168.0.105:3000/");
-  const [introText, setIntroText] = useState();
-  const [backgroundImage, setBackgroundImage] = useState();
+  const [img, setImg] = useState();
+    const [formValues, setFormValues] = useState({});
+  
   const [localState, setLocalState] = useState({
-    home__img: "",
-    home__intro: "",
-    theme__color: "",
-    main__form__text: "",
-    main__prompt: "",
+    // home__img: "",
+    // home__intro: "",
+    // theme__color: "",
+    // main__form__text: "",
+    // main__prompt: "",
   });
+
+  const [labelVals, setLabelVals] = useState({});
+  // const 
 
   return (
     <Router>
       <myContext.Provider
         value={{
-          introText,
-          setIntroText,
           formData,
           name,
           setName,
@@ -50,24 +48,18 @@ function App() {
           setDisabled,
           model,
           setModel,
-          ipAddress,
-          setIPAddress,
           lastGeneratedImg,
           setLastGeneratedImg,
           submitDisabled,
           setSubmitDisabled,
-          img,
-          setImg,
           isLoading,
           setIsLoading,
-          configData,
-          setConfigData,
-          refresh,
-          setRefresh,
-          backgroundImage,
-          setBackgroundImage,
           localState,
           setLocalState,
+          img,
+          setImg,
+          labelVals, setLabelVals,
+          formValues, setFormValues
         }}
       >
         <Navbar />

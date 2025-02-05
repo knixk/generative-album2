@@ -1,14 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import Grid from "../components/Grid";
 import { myContext } from "../App";
-import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import Loader from "../components/Loader";
-
-const dbName = "the_name";
-
-const request = indexedDB.open(dbName, 2);
 
 const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOajH9gS4C30cRF7rD_voaTAKly2Ntaw&s`;
 
@@ -18,6 +12,8 @@ const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOa
 
 // send the data on port - sender --------
 import io from "socket.io-client";
+import DynamicForm from "./DynamicForm";
+import { replace } from '../../node_modules/stylis/src/Utility';
 
 // IndexedDB setup ----------
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
@@ -32,7 +28,7 @@ function submitData(payload) {
 
 // ----------- Main app function ----------------
 function Main() {
-  const valentineDay = `Valentine's day celebration at`;
+  // const valentineDay = `Valentine's day celebration at`;
 
   const myState = useContext(myContext);
 
@@ -51,27 +47,13 @@ function Main() {
     refresh,
     localState,
     setLocalState,
+    labelVals,
+    setLabelVals,
+    formValues, setFormValues
   } = myState;
 
   socket = localState && io(localState.ip__address);
-  console.log(socket)
-
-  const handleAddImage = async (imageUrl) => {
-    try {
-      const response = await fetch(imageUrl);
-      if (!response.ok) throw new Error("Failed to fetch image.");
-      const blob = await response.blob();
-
-      // Save to IndexedDB
-      const id = Date.now(); // Unique ID
-      await addToDB(dbName, storeName, { id, blob });
-
-      // Update UI
-      setImages((prev) => [...prev, { id, blob }]);
-    } catch (error) {
-      console.error("Error downloading image:", error);
-    }
-  };
+  // console.log(socket)
 
   const uploadImage = async (imageUrl) => {
     // console.log(imageUrl, "im i u");
@@ -93,10 +75,29 @@ function Main() {
       return;
     }
 
+
+    
+
+    // console.log(localState.main__form__text1);
+    // console.log(formValues)
+
+    let template2 = localState.main__form__text1
+    let newstr2 = template2.replace(/\{(\d+)\}/g, (_, n) => formValues[n] ?? `{${n}}`);
+
+    let newstr = template2.replace("{1}", "kanishk")
+    // template2.replace(/\{(\d+)\}/g, (_, n) => "hi");
+    console.log(newstr2);
+
+
+    console.log(formValues)
     toast("Please wait while we ready your creation...");
 
-    const finalStr = `${localState.main__prompt} ${prompt}`;
-    console.log(finalStr);
+    // const finalStr2 = `${localState.main__form__text1} ${labelVals.val1} ${localState.main__form__text2} ${labelVals.val2} ${localState.main__form__text3} ${labelVals.val3}`;
+    // console.log(finalStr2);
+
+    // return
+    // const finalStr = `${localState.main__prompt} ${prompt}`;
+    // console.log(finalStr);
 
     try {
       // console.log(ipAddress);
@@ -104,7 +105,7 @@ function Main() {
       const data = await axios.post(
         "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
         {
-          inputs: finalStr,
+          inputs: newstr2,
         },
         {
           headers: {
@@ -147,9 +148,19 @@ function Main() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     setDisabled(true);
     setIsLoading(true);
     await myAsyncFn();
+  };
+
+  const handleLabelChange = (e) => {
+    console.log(e.target);
+    const { name, value } = e.target;
+    // console.log(name, value);
+    setLabelVals((prev) => ({ ...prev, [name]: value }));
+
+    console.log(labelVals);
   };
 
   if (isLoading) {
@@ -160,33 +171,51 @@ function Main() {
     // console.log(introText)
     console.log("component was mounted..");
     // console.log(configData);
-  }, [refresh]);
+    const mainBtn = document.querySelector("#submit__btn");
+    // myDoc.style.backgroundImage = `url(${localState.bg__img})`;
+    // darker background
+    if (mainBtn) {
+      mainBtn.style.backgroundColor = localState.theme__color;
+      // console.log(mainBtn)
+      console.log("color was set");
+    }
+
+    // console.log(localState.main__form__text1);
+   
+
+    const splitted =
+      localState.main__form__text1 && localState.main__form__text1.split("}");
+    // const newStr = splitted && splitted.map((i) => {
+    // console.log(i)
+    // const newI = i.split("{");
+    // console.log(newI, "im new i")
+    // });
+    // console.log(splitted)
+
+    // console.log(localState)
+  }, [localState]);
 
   return (
     <div className="main__container">
       <Toaster />
       <form onSubmit={(e) => handleSubmit(e)} className="form__container">
         <div className="choose__container">
-          <p className="prompt__label">
-            {localState.main__form__text}: {/* {configData.main__prompt},  */}
-            {/* {configData.main__form__text} */}
-          </p>
+          {/*           
+          <label className="prompt__label">
+            {localState.main__form__text1}: 
+          </label>
           <input
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Enter place.."
+            value={labelVals.val1}
+            name="val1"
+            onChange={(e) => handleLabelChange(e)}
+            placeholder="enter text.."
             type="text"
             required
-          />
+          /> */}
 
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name.."
-            type="text"
-            required
-            autoFocus
-          />
+          <DynamicForm localState={localState && localState} />
+
+         
 
           <button id="submit__btn" disabled={disabled} onClick={() => {}}>
             Submit

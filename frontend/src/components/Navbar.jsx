@@ -3,7 +3,6 @@ import React from "react";
 import { myContext } from "../App";
 import { useContext, useEffect } from "react";
 
-
 function Navbar() {
   const MyState = useContext(myContext);
   const { isLoading, setIsLoading, localState, setLocalState } = MyState;
@@ -19,7 +18,7 @@ function Navbar() {
 
   useEffect(() => {
     const mainFn = () => {
-      console.log("main event fired")
+      // console.log("main event fired");
       const localState = localStorage.getItem("localState");
       if (localState) {
         const parsedState = JSON.parse(localState);
@@ -32,23 +31,27 @@ function Navbar() {
         handleChange("home__intro", parsedState.home__intro);
         handleChange("header__txt", parsedState.header__txt);
         handleChange("ip__address", parsedState.ip__address);
+        handleChange("main__form__text1", parsedState.main__form__text1);
+        handleChange("main__form__text2", parsedState.main__form__text2);
+        handleChange("main__form__text3", parsedState.main__form__text3);
+        handleChange("album__bg__img", parsedState.album__bg__img);
+
+        // album__bg__img
 
 
 
-
-        // console.log(localState);
-        // const prsedLocalState = JSON.parse(localState);
-        // console.log(prsedLocalState);
 
         const navEle = document.querySelector("nav");
-        // console.log(navEle);
         navEle.style.backgroundColor = parsedState.theme__color;
 
         const myDoc = document.querySelector("body");
-        myDoc.style.backgroundImage = `url(${parsedState.bg__img})`;
-
-        // console.log(localState)
-        // setBg(parsedState.bg__img);
+        // const homeBtn = document.querySelector(".home__btn");
+        // myDoc.style.backgroundImage = `url(${parsedState.bg__img})`;
+        // darker background
+        myDoc.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${parsedState.bg__img})`;
+        // if (homeBtn) {
+        //   homeBtn.style.backgroundColor = parsedState.theme__color;
+        // }
       }
     };
 
@@ -58,6 +61,13 @@ function Navbar() {
     // return () => window.removeEventListener("localStorageUpdate", mainFn);
     // console.log("listener removed");
   }, []);
+
+  useEffect(() => {
+    const homeBtn = document.querySelector(".home__btn");
+    if (homeBtn) {
+      homeBtn.style.backgroundColor = localState.theme__color;
+    }
+  }, [localState])
 
   return (
     <nav>
