@@ -18,7 +18,7 @@ function Navbar() {
 
   useEffect(() => {
     const mainFn = () => {
-      console.log("main event fired");
+      // console.log("main event fired");
       const localState = localStorage.getItem("localState");
       if (localState) {
         const parsedState = JSON.parse(localState);

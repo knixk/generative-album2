@@ -13,6 +13,7 @@ const sampleImg = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnvAOa
 // send the data on port - sender --------
 import io from "socket.io-client";
 import DynamicForm from "./DynamicForm";
+import { replace } from '../../node_modules/stylis/src/Utility';
 
 // IndexedDB setup ----------
 // so this takes in a default value, and it won't work if u put a wrong one, but will if u omut it
@@ -76,10 +77,11 @@ function Main() {
 
 
     // console.log(localState.main__form__text1);
-    console.log(formValues)
+    // console.log(formValues)
 
     let template2 = localState.main__form__text1
-    template2.replace(/\{(\d+)\}/g, (_, n) => formValues && formValues[n]);
+    template2.replace("{1}", "kanishk")
+    // template2.replace(/\{(\d+)\}/g, (_, n) => "hi");
     console.log(template2)
 
 
@@ -142,6 +144,7 @@ function Main() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     setDisabled(true);
     setIsLoading(true);
     await myAsyncFn();
@@ -173,9 +176,8 @@ function Main() {
       console.log("color was set");
     }
 
-    console.log(localState.main__form__text1);
-    let mytemp = localState.main__form__text1;
-    // mytemp.replace()
+    // console.log(localState.main__form__text1);
+   
 
     const splitted =
       localState.main__form__text1 && localState.main__form__text1.split("}");

@@ -20,7 +20,7 @@ const DynamicForm = () => {
   const template = main__form__text1 || "";
 
   const parts = template.split(/\{(\d+)\}/g);
-  console.log(parts);
+//   console.log(parts);
 
   //   const [formValues, setFormValues] = useState({});
 
