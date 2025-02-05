@@ -76,9 +76,10 @@ function Main() {
 
 
     // console.log(localState.main__form__text1);
+    console.log(formValues)
 
     let template2 = localState.main__form__text1
-    template2.replace(/\{(\d+)\}/g, (_, n) => formValues[n] || `{${n}}`);
+    template2.replace(/\{(\d+)\}/g, (_, n) => formValues && formValues[n]);
     console.log(template2)
 
 
@@ -86,7 +87,7 @@ function Main() {
     toast("Please wait while we ready your creation...");
 
     const finalStr2 = `${localState.main__form__text1} ${labelVals.val1} ${localState.main__form__text2} ${labelVals.val2} ${localState.main__form__text3} ${labelVals.val3}`;
-    console.log(finalStr2);
+    // console.log(finalStr2);
 
     return
     const finalStr = `${localState.main__prompt} ${prompt}`;
