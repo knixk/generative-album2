@@ -101,7 +101,9 @@ function Album() {
 
   const getAllImages = async () => {
     try {
-      const req = axios.get("http://localhost:5051/get-images");
+      // const req = axios.get("http://localhost:5051/get-images");
+      const req = axios.get("http://192.168.0.106:5051/get-images");
+
       const res = await req;
       // console.log(res.data.images);
       return res.data.images;

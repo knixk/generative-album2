@@ -58,7 +58,7 @@ function Main() {
   const uploadImage = async (imageUrl) => {
     // console.log(imageUrl, "im i u");
     try {
-      const response = await axios.post("http://localhost:5051/upload-image", {
+      const response = await axios.post("http://192.168.0.106:5051/upload-image", {
         imageUrl,
         name,
       });
