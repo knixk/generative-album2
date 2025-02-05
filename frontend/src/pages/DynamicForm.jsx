@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
-import { TextField, Typography, Box } from "@mui/material";
+// import { TextField, Typography, Box } from "@mui/material";
+import { TextField, Typography, Card, CardContent, Stack, Container } from "@mui/material";
+
 import { myContext } from "../App";
 
 const DynamicForm = () => {
@@ -8,6 +10,8 @@ const DynamicForm = () => {
   const { localState, formValues, setFormValues } = useContext(myContext);
   const { main__form__text1 } = localState;
   const template = main__form__text1 || "";
+
+  const parts = template.split(/\{(\d+)\}/g);
 
 //   const [formValues, setFormValues] = useState({});
 
@@ -51,32 +55,33 @@ const DynamicForm = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        gap: 1,
-        alignItems: "center",
-      }}
-    >
-      {formElements.map((element, index) =>
-        element.type === "text" ? (
-          <Typography key={index} variant="body1">
-            {element.content}
+    <Container maxWidth="sm">
+      <Card variant="outlined" sx={{ p: 3, mt: 4, boxShadow: 3 }}>
+        <CardContent>
+          <Typography variant="h5" gutterBottom>
+            Fill the Details
           </Typography>
-        ) : (
-          <TextField
-            key={index}
-            variant="outlined"
-            size="small"
-            required
-            onChange={(e) => handleChange(element.id, e.target.value)}
-          />
-        )
-      )}
-    </Box>
-  );
+          <Stack spacing={2}>
+            {parts.map((part, index) =>
+              /^\d+$/.test(part) ? (
+                <TextField
+                  key={index}
+                  fullWidth
+                  variant="outlined"
+                  value={formValues[part] || ""}
+                  onChange={(e) => handleChange(part, e.target.value)}
+                />
+              ) : (
+                <Typography key={index} variant="body1">
+                  {part}
+                </Typography>
+              )
+            )}
+          </Stack>
+        </CardContent>
+      </Card>
+    </Container>
+  )
 };
 
 export default DynamicForm;
