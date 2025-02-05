@@ -228,9 +228,10 @@ input:hover,
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #eeeeee;
+  background-color: #eeeeeeaf;
   padding: 3rem 2rem;
   border-radius: 5px;
+  /* box-shadow: none; */
   /* width: 780px; */
   /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
 
