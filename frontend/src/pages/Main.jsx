@@ -174,6 +174,8 @@ function Main() {
     }
 
     console.log(localState.main__form__text1);
+    let mytemp = localState.main__form__text1;
+    // mytemp.replace()
 
     const splitted =
       localState.main__form__text1 && localState.main__form__text1.split("}");

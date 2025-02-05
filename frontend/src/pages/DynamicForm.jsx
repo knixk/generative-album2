@@ -20,6 +20,7 @@ const DynamicForm = () => {
   const template = main__form__text1 || "";
 
   const parts = template.split(/\{(\d+)\}/g);
+  console.log(parts);
 
   //   const [formValues, setFormValues] = useState({});
 
@@ -70,24 +71,28 @@ const DynamicForm = () => {
             Customize your image
           </Typography>
           <Stack spacing={2}>
-            {parts.map((part, index) =>
-              /^\d+$/.test(part) ? (
-                <TextField
-                  key={index}
-                  fullWidth
-                  variant="outlined"
-                  value={formValues[part] || ""}
-                  onChange={(e) => handleChange(part, e.target.value)}
-                />
-              ) : (
-                <Typography key={index} variant="body1">
-                  {part}
-                </Typography>
-              )
-            )}
+            {parts.map((part, index) => {
+              if (part == "") {
+                return;
+              } else {
+                return /^\d+$/.test(part) ? (
+                  <TextField
+                    key={index}
+                    fullWidth
+                    variant="outlined"
+                    value={formValues[part] || ""}
+                    onChange={(e) => handleChange(part, e.target.value)}
+                  />
+                ) : (
+                  <Typography key={index} variant="body1">
+                    {part}:
+                  </Typography>
+                );
+              }
+            })}
 
             <Typography key={"12312"} variant="body1">
-              Enter your name
+              Enter your name :
             </Typography>
 
             <TextField
