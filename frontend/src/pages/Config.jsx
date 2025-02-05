@@ -56,7 +56,7 @@ function Config() {
   const deleteOldImages = async () => {
     try {
       const response = await axios.delete(
-        "http://localhost:5051/delete-old-images"
+        `http://${localState.ip__address}:5051/delete-old-images`
       );
       console.log("Deleted images:", response.data.deleted);
     } catch (error) {

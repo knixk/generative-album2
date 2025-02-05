@@ -52,13 +52,18 @@ function Main() {
     formValues, setFormValues
   } = myState;
 
-  socket = localState && io(localState.ip__address);
+  // localState.ip__address
+
+  let socketurl = localState && `ws://${localState.ip__address}:3000`;
+  console.log(socketurl)
+  socket = socketurl && io(socketurl);
+  // ws://192.168.0.106:3000
   // console.log(socket)
 
   const uploadImage = async (imageUrl) => {
     // console.log(imageUrl, "im i u");
     try {
-      const response = await axios.post("http://192.168.0.106:5051/upload-image", {
+      const response = await axios.post(`http://${localState.ip__address}:5051/upload-image`, {
         imageUrl,
         name,
       });

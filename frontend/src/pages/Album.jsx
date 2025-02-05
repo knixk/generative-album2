@@ -8,7 +8,6 @@ import axios from "axios";
 // const socket = io('ws://192.168.0.105:3000');
 // const socket = io('ws://192.168.0.106:3000');
 // big monitor
-const socket = io("ws://192.168.0.106:3000");
 
 // const socket = io("http://192.168.0.105:3000/");
 // const bigMonitor = 'http://192.168.0.118:3000'
@@ -95,6 +94,9 @@ function Album() {
   const myState = useContext(myContext);
   const { isLoading, setIsLoading, refresh, setRefresh, localState, setLocalState } = myState;
 
+  const socket = localState && io(`ws://${localState.ip__address}:3000`);
+
+
   const handleDelete = (i) => {
     return;
   };
@@ -102,7 +104,7 @@ function Album() {
   const getAllImages = async () => {
     try {
       // const req = axios.get("http://localhost:5051/get-images");
-      const req = axios.get("http://192.168.0.106:5051/get-images");
+      const req = axios.get(`http://${localState.ip__address}:5051/get-images`);
 
       const res = await req;
       // console.log(res.data.images);
