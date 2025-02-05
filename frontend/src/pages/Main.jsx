@@ -76,24 +76,28 @@ function Main() {
     }
 
 
+    
+
     // console.log(localState.main__form__text1);
     // console.log(formValues)
 
     let template2 = localState.main__form__text1
-    template2.replace("{1}", "kanishk")
+    let newstr2 = template2.replace(/\{(\d+)\}/g, (_, n) => formValues[n] ?? `{${n}}`);
+
+    let newstr = template2.replace("{1}", "kanishk")
     // template2.replace(/\{(\d+)\}/g, (_, n) => "hi");
-    console.log(template2)
+    console.log(newstr2);
 
 
     console.log(formValues)
     toast("Please wait while we ready your creation...");
 
-    const finalStr2 = `${localState.main__form__text1} ${labelVals.val1} ${localState.main__form__text2} ${labelVals.val2} ${localState.main__form__text3} ${labelVals.val3}`;
+    // const finalStr2 = `${localState.main__form__text1} ${labelVals.val1} ${localState.main__form__text2} ${labelVals.val2} ${localState.main__form__text3} ${labelVals.val3}`;
     // console.log(finalStr2);
 
-    return
-    const finalStr = `${localState.main__prompt} ${prompt}`;
-    console.log(finalStr);
+    // return
+    // const finalStr = `${localState.main__prompt} ${prompt}`;
+    // console.log(finalStr);
 
     try {
       // console.log(ipAddress);
@@ -101,7 +105,7 @@ function Main() {
       const data = await axios.post(
         "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
         {
-          inputs: finalStr2,
+          inputs: newstr2,
         },
         {
           headers: {
