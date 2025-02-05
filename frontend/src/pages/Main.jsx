@@ -75,9 +75,6 @@ function Main() {
       return;
     }
 
-
-    
-
     // console.log(localState.main__form__text1);
     // console.log(formValues)
 
@@ -91,13 +88,6 @@ function Main() {
 
     console.log(formValues)
     toast("Please wait while we ready your creation...");
-
-    // const finalStr2 = `${localState.main__form__text1} ${labelVals.val1} ${localState.main__form__text2} ${labelVals.val2} ${localState.main__form__text3} ${labelVals.val3}`;
-    // console.log(finalStr2);
-
-    // return
-    // const finalStr = `${localState.main__prompt} ${prompt}`;
-    // console.log(finalStr);
 
     try {
       // console.log(ipAddress);

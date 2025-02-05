@@ -215,7 +215,9 @@ function Album() {
           {albums &&
             albums.map((i, idx) => {
               // console.log(i)
-              const finalUrl = `http://localhost:5051/images/${i}`;
+              // const finalUrl = `http://localhost:5051/images/${i}`;
+              const finalUrl = `http://192.168.0.106:5051/images/${i}`;
+
               // console.log(i, "IM the I --------------");
               const name2 = i.split("_")[0];
               // console.log(name2)
