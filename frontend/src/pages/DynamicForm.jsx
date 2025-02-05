@@ -58,8 +58,8 @@ const DynamicForm = () => {
     <Container maxWidth="sm">
       <Card variant="outlined" sx={{ p: 3, mt: 4, boxShadow: 3 }}>
         <CardContent>
-          <Typography variant="h5" gutterBottom>
-            Fill the Details
+          <Typography variant="h5" gutterBottom sx={{ mb: 4}}>
+            Customize your image
           </Typography>
           <Stack spacing={2}>
             {parts.map((part, index) =>
@@ -78,8 +78,19 @@ const DynamicForm = () => {
               )
             )}
           </Stack>
+          <label className="prompt__label mt-2">Enter your name</label>
+          <TextField
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name.."
+            type="text"
+            required
+            autoFocus
+          />
         </CardContent>
+        
       </Card>
+      
     </Container>
   )
 };

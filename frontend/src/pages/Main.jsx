@@ -207,15 +207,7 @@ function Main() {
 
           <DynamicForm localState={localState && localState} />
 
-          <label className="prompt__label mt-2">Enter your name</label>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name.."
-            type="text"
-            required
-            autoFocus
-          />
+         
 
           <button id="submit__btn" disabled={disabled} onClick={() => {}}>
             Submit
