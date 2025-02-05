@@ -161,8 +161,22 @@ function Main() {
       console.log("color was set");
     }
 
+  console.log(localState.main__form__text1)
+
+  const splitted = localState.main__form__text1 && localState.main__form__text1.split("}");
+  // const newStr = splitted && splitted.map((i) => {
+    // console.log(i)
+    // const newI = i.split("{");
+    // console.log(newI, "im new i")
+  // });
+  // console.log(splitted)
+
+
+
     // console.log(localState)
   }, [localState]);
+
+
 
   return (
     <div className="main__container">
