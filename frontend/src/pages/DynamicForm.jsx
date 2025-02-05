@@ -1,19 +1,27 @@
 import React, { useContext, useState } from "react";
 // import { TextField, Typography, Box } from "@mui/material";
-import { TextField, Typography, Card, CardContent, Stack, Container } from "@mui/material";
+import {
+  TextField,
+  Typography,
+  Card,
+  CardContent,
+  Stack,
+  Container,
+} from "@mui/material";
 
 import { myContext } from "../App";
 
 const DynamicForm = () => {
   //   const template = localState.main__form__text1 || "";
 
-  const { localState, formValues, setFormValues } = useContext(myContext);
+  const { localState, formValues, setFormValues, name, setName } =
+    useContext(myContext);
   const { main__form__text1 } = localState;
   const template = main__form__text1 || "";
 
   const parts = template.split(/\{(\d+)\}/g);
 
-//   const [formValues, setFormValues] = useState({});
+  //   const [formValues, setFormValues] = useState({});
 
   // Correctly parse the template string
   const parseTemplate = (text) => {
@@ -51,14 +59,14 @@ const DynamicForm = () => {
   // Handle input changes
   const handleChange = (id, value) => {
     setFormValues((prev) => ({ ...prev, [id]: value }));
-    console.log(formValues)
+    console.log(formValues);
   };
 
   return (
     <Container maxWidth="sm">
       <Card variant="outlined" sx={{ p: 3, mt: 4, boxShadow: 3 }}>
         <CardContent>
-          <Typography variant="h5" gutterBottom sx={{ mb: 4}}>
+          <Typography variant="h5" gutterBottom sx={{ mb: 4 }}>
             Customize your image
           </Typography>
           <Stack spacing={2}>
@@ -77,22 +85,24 @@ const DynamicForm = () => {
                 </Typography>
               )
             )}
+
+            <Typography key={"12312"} variant="body1">
+              Enter your name
+            </Typography>
+
+            <TextField
+              key={1231212}
+              fullWidth
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              variant="outlined"
+              placeholder="Enter your name.."
+            />
           </Stack>
-          <label className="prompt__label mt-2">Enter your name</label>
-          <TextField
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name.."
-            type="text"
-            required
-            autoFocus
-          />
         </CardContent>
-        
       </Card>
-      
     </Container>
-  )
+  );
 };
 
 export default DynamicForm;
