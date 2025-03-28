@@ -1,12 +1,17 @@
 # generative-album2
- 
-theme name: gruber darker
+ IMPORTANT:
+ the app will show a blank screen if u open it for the first time.
+ You need to configure it.
+
+inroder to do so,
+you need to go to the /config page.
+and fill the details accordingly
 
 flow:
 user goes to the / page,
 click the call to action button,
-goes to the second screem,
-fill the form,
+goes to the second screen,
+fills the form,
 hits enter.
 
 
@@ -19,9 +24,7 @@ so it's a very customizable picture.
 also the home page image, text, prompts, header text,
 all are customizable
 
-inroder to do so,
-you need to go to the /config page.
-and fill the details accordingly
+
 
 Home page:
 ![home](https://github.com/user-attachments/assets/44f7db8e-a094-4165-a8b3-f3ed195b0d68)
@@ -37,3 +40,6 @@ Config:
 
 
 Thanks.
+
+
+theme name: gruber darker
